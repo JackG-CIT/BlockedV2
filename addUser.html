@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Add User{% endblock %}
+
+{% block content %}
+<h1>Make a User!</h1>
+<div class="formBox">
+    <form method="post" class="form">
+        <label for="username">Username</label>
+        <input type="text" name="username" required>
+        <br><br>
+
+        <label for="first">First Name</label>
+        <input type="text" name="first" required>
+        <br><br>
+
+        <label for="last">Last Name</label>
+        <input type="text" name="last" required>
+        <br><br>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+        <br><br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" required>
+        <br><br>
+
+        <button type="submit">Submit</button>
+
+        <a href="{{ url_for('login') }}" class="button">Back to Login</a>
+    </form>
+</div>
+{% endblock %}

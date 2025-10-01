@@ -1,0 +1,19 @@
+{% extends 'base.html' %} <!--viewed before logging in--> 
+{% block head %} <title>Login</title> {% endblock %}
+{% block content %}
+
+<img src="../static/Images_Audio/BlockedV4.png" id="BlockedLogo">
+
+<form method="POST" id="buttons">
+    
+    <input type="text" class="button button1" id="username" name="username" placeholder="Username">
+    <br>
+    <input type="password" class="button button2" id="password" name="password" placeholder="Password">
+    <br>
+    <button type="submit" class="button button3">Sign In</button>
+    
+    <button></button><a href="{{ url_for('addUser') }}" class="button">Create Account</a></button>
+
+</form>
+
+{% endblock %}

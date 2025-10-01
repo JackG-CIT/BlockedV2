@@ -1,0 +1,35 @@
+{% extends 'base.html' %} <!--viewed in each level box--> 
+
+{% block head %}
+    <title>Main Page</title>
+    <script src="../static/home.js"></script>
+{% endblock %}
+
+{% block content %}
+    <img src="../static/Images_Audio/BlockedV4.png" id="BlockedLogo">
+    <div class="levels">
+
+        <div id="buttons">
+            <button class="button button1" onclick="showLevels()" id="button1">Levels</button>
+            <button class="button button2" id="button2"><a href="{{ url_for('create') }}">Create Level</a></button>
+            <a class="button button3" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        <div id="levelSelect">
+            <button onclick="clearPage()" id="closeLevels" style="position:absolute;top:10px;right:10px;padding:10px;z-index:1001;">Close</button>
+            <h1>Level Select</h1>
+            {% for level in data %}
+                <div class="level">
+                    <h1><i>{{level[1]}}</i></h1>
+                    <p>{{level[2]}}</p>
+                    <p>Insert photo here</p>
+                    <a href="{{url_for('playLevel', levelID=level[0])}}"><button>Play</button></a>
+                    {% if current_user.is_admin %}
+                        <a href="{{url_for('editLevel', levelID=level[0])}}"><button>Edit</button></a>
+                        <a href="{{url_for('deleteLevel', levelID=level[0])}}"><button>Delete</button></a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+{% endblock %}

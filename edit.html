@@ -1,0 +1,48 @@
+{% extends 'base.html' %} <!--when "Edit" on specific level is clicked-->
+
+{% block head %}
+    <title>Create</title>
+    <link href="{{url_for('static', filename='create.css')}}" rel="stylesheet">
+    <script src="{{url_for('static', filename='create.js')}}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div id="options">
+        <select id="select">
+            <option value="0">Nothing</option>
+            <option value="1">Wall</option>
+            <option value="2">Box</option>
+            <div id="playerSelect"></div>
+        </select>
+    </div>
+    <table id="createTable">
+        {% for row in range(10) %}
+        <tr>
+            {% for col in range(10) %}
+            <td><input type="hidden" value="{{ curlevel[3][row * 10 + col] }}"></td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>    
+
+    <br>
+
+    <form method="POST" class="form">
+        <input type="hidden" name="data" id="data" value="{{curlevel[3]}}">
+        <label for="levelName">Level Name: </label>
+        <input type="text" name="levelName" id="levelName" value="{{curlevel[1]}}">
+        <label for="difficulty">Level Difficulty: </label>
+        <input type="number" name="difficulty" id="difficulty" value="{{curlevel[4]}}">
+        <br>
+        <p>Additional levels to be unlocked by: </p>
+        {% for level in levels %}
+            <br>
+            <input type="checkbox" name="level" value="{{ level[0] }}"> <!--Id of the level-->
+            <label for="level">{{ level[1] }}</label> <!--name of the level-->
+        {% endfor %}
+        <br>
+        <label for="levelNote">Level Notes: </label>
+        <input type="text" name="levelNote" id="levelNote" value="{{curlevel[2]}}">
+        <button type="submit" value="0">Submit Level</button>
+    </form>
+{% endblock %}
