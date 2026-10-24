@@ -187,6 +187,17 @@
     // pictures tell it. Set to false to draw story.py's lines again.
     const WORDLESS = true;
 
+    // The logo's letters (art/make_sprites.py GLYPHS), for the crates in the hold.
+    const GLYPHS = {
+        B: ["####.", "#...#", "#...#", "####.", "#...#", "#...#", "####."],
+        L: ["#....", "#....", "#....", "#....", "#....", "#....", "#####"],
+        O: [".###.", "#...#", "#...#", "#...#", "#...#", "#...#", ".###."],
+        C: [".####", "#....", "#....", "#....", "#....", "#....", ".####"],
+        K: ["#...#", "#..#.", "#.#..", "##...", "#.#..", "#..#.", "#...#"],
+        E: ["#####", "#....", "#....", "####.", "#....", "#....", "#####"],
+        D: ["####.", "#...#", "#...#", "#...#", "#...#", "#...#", "####."],
+    };
+
     // Fire on a ship's hull: a few flickering flames.
     function flames(ctx, x, y, t) {
         for (let i = 0; i < 3; i++) {
@@ -256,13 +267,26 @@
                 ctx.lineWidth = 1;
                 ctx.beginPath(); ctx.moveTo(wx + 66, deck); ctx.lineTo(rx + 8, ry + 26); ctx.stroke();
             }
-            for (let i = 0; i < 6 && t < cut; i++) {   // the crew, one by one, Knight last
-                const start = 2.2 + i * 0.6, x = wx + 40 + Math.min((t - start) * 20, 78);
-                if (t < start || x > rx + 26) continue;
-                sailor(ctx, x, deck - 7, i === 5 ? COL.gold : COL.cream, t);
+            // The crew, one by one (Knight last): over the side, hauled through the water
+            // on a line, and up the Castle's hull.
+            for (let i = 0; i < 6 && t < cut; i++) {
+                const hat = i === 5 ? COL.gold : COL.cream;
+                const u = t - (0.6 + i * 0.55);
+                if (u < 0) continue;
+                const rail = wx + 66, side = rx + 6, swim = WATER - 4;
+                if (u < 0.5) sailor(ctx, wx + 44 + (rail - wx - 44) * u / 0.5, deck - 7, hat, t);          // to the rail
+                else if (u < 0.8) sailor(ctx, rail + (u - 0.5) * 10, deck - 7 + (swim - deck + 7) * ((u - 0.5) / 0.3) ** 2, hat, t);   // over the side
+                else if (u < 2.0) {   // hauled through the water: just a head bobbing, and a splash
+                    const x = rail + 3 + (side - rail - 3) * (u - 0.8) / 1.2, bob = Math.round(Math.sin(u * 9) * 0.6);
+                    rect(ctx, x, swim + bob, 4, 2, hat);
+                    rect(ctx, x, swim + 2 + bob, 4, 2, "#f2c39d");
+                    rect(ctx, x - 2, WATER, 8, 1, COL.foam);
+                    ctx.strokeStyle = COL.woodDeep; ctx.lineWidth = 1;   // the line they're hauled on
+                    ctx.beginPath(); ctx.moveTo(x + 4, swim + 3); ctx.lineTo(side + 2, ry + 26); ctx.stroke();
+                } else if (u < 2.6) sailor(ctx, side, swim - (swim - (ry + 19)) * (u - 2.0) / 0.6, hat, t);   // up the hull
             }
             // Pawn (red bandana) hops into a crate of plunder, which Rook's crew haul across.
-            const k = Math.max(0, Math.min(1, (t - 2.2) / 3.4));
+            const k = Math.max(0, Math.min(1, (t - 2.2) / 3.6));
             const cx = wx + 58 + (rx + 14 - (wx + 58)) * k, cy = deck - 7 + (ry + 20 - (deck - 7)) * k - Math.sin(k * Math.PI) * 6;
             if (t < 1.6) sailor(ctx, wx + 48 + t * 5, deck - 7, COL.red, t);
             else if (t < 2.0) sailor(ctx, wx + 56, deck - 9 - Math.sin((t - 1.6) / 0.4 * Math.PI) * 5, COL.red, t);
@@ -281,54 +305,55 @@
             if (t < cut) full(ctx, 0, H, `rgba(211, 59, 54, ${0.06 + Math.max(0, Math.sin(t * 5)) * 0.06})`);
             fog(ctx, t, Math.min(0.6, t / 10));
         } },
-        { dur: 8.5, draw(ctx, t, say) {   // Pawn, asleep in a crate in the hold
+        { dur: 9, draw(ctx, t, say) {   // Pawn, asleep in a crate in the hold: the crates spell BLOCKED
             full(ctx, 0, H, COL.hold);
             for (let y = 6; y < H; y += 9) {
                 full(ctx, y, 1, "rgba(0, 0, 0, 0.35)");
                 for (let x = -OX + (y * 7) % 40; x < VW - OX; x += 40) rect(ctx, x, y - 8, 1, 8, "rgba(0, 0, 0, 0.25)");
             }
             full(ctx, 14, 6, COL.woodDeep);   // a beam
-            full(ctx, H - 12, 12, COL.woodDark);   // the floor
+            full(ctx, H - 26, 26, COL.woodDark);   // the floor (high enough to clear the skip hint)
             const swing = Math.sin(t * 1.4) * 16, lx = 160 + swing, ly = 52;
             ctx.strokeStyle = COL.ink;
             ctx.beginPath(); ctx.moveTo(160, 20); ctx.lineTo(lx, ly); ctx.stroke();
             for (let r = 80; r > 10; r -= 14) disc(ctx, lx, ly + 4, r, "rgba(255, 200, 110, 0.05)");
             rect(ctx, lx - 3, ly, 6, 8, COL.lamp);
             rect(ctx, lx - 4, ly - 1, 8, 2, COL.ink);
-            const S = 24, floor = H - 12 - S;
-            const stack = [[-1, 0], [0, 0], [1, 0], [2, 0], [3, 0], [5, 0], [6, 0], [7, 0], [8, 0], [10, 0], [11, 0], [12, 0], [0, 1], [2, 1], [5, 1], [7, 1], [10, 1], [11, 1], [7, 2]];
-            stack.forEach(([cx, cy]) => draw(ctx, "crate", cx * S, floor - cy * S, S, S));
-            const px = 6 * S, py = floor - S;   // Pawn's crate
+            // The crates in the hold are stacked to spell BLOCKED (the logo's letters), and
+            // Pawn pops out of the top of the O. Then the crates glow gold: that's the title.
+            const S = 6, GW = 5, GAP = 2, word = "BLOCKED";
+            const across = word.length * GW + (word.length - 1) * GAP;
+            const x0 = Math.round(160 - across * S / 2), top = H - 26 - 7 * S;
+            const glow = Math.max(0, Math.min(1, (t - 6.2) / 1.2));
+            const px = x0 + (2 * (GW + GAP) + 2) * S, py = top;   // Pawn's crate: the top of the O
             const awake = t > 4.6, wobble = t > 2.6 && !awake ? (Math.floor(t * 9) % 2 ? 1 : -1) : 0;
+            [...word].forEach((letter, i) => GLYPHS[letter].forEach((row, y) => [...row].forEach((c, x) => {
+                if (c !== "#") return;
+                const cx = x0 + (i * (GW + GAP) + x) * S, cy = top + y * S;
+                if (cx === px && cy === py) return;
+                draw(ctx, "crate", cx, cy, S, S);
+                if (glow) rect(ctx, cx, cy, S, S, `rgba(246, 200, 76, ${glow * (y < 2 ? 0.75 : 0.6)})`);
+            })));
             if (awake) {   // Pawn pops up, with the lid knocked off
                 const rise = Math.min(1, (t - 4.6) / 0.4);
                 ctx.save();
-                ctx.beginPath(); ctx.rect(px, 0, S, py + 6); ctx.clip();
-                draw(ctx, "pirate", px + 2, py + 10 - rise * 22, 20, 20);
+                ctx.beginPath(); ctx.rect(px - 6, 0, S + 12, py + 2); ctx.clip();
+                draw(ctx, "pirate", px - 3, py + 2 - rise * 12, 12, 12);
                 ctx.restore();
                 const lid = Math.min(1, (t - 4.6) / 0.6);
-                rect(ctx, px + 26 + lid * 10, py - 4 + lid * (lid - 0.6) * 40, 20, 4, COL.wood);
-                if (between(t, 5.1, 6.1)) shout(ctx, "!", px + 10, py - 14, COL.gold);
-                if (t > 6.1) bubble(ctx, say("pawn"), px + 12, py - 12);
+                rect(ctx, px + 6 + lid * 10, py - 2 - Math.sin(lid * Math.PI) * 8 + lid * (H - 28 - py), 7, 2, COL.wood);   // the lid lands on the floor
+                if (between(t, 5.1, 6.1)) shout(ctx, "!", px + 1, py - 14, COL.gold);
             }
             draw(ctx, "crate", px + wobble, py, S, S);
+            if (glow) rect(ctx, px + wobble, py, S, S, `rgba(246, 200, 76, ${glow * 0.75})`);
             if (!awake) {
                 ctx.font = "10px 'Jersey 10', monospace";
                 for (let i = 0; i < 3; i++) {   // Zzz
                     const z = (t * 0.6 + i / 3) % 1;
                     ctx.fillStyle = `rgba(245, 239, 224, ${1 - z})`;
-                    ctx.fillText("z", Math.round(px + 14 + z * 12), Math.round(py - 4 - z * 22));
+                    ctx.fillText("z", Math.round(px + 4 + z * 12), Math.round(py - 2 - z * 22));
                 }
             }
-        } },
-        { dur: 3.5, draw(ctx, t) {   // the title
-            full(ctx, 0, H, "#070d17");
-            const logo = sprite("logo");
-            if (!loaded(logo)) return;
-            const w = 200, h = Math.round(w * logo.naturalHeight / logo.naturalWidth);
-            ctx.globalAlpha = Math.min(1, t / 1.2);
-            ctx.drawImage(logo, Math.round(160 - w / 2), Math.round(90 - h / 2 - Math.sin(t * 2) * 2), w, h);
-            ctx.globalAlpha = 1;
         } },
     ];
 
