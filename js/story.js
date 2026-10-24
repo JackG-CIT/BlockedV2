@@ -637,7 +637,8 @@
     const SCENES = { intro: INTRO, escape: ESCAPE, "ship-free": SHIP_FREE, "black-queen": BLACK_QUEEN, kraken: KRAKEN, ending: ENDING };
     const FADE = 0.6;   // seconds of fade to and from black between shots
 
-    // Plays a cutscene full screen. Resolves when it ends, or when a key or tap skips it.
+    // Plays a cutscene full screen. Resolves when it ends, or when a key press skips it
+    // (clicks and taps don't skip, so a stray click can't cut a scene short).
     function play(id) {
         const lines = ((STORY.cutscenes[id] || {}).lines || []);
         const shots = SCENES[id] || PLAIN;
@@ -685,7 +686,7 @@
                 finish();
             }
             document.addEventListener("keydown", onKey, true);
-            box.addEventListener("pointerdown", e => { e.preventDefault(); finish(); });
+            box.addEventListener("pointerdown", e => e.preventDefault());   // clicks don't skip
 
             function frame(now) {
                 let t = (now - begun) / 1000;
@@ -709,7 +710,7 @@
 
     // ---------- chapter title cards ----------
     // A full-screen card when a chapter starts: its number, title, place and intro.
-    // Space, Enter, Esc or a click sets sail.
+    // Space, Enter, Esc or the Set sail button sets sail (clicking elsewhere on the card doesn't).
     function titleCard(ch) {
         return new Promise(resolve => {
             const box = document.createElement("div");
@@ -741,7 +742,7 @@
                 if (!e.repeat && (e.key === " " || e.key === "Enter" || e.key === "Escape")) close();
             }
             document.addEventListener("keydown", onKey, true);
-            box.addEventListener("click", close);
+            box.querySelector("button").addEventListener("click", close);
             box.querySelector("button").focus({ preventScroll: true });
         });
     }
