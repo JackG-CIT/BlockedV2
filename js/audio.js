@@ -373,17 +373,21 @@
         if (type === "pulse") osc.setPeriodicWave(pulse()); else osc.type = type;
         osc.frequency.value = f;
         osc.detune.value = detune;
-        if (vibrato) {
-            // Vibrato fades in after vibDelay, the way a player leans into a long note.
-            const lfo = ctx.createOscillator(), depth = ctx.createGain();
-            lfo.frequency.value = 5;
-            depth.gain.setValueAtTime(0, t);
-            depth.gain.setValueAtTime(0, t + vibDelay);
-            depth.gain.linearRampToValueAtTime(f * vibrato, t + vibDelay + 0.25);
-            lfo.connect(depth);
-            depth.connect(osc.frequency);
-            lfo.start(t);
-            lfo.stop(t + d + release);
+        // Vibrato: the pitch wobbles 5 times a second, fading in after vibDelay the
+        // way a player leans into a long note. It's written straight onto the note's
+        // pitch as a curve (100 points a second) rather than driven by a second,
+        // live oscillator: the same wobble, at a fraction of the work for the
+        // browser, which is what kept the music from stuttering on slower computers.
+        if (vibrato && d + release > vibDelay) {
+            const from = t + vibDelay, to = t + d + release, depth = f * vibrato;
+            const n = Math.max(2, Math.ceil((to - from) * 100));
+            const curve = new Float32Array(n);
+            for (let k = 0; k < n; k++) {
+                const at = from + (to - from) * k / (n - 1);
+                const fade = Math.min(1, (at - from) / 0.25);
+                curve[k] = f + depth * fade * Math.sin(2 * Math.PI * 5 * (at - t));
+            }
+            osc.frequency.setValueCurveAtTime(curve, from, to - from);
         }
         const g = ctx.createGain();
         g.gain.setValueAtTime(0.0001, t);
@@ -394,8 +398,15 @@
         if (filter) {
             const lp = ctx.createBiquadFilter();
             lp.type = "lowpass";
-            lp.frequency.setValueAtTime(sweep || filter, t);
-            if (sweep) lp.frequency.exponentialRampToValueAtTime(filter, t + Math.max(attack * 2, 0.12));
+            // A fixed cutoff is set as a plain value: an automated one (setValueAtTime)
+            // makes the browser recompute the filter for every sample, which is
+            // what made the music stutter on slower computers. Same sound either way.
+            if (sweep) {
+                lp.frequency.setValueAtTime(sweep, t);
+                lp.frequency.exponentialRampToValueAtTime(filter, t + Math.max(attack * 2, 0.12));
+            } else {
+                lp.frequency.value = filter;
+            }
             osc.connect(lp);
             n = lp;
         }
@@ -403,6 +414,8 @@
         g.connect(bus);
         osc.start(t);
         osc.stop(t + d + release + 0.05);
+        // Unhook the note's nodes once it's done, so a long session doesn't pile them up.
+        osc.onended = () => { g.disconnect(); if (n !== osc) n.disconnect(); };
     }
 
     function drum(bus, t, kind, v) {

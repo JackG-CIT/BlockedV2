@@ -50,6 +50,7 @@
                     <button class="btn wood" type="button" data-go="chapters">Choose a level</button>
                     <button class="btn sea" type="button" data-go="workshop">Build your own</button>
                 </div>
+                <button class="btn small sea" type="button" data-story-scene="intro">Watch the intro</button>
                 <p class="progress-label" id="titleProgress"></p>
             </div>
         </section>
@@ -59,6 +60,14 @@
             <div class="section-head">
                 <h2>The Voyage</h2>
                 <p>Clear each room to unlock the next.</p>
+                <div class="view-toggle" role="group" aria-label="Show the voyage as">
+                    <button type="button" data-view="map">Map</button>
+                    <button type="button" data-view="list">List</button>
+                </div>
+            </div>
+            <div id="voyageMap" class="hidden">
+                <div class="map-tools"><button class="btn small sea" type="button" data-story-scene="intro">Watch the intro</button></div>
+                <div class="voyage-map" id="voyageMapBody"></div>
             </div>
             <div id="chapterList"></div>
         </section>
@@ -314,6 +323,7 @@
     <script src="js/hints.js"></script>
     <script src="js/editor.js"></script>
     <script src="js/soundmenu.js"></script>
+    <script src="js/story.js"></script>
     <script src="js/portal.js"></script>
     <script src="js/standalone.js"></script>
 </body>

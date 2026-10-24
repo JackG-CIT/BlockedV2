@@ -755,6 +755,129 @@ kbd {
 .lost { text-align: center; padding: 40px 0; }
 .lost .code { font-size: 5rem; color: var(--gold); text-shadow: 6px 6px 0 var(--ink); margin: 0; }
 
+/* ---------- story: cutscenes (static/js/story.js) ---------- */
+.cutscene {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    justify-items: center;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 16px;
+    background: #070d17;
+    cursor: pointer;
+    animation: fade-in 0.4s ease-out;
+}
+.cutscene.closing { opacity: 0; transition: opacity 0.35s; }
+.cutscene-stage { width: 100%; height: 100%; display: grid; place-items: center; min-height: 0; }
+.cutscene canvas {
+    display: block;
+    width: min(100%, calc((100vh - 200px) * 16 / 9));
+    max-width: 1280px;
+    aspect-ratio: 16 / 9;
+    image-rendering: pixelated;
+    border: var(--px) solid var(--ink);
+    box-shadow: 0 0 0 var(--px) var(--wood-dark), var(--shadow);
+}
+.cutscene-caption {
+    width: min(100%, 860px);
+    min-height: 110px;
+    padding: 14px 18px 10px;
+    background: var(--wood-deep);
+    border: var(--px) solid var(--ink);
+    box-shadow: inset 0 0 0 var(--px) var(--wood-dark), var(--shadow);
+}
+.cutscene-text { min-height: 2.6em; margin: 0 0 6px; font-size: 1.35rem; color: var(--cream); text-shadow: 2px 2px 0 var(--ink); }
+.cutscene-keys { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0; font-size: 0.85rem; opacity: 0.8; }
+.cutscene-dots { display: flex; gap: 6px; }
+.cutscene-dots i { width: 10px; height: 10px; background: var(--wood-dark); border: 2px solid var(--ink); }
+.cutscene-dots i.done { background: var(--gold-dark); }
+.cutscene-dots i.on { background: var(--gold); }
+.cutscene-skip { position: absolute; top: 16px; right: 16px; }
+@keyframes fade-in { from { opacity: 0; } }
+
+/* ---------- story: the voyage map ---------- */
+.view-toggle { display: inline-flex; margin-left: auto; border: var(--px) solid var(--ink); box-shadow: var(--shadow); }
+.view-toggle button {
+    font: inherit;
+    font-size: 1rem;
+    padding: 4px 14px;
+    color: var(--cream);
+    background: var(--wood-dark);
+    border: 0;
+    cursor: pointer;
+}
+.view-toggle button + button { border-left: var(--px) solid var(--ink); }
+.view-toggle button.active { background: var(--gold); color: var(--ink); }
+.view-toggle button:focus-visible { outline: var(--px) dashed var(--foam); outline-offset: 2px; }
+.map-tools { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin: -6px 0 14px; }
+
+.voyage-map { display: grid; gap: 22px; max-width: 620px; margin: 0 auto 10px; }
+.map-part-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 8px; }
+.map-part-head h3 { margin: 0; color: var(--gold); text-shadow: 2px 2px 0 var(--ink); }
+.map-part-head p { margin: 0; opacity: 0.85; }
+.map-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: var(--px) solid var(--ink);
+    box-shadow: var(--shadow);
+    font-family: var(--font);
+}
+.map-svg text { font-size: 11px; fill: var(--cream); }
+.map-svg image { image-rendering: pixelated; }
+
+/* the Castle */
+.map-night { fill: #13243d; }
+.map-mast { fill: var(--wood-deep); }
+.map-sail { fill: #cfc6b4; }
+.map-sail-stripe { fill: var(--ink); opacity: 0.55; }
+.map-flag { fill: var(--ink); }
+.map-flag-skull { fill: var(--cream); }
+.map-rail, .map-beam { fill: var(--wood-deep); }
+.map-hull { fill: var(--wood-dark); }
+.map-room { fill: #2e1a0b; }
+.map-keel { fill: var(--wood-deep); }
+.map-svg .map-name { font-size: 8px; fill: var(--gold-dark); letter-spacing: 0.2em; }
+.map-svg .map-label { fill: var(--gold); font-size: 12px; }
+.map-svg .map-place { fill: var(--parch-dark); font-size: 9px; }
+.map-deck.dim, .map-stop.dim { opacity: 0.55; }
+.map-water { fill: rgba(31, 100, 168, 0.55); pointer-events: none; }
+.map-wave { fill: var(--foam); opacity: 0.7; pointer-events: none; }
+.map-ladder { fill: none; stroke: var(--wood-light); stroke-width: 2; stroke-dasharray: 2 3; }
+
+/* the chart */
+.map-parch { fill: var(--parch); }
+.map-ripple { fill: var(--sea-light); opacity: 0.35; }
+.map-sand { fill: var(--parch-dark); }
+.map-grass { fill: var(--green); }
+.map-palm { fill: var(--wood-dark); }
+.map-compass rect { fill: var(--wood-dark); }
+.map-compass .map-compass-n { fill: var(--red); }
+.map-svg .map-compass text { fill: var(--wood-deep); font-size: 10px; }
+.map-sea .map-svg .map-label { fill: var(--wood-deep); }
+.map-sea .map-svg .map-place { fill: var(--wood); }
+.map-route { fill: none; stroke: var(--red-dark); stroke-width: 2; stroke-dasharray: 3 4; }
+.map-x rect { fill: var(--red); }
+
+/* rooms */
+.map-node { cursor: pointer; }
+.map-node .map-tile { fill: var(--cream); stroke: var(--ink); stroke-width: 2; }
+.map-node text { fill: var(--ink); font-size: 12px; }
+.map-node.cleared .map-tile { fill: var(--gold); }
+.map-node.locked { cursor: default; }
+.map-node.locked .map-tile { fill: #5b5f6a; }
+.map-node .map-tick { fill: var(--green); stroke: var(--ink); stroke-width: 1; }
+.map-node.current .map-tile { animation: map-beacon 1.2s steps(2) infinite; }
+a.map-node:hover .map-tile, a.map-node:focus-visible .map-tile { fill: var(--gold-light); stroke: var(--gold-dark); }
+a.map-node:focus { outline: none; }
+.map-pawn { pointer-events: none; animation: map-bob 1s steps(2) infinite; }
+.map-node.current .map-tile { fill: var(--gold-light); }
+@keyframes map-beacon { 50% { stroke: var(--gold); fill: var(--gold-light); } }
+@keyframes map-bob { 50% { transform: translateY(-2px); } }
+
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) {
     .editor { grid-template-columns: 180px minmax(0, 1fr); }

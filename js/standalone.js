@@ -141,7 +141,32 @@
             });
             list.append(h, grid);
         });
+        renderMap();
     }
+
+    // ========== The voyage map (story.js draws it) ==========
+    BlockedStory.init({ imgBase: "img/", story: DATA.story, seenKey: "blocked-sa-story-seen" });
+    function renderMap() {
+        const chapters = DATA.chapters.map((title, c) => ({
+            number: c + 1, title,
+            levels: LEVELS.map((lv, i) => ({ lv, i })).filter(({ lv }) => lv.chapter === c + 1).map(({ lv, i }) => ({
+                id: lv.id, name: lv.name, number: i + 1,
+                state: progress[lv.id] ? "cleared" : isUnlocked(i) ? "open" : "locked",
+            })),
+        })).filter(ch => ch.levels.length);
+        BlockedStory.renderMap($("voyageMapBody"), chapters);
+    }
+    $("voyageMapBody").addEventListener("click", e => {
+        const room = e.target.closest("a.map-node");
+        if (!room) return;
+        e.preventDefault();
+        const i = Number(room.dataset.index);
+        playVoyage(i, { flow: !progress[LEVELS[i].id] });
+    });
+    BlockedStory.viewSwitch({
+        buttons: [...document.querySelectorAll("#screen-chapters .view-toggle [data-view]")],
+        map: $("voyageMap"), list: $("chapterList"), key: "blocked-sa-view",
+    });
 
     // ========== Tutorials ==========
     const CONTROLS = `<ul class="info-list">
@@ -399,8 +424,8 @@
         const chapter = cur ? cur.lv.chapter : 1;
         portal.breakTime(() => {
             show("chapters");
-            const h = $("chapter-" + chapter);
-            if (h) h.scrollIntoView();
+            const h = $("voyageMap").classList.contains("hidden") ? $("chapter-" + chapter) : $("map-chapter-" + chapter);
+            if (h) h.scrollIntoView({ block: "center" });
         });
     }
 
@@ -628,5 +653,6 @@
     // ========== Start ==========
     show("title");
     portal.gameStart();
+    BlockedStory.playOnce("intro");   // the first time the game opens
     window.BlockedStandalone = { playVoyage, show, progress: () => ({ ...progress }) };   // handy for testing
 })();
