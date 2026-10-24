@@ -329,7 +329,7 @@
         fitBoard();   // again, now the board (and any health bar) is drawn
         hints = BlockedHints.create({
             table, level: lv, game,
-            solverUrl: "js/solver.js",
+            solverUrl: "js/solver.js?v=30c648892b",
             route: lv.solution || null,
             text: $("hintText"),
             button: $("hintBtn"),
