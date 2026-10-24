@@ -9,10 +9,16 @@
 const MAX_STATES = 300000;
 const DIRS = [["U", 0, -1], ["D", 0, 1], ["L", -1, 0], ["R", 1, 0]];
 const CANNON_DIRS = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+// Monsters (solver.py MONSTERS): squares that block like walls; every crate shot into
+// one costs it a health, and with none left all its squares vanish. Health is kept in
+// the walls set as negative numbers: token(m, k) for k = 1..health.
+const MONSTERS = ["kraken", "hull"];
+const token = (m, k) => -(1 + m * 1000 + k);
 
 function prepare(level) {
     const W = level.width, H = level.height;
-    const L = { W, H, cannons: new Map(), exits: new Set(), plates: [], fuses: [], plateCells: new Set() };
+    const L = { W, H, cannons: new Map(), exits: new Set(), plates: [], fuses: [], plateCells: new Set(),
+                monsterCells: MONSTERS.map(() => []), monsterAt: new Map(), health: MONSTERS.map(() => 0) };
     const tiles = level.tiles.slice().sort((a, b) => a.y - b.y || a.x - b.x);
     for (const t of tiles) {
         const i = t.y * W + t.x;
@@ -23,6 +29,12 @@ function prepare(level) {
         else if (type === "exit") L.exits.add(i);
         else if (type === "pressureplate") { L.plates.push([i, target]); L.plateCells.add(i); }
         else if (type === "fuse") L.fuses.push([i, target]);
+        else if (MONSTERS.includes(type)) {
+            const m = MONSTERS.indexOf(type);
+            L.monsterCells[m].push(i);
+            L.monsterAt.set(i, m);
+            L.health[m] = Math.max(L.health[m], t.aX || 3);
+        }
     }
     // Plate targets act as gates (unless they're cannons, which plates ignore).
     L.gates = new Set(L.plates.map(([, t]) => t).filter(t => t >= 0 && !L.cannons.has(t)));
@@ -31,6 +43,28 @@ function prepare(level) {
     for (const [plate, t] of L.plates) if (L.gates.has(t)) decider.set(t, plate);
     L.gateOrder = L.plates.filter(([plate, t]) => L.gates.has(t) && decider.get(t) === plate);
     return L;
+}
+
+// Adds the monsters' squares and full health to a fresh walls set.
+function addMonsters(L, walls) {
+    L.monsterCells.forEach((cells, m) => {
+        if (!cells.length) return;
+        cells.forEach(c => walls.add(c));
+        for (let k = 1; k <= L.health[m]; k++) walls.add(token(m, k));
+    });
+}
+
+function healthLeft(walls, m) {
+    let k = 0;
+    while (walls.has(token(m, k + 1))) k++;
+    return k;
+}
+
+// A crate hit monster m: one less health; at none, its squares vanish.
+function hitMonster(L, m, walls) {
+    const left = healthLeft(walls, m);
+    walls.delete(token(m, left));
+    if (left <= 1) L.monsterCells[m].forEach(c => walls.delete(c));
 }
 
 function inside(L, x, y) {
@@ -100,7 +134,8 @@ function settle(L, p, boxes, walls) {
             const n = inside(L, nx, ny) ? ny * L.W + nx : -1;
             if (n === p) return null; // a cannonball crate flattens the pirate
             if (n < 0 || boxes.has(n) || walls.has(n)) {
-                if (n >= 0 && walls.has(n) && !L.gates.has(n)) walls.delete(n); // gates eat the crate
+                if (n >= 0 && walls.has(n) && L.monsterAt.has(n)) hitMonster(L, L.monsterAt.get(n), walls);
+                else if (n >= 0 && walls.has(n) && !L.gates.has(n)) walls.delete(n); // gates eat the crate
                 boxes.delete(y * L.W + x);
                 if (n >= 0 && boxes.has(n)) boxes.delete(n);
                 if (!settlePlates(L, p, boxes, walls)) return null;
@@ -240,6 +275,7 @@ function routeFrom(L, level, current, route) {
         else if (type === "box") s.boxes.add(i);
         else if (type === "wall") s.walls.add(i);
     }
+    addMonsters(L, s.walls);
     if (s.p < 0 || !settle(L, s.p, s.boxes, s.walls)) return null;
     const want = key(current);
     for (let k = 0; k <= route.length; k++) {
@@ -256,6 +292,11 @@ function analyse(level, board, route) {
     const L = prepare(level);
     const idx = ([x, y]) => y * L.W + x;
     const start = { p: idx(board.player), boxes: new Set(board.boxes.map(idx)), walls: new Set(board.walls.map(idx)) };
+    // The board's walls include living monsters' squares; add their health left.
+    MONSTERS.forEach((kind, m) => {
+        const left = (board.health || {})[kind] || 0;
+        for (let k = 1; k <= left; k++) start.walls.add(token(m, k));
+    });
     const onRoute = route ? routeFrom(L, level, start, route) : null;
     const result = onRoute ? { solvable: true, path: onRoute } : search(L, start);
     if (!result.solvable) return { solvable: false, truncated: result.truncated };

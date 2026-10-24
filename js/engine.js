@@ -5,8 +5,9 @@
 //
 // A level looks like:
 //   { width, height, tiles: [{ type, x, y, direction, aX, aY }, ...] }
-// type is one of: player, wall, box, pressureplate, cannon, fuse, exit.
-// Plates and fuses point at the tile they control with aX/aY.
+// type is one of: player, wall, box, pressureplate, cannon, fuse, exit, kraken, hull.
+// Plates and fuses point at the tile they control with aX/aY. A kraken or hull
+// tile keeps its health in aX: all of one kind share one health pool.
 (function (global) {
     "use strict";
 
@@ -25,7 +26,7 @@
         table.innerHTML = "";
         // A square can hold two tiles: a plate or fuse with a crate or the
         // pirate starting on top of it.
-        const tiles = {};
+        const tiles = {}, health = {};
         (level.tiles || []).forEach(t => { (tiles[t.x + "," + t.y] = tiles[t.x + "," + t.y] || []).push(t); });
 
         for (let y = 0; y < level.height; y++) {
@@ -44,11 +45,24 @@
                         td.dataset.targetY = t.aY;
                     }
                     if (type === "cannon") td.dataset.direction = t.direction || "up";
+                    if (MONSTERS[type]) {
+                        td.classList.add("wall");    // blocks like a wall while it lives
+                        health[type] = Math.max(health[type] || 0, t.aX || 3);
+                    }
                 }
                 tr.appendChild(td);
             }
             table.appendChild(tr);
         }
+        // Each monster's health is kept on its squares (so undo snapshots keep it too).
+        Object.keys(health).forEach(kind => {
+            const cells = Array.from(table.querySelectorAll("td." + kind));
+            cells.forEach(td => { td.dataset.hp = health[kind]; td.dataset.maxHp = health[kind]; });
+            // The kraken gets an eye or two along its top row.
+            if (kind === "kraken") cells.filter((td, k) => td.dataset.y === cells[0].dataset.y && k % 3 === 1 || cells.length < 3 && k === 0)
+                .forEach(td => { td.dataset.eye = "1"; });
+        });
+        renderHealth(table);
 
         // Whatever a plate controls is drawn as a gate.
         table.querySelectorAll(".pressureplate").forEach(pp => {
@@ -56,6 +70,53 @@
             if (target && !target.classList.contains("cannon")) target.dataset.door = "1";
         });
         table.querySelectorAll("td").forEach(renderCell);
+    }
+
+    // ========== Monsters: the kraken, and an enemy ship's hull ==========
+    // Their squares block like walls. Every crate shot into one costs that monster
+    // one health (the crate is gone); with none left, all of its squares vanish.
+    // The same rule is in solver.js and solver.py (MONSTERS).
+    const MONSTERS = { kraken: "Kraken", hull: "Enemy ship" };
+
+    function monsterHealth(table, kind) {
+        const cell = table.querySelector(`td.${kind}.wall`);
+        return cell ? parseInt(cell.dataset.hp) : 0;
+    }
+
+    // A health bar for each monster, in a strip above the board (outside the camera's
+    // window, so it never scrolls away). Health lives on the squares, so redrawing from
+    // them is always right, after undo and restart too.
+    function renderHealth(table) {
+        const frame = table.closest(".board-frame");
+        if (!frame) return;
+        let strip = frame.querySelector(":scope > .health");
+        const bars = Object.keys(MONSTERS).map(kind => {
+            const first = table.querySelector("td." + kind);
+            if (!first) return "";
+            const max = parseInt(first.dataset.maxHp), hp = monsterHealth(table, kind);
+            const pips = Array.from({ length: max }, (_, k) => `<i class="pip${k < hp ? "" : " lost"}"></i>`).join("");
+            return `<span class="health-bar ${kind}${hp ? "" : " beaten"}"><b>${MONSTERS[kind]}</b>${pips}</span>`;
+        }).join("");
+        if (!bars) { if (strip) strip.remove(); return; }
+        if (!strip) {
+            strip = document.createElement("div");
+            strip.className = "health";
+            frame.prepend(strip);
+        }
+        strip.innerHTML = bars;
+    }
+
+    // A crate hit this monster: one less health, and with none left it's beaten.
+    function hitMonster(table, kind, emit) {
+        const cells = Array.from(table.querySelectorAll(`td.${kind}.wall`));
+        const hp = parseInt(cells[0].dataset.hp) - 1;
+        cells.forEach(td => { td.dataset.hp = hp; });
+        if (hp <= 0) {
+            cells.forEach(td => { td.classList.remove("wall"); renderCell(td); flash(td); });
+            if (emit) emit("smash");
+        }
+        renderHealth(table);
+        return hp;
     }
 
     // Mid-chapter rooms end at a door (an exit in the outer wall) or a trapdoor
@@ -84,6 +145,8 @@
         let obj = "";
         if (c.contains("player")) obj = "pirate";
         else if (c.contains("box")) obj = c.contains("pressureplate") ? "crate weighing" : "crate";
+        else if (c.contains("kraken") && c.contains("wall")) obj = cell.dataset.eye ? "kraken-eye" : "kraken";
+        else if (c.contains("hull") && c.contains("wall")) obj = "hull";
         else if (c.contains("wall") || c.contains("nopass")) obj = cell.dataset.door ? "gate" : "wall";
         else if (c.contains("cannon")) obj = "cannon " + (cell.dataset.direction || "up");
 
@@ -218,7 +281,13 @@
         }
         if (!next || next.classList.contains("box") || next.classList.contains("nopass") || next.classList.contains("wall")) {
             // Cannon fire smashes walls, but a shut gate just eats the crate.
-            if (next && next.classList.contains("wall") && !next.dataset.door) {
+            // A monster loses a health instead.
+            const monster = next && next.classList.contains("wall") && Object.keys(MONSTERS).find(k => next.classList.contains(k));
+            if (monster) {
+                hitMonster(table, monster, emit);
+                flash(next);
+                if (emit) emit("crash");
+            } else if (next && next.classList.contains("wall") && !next.dataset.door) {
                 next.classList.remove("wall", "nopass");
                 renderCell(next);
                 flash(next);
@@ -280,8 +349,8 @@
 
         function findPlayer() {
             playerCell = table.querySelector(".player");
-            playerx = Array.from(playerCell.parentElement.children).indexOf(playerCell);
-            playery = Array.from(playerCell.parentElement.parentElement.children).indexOf(playerCell.parentElement);
+            playerx = parseInt(playerCell.dataset.x);
+            playery = parseInt(playerCell.dataset.y);
         }
 
         function elapsed() {
@@ -399,8 +468,10 @@
             history = [];
 
             table.querySelectorAll("td").forEach(renderCell);
+            renderHealth(table);
             runChecks(true);
             updateHUD();
+            follow(table, true);
         }
 
         // Takes back one move (shots that were in the air then carry on). The timer keeps running.
@@ -414,6 +485,8 @@
             cleanBoard();
             findPlayer();
             moveCount = snap.moves;
+            renderHealth(table);
+            follow(table, true);
             sound("undo");
             updateHUD();
             nextShot();
@@ -428,7 +501,9 @@
                 if (td.classList.contains("wall") || td.classList.contains("nopass")) walls.push([x, y]);
                 if (td.classList.contains("box")) boxes.push([x, y]);
             });
-            return { player: [playerx, playery], boxes, walls };
+            const health = {};
+            Object.keys(MONSTERS).forEach(kind => { health[kind] = monsterHealth(table, kind); });
+            return { player: [playerx, playery], boxes, walls, health };
         }
 
         // Moves are never held back: you can keep moving while a shot is in the air.
@@ -482,6 +557,7 @@
             playerCell.classList.add("player");
             renderCell(playerCell);
             faceDirection(dx);
+            follow(table);
             sound(pushing ? "push" : "step");
 
             runChecks();
@@ -555,6 +631,7 @@
         findPlayer();
         runChecks(true);
         updateHUD();
+        requestAnimationFrame(() => follow(table, true));
 
         return {
             move,
@@ -588,5 +665,37 @@
         return Math.max(min, Math.min(max, size));
     }
 
-    global.Blocked = { startGame, drawLevel, buildBoard, renderCell, getCell, fitTile };
+    // ========== Big boards: the camera ==========
+    // A board that would need tiles smaller than CAMERA_MIN to fit gets CAMERA_TILE
+    // tiles instead, inside a window (.board-wrap.camera) that follows the pirate.
+    // maxW/maxH are the space the page has for the board.
+    const CAMERA_MIN = 26, CAMERA_TILE = 30;
+    function fitBoard(table, width, height, maxW, maxH, min = 14, max = 72) {
+        const wrap = table.closest(".board-wrap");
+        const strip = table.closest(".board-frame") && table.closest(".board-frame").querySelector(":scope > .health");
+        const capH = strip ? strip.offsetHeight + 6 : 0;
+        let size = fitTile(width, height, maxW, maxH - capH, 1, max);
+        const camera = !!wrap && size < CAMERA_MIN;
+        size = camera ? CAMERA_TILE : Math.max(min, size);
+        table.style.setProperty("--tile", size + "px");
+        if (wrap) {
+            wrap.classList.toggle("camera", camera);
+            wrap.style.width = camera ? Math.min(maxW, width * size) + "px" : "";
+            wrap.style.height = camera ? Math.min(maxH - capH, height * size) + "px" : "";
+        }
+        follow(table, true);
+        return size;
+    }
+
+    // Keeps the pirate in the middle of the camera's window (if the board has one).
+    function follow(table, instant = false) {
+        const wrap = table.closest(".board-wrap.camera");
+        const p = wrap && table.querySelector("td.player");
+        if (!p) return;
+        const x = table.offsetLeft + p.offsetLeft + p.offsetWidth / 2;
+        const y = table.offsetTop + p.offsetTop + p.offsetHeight / 2;
+        wrap.scrollTo({ left: x - wrap.clientWidth / 2, top: y - wrap.clientHeight / 2, behavior: instant ? "auto" : "smooth" });
+    }
+
+    global.Blocked = { startGame, drawLevel, buildBoard, renderCell, getCell, fitTile, fitBoard, follow };
 })(window);

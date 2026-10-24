@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +33,7 @@
         <label class="check"><input type="checkbox" id="muteAll"> Mute everything <kbd>M</kbd></label>
         <label class="check" title="Off: the shorter chapter loops instead of the long tracks that build up room by room"><input type="checkbox" id="longMusic"> Long chapter music</label>
         
+        <a href="#" data-go="sounds">Sound test</a>
     </div>
 </div>
 
@@ -66,7 +68,7 @@
                 </div>
             </div>
             <div id="voyageMap" class="hidden">
-                <div class="map-tools"><button class="btn small sea" type="button" data-story-scene="intro">Watch the intro</button></div>
+                <div class="map-tools" id="sceneButtons"></div>
                 <div class="voyage-map" id="voyageMapBody"></div>
             </div>
             <div id="chapterList"></div>
@@ -106,6 +108,13 @@
 
                 </div>
                 <aside class="sidebar">
+                    <div class="panel dark">
+                        <h3>This run</h3>
+                        <div class="hud-run">
+                            <div class="stat"><b id="moveCount">0</b><span>moves</span></div>
+                            <div class="stat"><b id="timeElapsed">0.0s</b><span>time</span></div>
+                        </div>
+                    </div>
             <div class="panel play-controls">
                 <h3>Controls</h3>
                 <div class="btn-row">
@@ -123,13 +132,6 @@
                     <span>Swipe the board on a touch screen</span>
                 </div>
             </div>
-                    <div class="panel dark">
-                        <h3>This run</h3>
-                        <div class="hud-run">
-                            <div class="stat"><b id="moveCount">0</b><span>moves</span></div>
-                            <div class="stat"><b id="timeElapsed">0.0s</b><span>time</span></div>
-                        </div>
-                    </div>
                     <div class="panel">
                         <h3>Your record</h3>
                         <dl class="stat-list" id="myStats"></dl>
@@ -161,6 +163,55 @@
                 </div>
                 <div id="editorHost"></div>
             </div>
+        </section>
+
+        <!-- Sound test: every track and effect (shared with the website's /sounds page) -->
+        <section class="screen hidden" id="screen-sounds">
+            
+<style>
+    .track-group { margin: 14px 0 8px; color: var(--wood-deep); }
+    .track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 10px; }
+    .track { display: flex; gap: 10px; align-items: flex-start; padding: 8px; background: var(--parch-dark); border: 2px solid var(--ink); }
+    .track .muted { font-size: 0.85rem; margin: 2px 0 4px; }
+    .track code { display: block; font-size: 0.8rem; }
+    .passes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: center; }
+    .cycle { font-size: 0.8rem; margin-top: 6px; }
+    .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 10px; }
+    .slot-grid .field span { display: block; font-weight: 600; }
+    .slot-grid select { width: 100%; }
+</style>
+<div class="play-head">
+    <div>
+        <h1>Sound test</h1>
+        <p>Every sound in the game is made by <code>static/js/audio.js</code>. Click to listen, then change the numbers or notes there and refresh.</p>
+    </div>
+</div>
+
+<div class="panel" style="margin-bottom: 20px">
+    <h3>Music</h3>
+    <p>Click a track to listen. Switching tracks waits for the bar line and crossfades, the same as between pages in the game. The gold tags show which slot each track fills; change that in <code>PLAYLIST</code> near the top of the music section of <code>audio.js</code>.</p>
+    <p>The long chapter tracks play their short loop over and over, and every few times round they play a variation instead: a <strong>change-up</strong> (a second fiddle and drum fills), a <strong>grand</strong> pass (horns on the tune, big drums) or a <strong>breakdown</strong> (just fiddle, plucks and light drums). The cycle line shows the order. The variation buttons jump straight to that pass so you don't have to wait. Each chapter's boss track is a faster, grander version of its tune.</p>
+    <div class="btn-row" style="margin-bottom: 14px">
+        <button class="btn red small" type="button" id="stopMusic">Stop music</button>
+        <span id="nowPlaying" class="muted">Nothing playing</span>
+    </div>
+    <div id="tracks"></div>
+</div>
+
+<div class="panel" style="margin-bottom: 20px">
+    <h3>Try a track in a slot</h3>
+    <p>Hear a different track in the real game without editing code. This only changes <em>this browser</em>; when you've found the one you like, put its id in <code>PLAYLIST</code> to make it stick for everyone.</p>
+    <div class="slot-grid" id="slots"></div>
+    <div class="btn-row" style="margin-top: 12px">
+        <button class="btn small" type="button" id="resetSlots">Back to PLAYLIST</button>
+    </div>
+</div>
+
+<div class="panel">
+    <h3>Effects</h3>
+    <div class="sound-grid" id="effects"></div>
+</div>
+
         </section>
 
         <!-- How to play -->
@@ -212,11 +263,11 @@
         <div class="size-row">
             <div class="field">
                 <label for="levelWidth">Width</label>
-                <input type="number" id="levelWidth" min="3" max="30">
+                <input type="number" id="levelWidth" min="3" max="48">
             </div>
             <div class="field">
                 <label for="levelHeight">Height</label>
-                <input type="number" id="levelHeight" min="3" max="30">
+                <input type="number" id="levelHeight" min="3" max="48">
             </div>
         </div>
         
@@ -272,6 +323,7 @@
             </div>
             <p class="best" id="winBest"></p>
             <p class="best hidden" id="winPar"></p>
+            <p class="chest-line hidden" id="winStory"></p>
             <div class="btn-row">
                 <button class="btn big hidden" type="button" id="nextBtn">Next level ▶ <kbd>Space</kbd></button>
                 <button class="btn wood" type="button" id="replayBtn">Play again (R)</button>
@@ -323,6 +375,7 @@
     <script src="js/hints.js"></script>
     <script src="js/editor.js"></script>
     <script src="js/soundmenu.js"></script>
+    <script src="js/soundtest.js"></script>
     <script src="js/story.js"></script>
     <script src="js/portal.js"></script>
     <script src="js/standalone.js"></script>

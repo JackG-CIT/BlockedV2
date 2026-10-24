@@ -10,7 +10,6 @@
     "use strict";
     const DATA = window.BLOCKED_DATA;
     const LEVELS = DATA.levels;
-    const CHAPTER_SIZE = DATA.chapterSize;
     const $ = id => document.getElementById(id);
     const S = window.BlockedSound;
     const portal = window.BlockedPortal;
@@ -71,11 +70,12 @@
         screen = name;
         document.querySelectorAll(".screen").forEach(el => el.classList.toggle("hidden", el.id !== "screen-" + name));
         document.querySelectorAll(".topbar [data-go]").forEach(el => el.classList.toggle("active", el.dataset.go === name));
-        if (name !== "play") S.music("lobby", { room: 0 });
+        if (name !== "play" && name !== "sounds") S.music("lobby", { room: 0 });
         if (name === "title") renderTitle();
         if (name === "chapters") renderChapters();
         if (name === "workshop") renderMyLevels();
         if (name === "help") renderHelp();
+        if (name === "sounds") BlockedSoundTest.init();
         window.scrollTo(0, 0);
     }
     document.addEventListener("click", e => {
@@ -110,7 +110,7 @@
             </div>`;
         if (!locked) {
             const table = el.querySelector("table");
-            table.dataset.exitStyle = lv.room >= 1 && lv.room < CHAPTER_SIZE ? "door" : "chest";
+            table.dataset.exitStyle = lv.mid ? "door" : "chest";
             table.style.setProperty("--tile", Blocked.fitTile(lv.width, lv.height, 210, 150, 4, 28) + "px");
             Blocked.drawLevel(table, lv);
             if (onPlay) {
@@ -155,6 +155,7 @@
             })),
         })).filter(ch => ch.levels.length);
         BlockedStory.renderMap($("voyageMapBody"), chapters);
+        BlockedStory.sceneButtons($("sceneButtons"));
     }
     $("voyageMapBody").addEventListener("click", e => {
         const room = e.target.closest("a.map-node");
@@ -180,6 +181,8 @@
         squeeze: ["The squeeze", "A gate that shuts on a crate squeezes it out to the nearest free square, checking squares around the gate starting at the top-right. Block the nearer squares and you can drop a crate somewhere you can't reach."],
         cannons: ["Fuses and cannons", "Stand on a fuse (or put a crate on it) and its cannon fires the crate sitting in front of it. The shot smashes the first wall or crate it hits. Don't stand in the line of fire!"],
         loaded: ["A loaded fuse", "A crate parked on a fuse keeps its cannon firing after every move, so any crate that lands in front of it is shot straight away."],
+        hull: ["The enemy ship", "Her hull blocks like a wall, and every crate you shoot into it costs her one health (the bar above the board). Use it all up and the whole ship sinks out of your way."],
+        kraken: ["The kraken", "The kraken blocks your way like a wall. Every crate you shoot into it costs it one health (the bar above the board). Use it all up and it sinks back into the deep."],
         doors: ["Doors and trapdoors", "Rooms in the middle of a chapter end at a glowing door or trapdoor. Walk through to the next room. The treasure waits at the end of each chapter."],
     };
 
@@ -236,8 +239,7 @@
         }
         const maxW = area.clientWidth - 24;
         const maxH = window.innerHeight - top - below - 32;
-        const size = Blocked.fitTile(current.lv.width, current.lv.height, maxW, Math.max(maxH, 180), 14, 72);
-        table.style.setProperty("--tile", size + "px");
+        Blocked.fitBoard(table, current.lv.width, current.lv.height, maxW, Math.max(maxH, 180), 14, 72);
     }
     window.addEventListener("resize", fitBoard);
 
@@ -274,35 +276,30 @@
         leaving = false;
         const lv = cur.lv;
         const voyage = cur.index != null;
-        const boss = lv.room === CHAPTER_SIZE;
         $("pPlace").textContent = voyage
-            ? `Chapter ${lv.chapter}: ${DATA.chapters[lv.chapter - 1]} · Room ${lv.room} of ${CHAPTER_SIZE}` + (boss ? " · Chapter test" : "")
+            ? `Chapter ${lv.chapter}: ${DATA.chapters[lv.chapter - 1]} · ${lv.mid || lv.test ? "Room" : "Level"} ${lv.room} of ${lv.size}` + (lv.test ? " · Chapter test" : "")
             : "Your level";
         $("pName").textContent = lv.name;
         $("pDifficulty").innerHTML = lv.difficulty
             ? `${skulls(lv.difficulty)} ${ratingName(lv.difficulty)}${lv.par ? ` · Par ${lv.par} moves` : ""}` : "";
         $("pNotes").textContent = lv.notes || "";
         $("pBack").textContent = voyage ? "All levels" : "Your levels";
-        $("autoAdvanceRow").classList.toggle("hidden", !voyage || boss);
+        $("autoAdvanceRow").classList.toggle("hidden", !voyage || !lv.mid);
         $("autoAdvance").checked = walkOnWanted;
         $("hintText").textContent = "";
         $("stuckBanner").classList.add("hidden");
         $("moveCount").textContent = "0";
         $("timeElapsed").textContent = "0.0s";
         showStats(lv);
-        // Music: chapter rooms build the band up room by room; the boss room switches song.
+        // Music: the same slots as the website (chapters.py music_slot): each chapter's
+        // track, its grand boss version in the last room, and the finale's own tracks.
         if (voyage) {
-            const i = cur.index;
-            // Same slots as the website (app.py music_slot): each chapter's last level gets its
-            // grand boss version, and the voyage's final level gets the finale.
-            const chapter = Math.min(lv.chapter, 6);
-            const slot = i === LEVELS.length - 1 ? "finale" : boss ? "boss" + chapter : "chapter" + chapter;
-            S.music(slot, { room: boss ? 0 : lv.room });
+            S.music(lv.music, { room: lv.mid ? lv.room : 0 });
         } else {
             S.music("chapter1", { room: 0 });
         }
         table.innerHTML = "";
-        table.dataset.exitStyle = voyage && !boss ? "door" : "chest";
+        table.dataset.exitStyle = voyage && lv.mid ? "door" : "chest";
         fitBoard();
         if (entering) {
             $("curtain").classList.remove("closing");
@@ -310,6 +307,8 @@
         } else {
             $("curtain").classList.remove("closing", "entering");
         }
+        if (voyage) await BlockedStory.before(storyBefore(cur.index));
+        if (current !== cur) return;   // the player left during a scene
         if (voyage) await introduce(lv);
         if (current !== cur) return;   // the player left while a tutorial was up
         game = Blocked.startGame(table, lv, {
@@ -327,6 +326,7 @@
             },
         });
         if (!game) { $("hintText").textContent = "This level has no pirate to play as."; return; }
+        fitBoard();   // again, now the board (and any health bar) is drawn
         hints = BlockedHints.create({
             table, level: lv, game,
             solverUrl: "js/solver.js",
@@ -340,6 +340,25 @@
         });
         if (entering) stepIn(lv);
         portal.levelStart({ id: lv.id, name: lv.name, chapter: lv.chapter, room: lv.room });
+    }
+
+    // The story around voyage room i (story.js): what plays before it, the first time.
+    function storyBefore(i) {
+        const lv = LEVELS[i], prev = LEVELS[i - 1];
+        const first = !prev || prev.chapter !== lv.chapter;
+        const told = (DATA.story.chapters || [])[lv.chapter - 1] || {};
+        return {
+            afterLevel: prev ? prev.name : null,
+            afterChapter: first && prev ? DATA.chapters[prev.chapter - 1] : null,
+            chapter: first ? { number: lv.chapter, title: DATA.chapters[lv.chapter - 1], place: told.place, intro: told.intro } : null,
+        };
+    }
+    // A chapter's last room ends with its story line on the "Treasure found!" popup.
+    function chestLine(i) {
+        if (i == null) return "";
+        const lv = LEVELS[i], next = LEVELS[i + 1];
+        if (next && next.chapter === lv.chapter) return "";
+        return ((DATA.story.chapters || [])[lv.chapter - 1] || {}).end || "";
     }
 
     // Walking in from the room before: the pirate steps in from the nearest edge.
@@ -379,7 +398,7 @@
         if (hints.used) note += ` (${hints.used} hint${hints.used === 1 ? "" : "s"} used)`;
         const parNote = lv.par ? (moves <= lv.par ? `☠ You matched par (${lv.par} moves)!` : `Par is ${lv.par} moves.`) : "";
         const hasNext = cur.index != null && cur.index + 1 < LEVELS.length;
-        if (cur.index != null && cur.flow && lv.room < CHAPTER_SIZE && hasNext && walkOnWanted) {
+        if (cur.index != null && cur.flow && lv.mid && hasNext && walkOnWanted) {
             $("tallyMoves").textContent = moves;
             $("tallyTime").textContent = formatTime(ms);
             $("tallyNote").textContent = [parNote, note].filter(Boolean).join(" ");
@@ -395,17 +414,21 @@
         $("winBest").textContent = note;
         $("winPar").textContent = parNote;
         $("winPar").classList.toggle("hidden", !parNote);
-        $("winTitle").textContent = lv.room && lv.room < CHAPTER_SIZE ? "Room cleared!" : "Treasure found!";
-        $("nextBtn").classList.toggle("hidden", !hasNext);
-        $("nextBtn").firstChild.textContent = lv.room && lv.room < CHAPTER_SIZE ? "Next room ▶ " : "Next level ▶ ";
+        $("winTitle").textContent = lv.mid ? "Room cleared!" : "Treasure found!";
+        const theEnd = cur.index != null && cur.index === DATA.ending;   // the ending plays next
+        $("winStory").textContent = chestLine(cur.index);
+        $("winStory").classList.toggle("hidden", !$("winStory").textContent);
+        $("nextBtn").classList.toggle("hidden", !hasNext && !theEnd);
+        $("nextBtn").firstChild.textContent = theEnd ? "The end ▶ " : lv.mid ? "Next room ▶ " : "Next level ▶ ";
         $("winBackBtn").textContent = cur.index != null ? "Back to the chapter" : "Back to your levels";
         $("winModal").classList.remove("hidden");
-        (hasNext ? $("nextBtn") : $("replayBtn")).focus();
+        (hasNext || theEnd ? $("nextBtn") : $("replayBtn")).focus();
     }
 
     // Fade to dark, then the next room fades in. Between chapters the portal gets a break.
     function goNext() {
         const cur = current;
+        if (cur && cur.index === DATA.ending && !leaving) return theEnd();
         if (!cur || cur.index == null || cur.index + 1 >= LEVELS.length || leaving) return;
         leaving = true;
         const next = cur.index + 1;
@@ -416,6 +439,13 @@
             const go = () => playVoyage(next, { flow: true, entering: true });
             if (newChapter) portal.breakTime(go); else go();
         });
+    }
+
+    // After the voyage's last room: the ending, then the map.
+    function theEnd() {
+        leaving = true;
+        $("winModal").classList.add("hidden");
+        BlockedStory.play("ending").then(() => portal.breakTime(() => show("chapters")));
     }
 
     function backFromLevel() {

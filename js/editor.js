@@ -29,10 +29,24 @@ function startEditor(cfg) {
         { id: "fuse", label: "Fuse", key: "6", sprite: "fuse", drag: false },
         { id: "exit", label: "Treasure", key: "7", sprite: "chest", drag: false },
         { id: "link", label: "Link", key: "8", sprite: "gate", drag: false },
+        { id: "kraken", label: "Kraken", key: "9", sprite: "kraken-eye", drag: true },
+        { id: "hull", label: "Enemy hull", key: "-", sprite: "hull", drag: true },
         { id: "erase", label: "Erase", key: "0", sprite: null, drag: true },
     ];
     const NAMES = { player: "Pirate start", wall: "Wall", box: "Crate", pressureplate: "Pressure plate",
-                    cannon: "Cannon", fuse: "Fuse", exit: "Treasure (exit)" };
+                    cannon: "Cannon", fuse: "Fuse", exit: "Treasure (exit)", kraken: "Kraken", hull: "Enemy hull" };
+    // The kraken and an enemy hull block like walls; each crate shot into one costs it a
+    // health, and with none left all its squares vanish. Every square of one kind shares
+    // its health (stored in aX on each square). Click one again to change it.
+    const MONSTER = new Set(["kraken", "hull"]);
+    const MAX_HEALTH = 20;
+    function healthOf(kind) {
+        for (const row of board) for (const c of row) if (c && c.type === kind && c.aX) return c.aX;
+        return 3;
+    }
+    function setHealth(kind, hp) {
+        board.forEach(row => row.forEach(c => { if (c && c.type === kind) c.aX = hp; }));
+    }
     const TURN = { up: "right", right: "down", down: "left", left: "up" };
     // A crate or the pirate can start on top of a plate or fuse. That cell is
     // stored as the plate/fuse with top: "box" or top: "player".
@@ -227,6 +241,7 @@ function startEditor(cfg) {
         const c = board[y][x];
         let text = `(${x}, ${y}): ${c ? (c.top ? NAMES[c.top] + " on a " + NAMES[c.type].toLowerCase() : NAMES[c.type]) : "Empty deck"}`;
         if (c && c.type === "cannon") text += `, facing ${c.direction}`;
+        if (c && MONSTER.has(c.type)) text += `, ${c.aX || 3} health (click it again to change)`;
         if (c && (c.type === "pressureplate" || c.type === "fuse")) {
             text += c.aX == null ? ", not linked" : ` → ${c.type === "fuse" ? "fires" : "opens"} (${c.aX}, ${c.aY})`;
         }
@@ -257,6 +272,7 @@ function startEditor(cfg) {
         cancelLink(false);
         if (id === "link") setStatus("Click a plate or fuse, then click what it should control.");
         else if (id === "cannon") setStatus("Click to place a cannon. Click a cannon again to turn it.");
+        else if (MONSTER.has(id)) setStatus(`Painting: ${TOOLS.find(t => t.id === id).label} (health ${healthOf(id)}). Click one again to raise its health; it blocks like a wall until cannon fire uses its health up.`);
         else setStatus(`Painting: ${TOOLS.find(t => t.id === id).label}. Right-click to erase.`);
     }
 
@@ -319,6 +335,15 @@ function startEditor(cfg) {
                 cur.direction = TURN[cur.direction] || "up";
             } else {
                 board[y][x] = { type: "cannon", direction: "up" };
+            }
+        } else if (MONSTER.has(t)) {
+            if (cur && cur.type === t) {
+                if (dragging) return;
+                const hp = (cur.aX || 3) % MAX_HEALTH + 1;
+                setHealth(t, hp);
+                setStatus(`${NAMES[t]} health: ${hp}. Every crate shot into it costs one.`);
+            } else {
+                board[y][x] = { type: t, aX: healthOf(t), aY: null };
             }
         } else if (t === "player") {
             board.forEach(row => row.forEach((c, xx, r) => {

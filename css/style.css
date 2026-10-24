@@ -436,6 +436,21 @@ textarea { min-height: 80px; resize: vertical; }
 .sp.cannon.right { transform: rotate(90deg); }
 .sp.cannon.down { transform: rotate(180deg); }
 .sp.cannon.left { transform: rotate(270deg); }
+.sp.kraken { background-image: url("../img/kraken.svg"); animation: sway 1.6s steps(2) infinite; }
+.sp.kraken-eye { background-image: url("../img/kraken-eye.svg"); animation: blink 4s steps(1) infinite; }
+.sp.hull { background-image: url("../img/hull.svg"); }
+@keyframes sway { 50% { transform: translateX(6%); } }
+@keyframes blink { 96% { transform: scaleY(0.15); } }
+
+/* Monster health (engine.js renderHealth): a strip above the board */
+.board-frame > .health { padding: 0 0 6px; text-align: center; white-space: nowrap; }
+.health-bar { display: inline-flex; align-items: center; gap: 3px; margin: 0 8px; padding: 3px 8px;
+    background: #1d1a1f; border: 2px solid #000; color: #f5efe0; font-size: 15px; line-height: 1; }
+.health-bar b { margin-right: 5px; font-weight: normal; letter-spacing: 0.5px; }
+.health-bar .pip { width: 10px; height: 12px; background: #d33b36; box-shadow: inset 0 -3px 0 #962127; }
+.health-bar.kraken .pip { background: #c87ee0; box-shadow: inset 0 -3px 0 #5a2275; }
+.health-bar .pip.lost { background: #383a42; box-shadow: none; }
+.health-bar.beaten { opacity: 0.55; text-decoration: line-through; }
 
 @keyframes idle { 50% { translate: 0 -6%; } }
 @keyframes flicker { 50% { filter: brightness(1.3); } }
@@ -552,6 +567,9 @@ main:has(.play-layout) .msgbar { height: 38px; }
 .difficulty .skulls { margin-right: 8px; }
 .board-area { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .board-wrap { position: relative; max-width: 100%; overflow: auto; }
+/* A board too big for the screen: a window that follows the pirate (engine.js fitBoard/follow) */
+.board-wrap.camera { overflow: hidden; }
+
 
 .controls-hint { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; font-size: 0.95rem; text-shadow: 2px 2px 0 var(--ink); }
 kbd {
@@ -756,47 +774,65 @@ kbd {
 .lost .code { font-size: 5rem; color: var(--gold); text-shadow: 6px 6px 0 var(--ink); margin: 0; }
 
 /* ---------- story: cutscenes (static/js/story.js) ---------- */
+/* Full screen, no narration; any key or a tap skips. */
 .cutscene {
     position: fixed;
     inset: 0;
     z-index: 300;
     display: grid;
-    grid-template-rows: minmax(0, 1fr) auto;
-    justify-items: center;
-    align-items: center;
-    gap: 14px;
-    padding: 24px 16px;
-    background: #070d17;
+    place-items: center;
+    background: #000;
     cursor: pointer;
     animation: fade-in 0.4s ease-out;
 }
-.cutscene.closing { opacity: 0; transition: opacity 0.35s; }
-.cutscene-stage { width: 100%; height: 100%; display: grid; place-items: center; min-height: 0; }
-.cutscene canvas {
-    display: block;
-    width: min(100%, calc((100vh - 200px) * 16 / 9));
-    max-width: 1280px;
-    aspect-ratio: 16 / 9;
-    image-rendering: pixelated;
-    border: var(--px) solid var(--ink);
-    box-shadow: 0 0 0 var(--px) var(--wood-dark), var(--shadow);
+.cutscene.closing { opacity: 0; transition: opacity 0.4s; }
+.cutscene canvas { display: block; image-rendering: pixelated; }
+.cutscene-hint {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 18px;
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    text-shadow: 2px 2px 0 var(--ink);
+    opacity: 0.4;
+    animation: hint-blink 1.6s steps(2) infinite;
+    pointer-events: none;
 }
-.cutscene-caption {
-    width: min(100%, 860px);
-    min-height: 110px;
-    padding: 14px 18px 10px;
-    background: var(--wood-deep);
-    border: var(--px) solid var(--ink);
-    box-shadow: inset 0 0 0 var(--px) var(--wood-dark), var(--shadow);
-}
-.cutscene-text { min-height: 2.6em; margin: 0 0 6px; font-size: 1.35rem; color: var(--cream); text-shadow: 2px 2px 0 var(--ink); }
-.cutscene-keys { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0; font-size: 0.85rem; opacity: 0.8; }
-.cutscene-dots { display: flex; gap: 6px; }
-.cutscene-dots i { width: 10px; height: 10px; background: var(--wood-dark); border: 2px solid var(--ink); }
-.cutscene-dots i.done { background: var(--gold-dark); }
-.cutscene-dots i.on { background: var(--gold); }
-.cutscene-skip { position: absolute; top: 16px; right: 16px; }
+@keyframes hint-blink { 0% { opacity: 0.45; } 50% { opacity: 0.12; } }
 @keyframes fade-in { from { opacity: 0; } }
+
+/* ---------- story: chapter title cards ---------- */
+.chapter-card {
+    position: fixed;
+    inset: 0;
+    z-index: 290;
+    display: grid;
+    place-items: center;
+    padding: 24px 16px;
+    background: linear-gradient(rgba(7, 13, 23, 0.78), rgba(7, 13, 23, 0.9)), var(--sea-deep) url("../img/sea.svg") 0 0 / 64px 64px;
+    animation: fade-in 0.5s ease-out, tide 16s linear infinite;
+    cursor: pointer;
+}
+.chapter-card.closing { opacity: 0; transition: opacity 0.35s; }
+.chapter-card-inner { max-width: 640px; text-align: center; display: grid; justify-items: center; gap: 10px; }
+.chapter-card-inner > * { animation: card-rise 0.6s ease-out both; }
+.chapter-card-inner > :nth-child(2) { animation-delay: 0.15s; }
+.chapter-card-inner > :nth-child(3) { animation-delay: 0.3s; }
+.chapter-card-inner > :nth-child(4) { animation-delay: 0.45s; }
+.chapter-card-inner > :nth-child(5) { animation-delay: 0.6s; }
+.chapter-card-num { margin: 0; font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); text-shadow: 2px 2px 0 var(--ink); }
+.chapter-card h2 { margin: 0; font-size: clamp(2.6rem, 8vw, 4.4rem); color: var(--cream); text-shadow: 5px 5px 0 var(--ink); }
+.chapter-card-place { margin: 0; color: var(--parch-dark); font-size: 1.2rem; text-shadow: 2px 2px 0 var(--ink); }
+.chapter-card-intro { margin: 10px 0 14px; font-size: 1.25rem; line-height: 1.35; text-shadow: 2px 2px 0 var(--ink); }
+@keyframes card-rise { from { opacity: 0; transform: translateY(10px); } }
+
+/* the story line on a chapter finale's "Treasure found!" popup */
+.chest-line { max-width: 460px; margin: 6px auto 12px; font-size: 1.1rem; color: var(--wood-deep); font-style: italic; }
+.map-tools-label { align-self: center; opacity: 0.85; text-shadow: 2px 2px 0 var(--ink); }
 
 /* ---------- story: the voyage map ---------- */
 .view-toggle { display: inline-flex; margin-left: auto; border: var(--px) solid var(--ink); box-shadow: var(--shadow); }
@@ -900,4 +936,29 @@ a.map-node:focus { outline: none; }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- level pages never scroll on computers ----------
+   The whole page fits the window; the sidebar (controls, this run, records,
+   fastest crews) scrolls on its own instead, so the mouse wheel or Space can't
+   shift the board around mid-puzzle. Phones and narrow windows (one column)
+   scroll normally. In the standalone build this only applies while the play
+   screen is showing. */
+@media (min-width: 1101px) {
+    html:has(.play-layout):not(:has(.screen.hidden .play-layout)),
+    html:has(.play-layout):not(:has(.screen.hidden .play-layout)) body {
+        height: 100%;
+        overflow: hidden;
+    }
+    body:has(.play-layout) > footer { display: none; }
+    main:has(.play-layout) { display: flex; flex-direction: column; min-height: 0; padding-bottom: 12px; }
+    #screen-play:not(.hidden) { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+    .play-layout { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr); }
+    .play-layout .sidebar {
+        height: 100%;
+        overflow-y: auto;
+        align-content: start;
+        padding: 0 6px 6px 0;
+        scrollbar-width: thin;
+    }
 }
