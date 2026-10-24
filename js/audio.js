@@ -549,8 +549,8 @@
         boss5: "gunpowder-boss",
         boss6: "davy-jones-boss",
         finale: "boss-storm",     // chapter 7 Endgame: the deck battle
-        kraken: "boss-kraken",    // chapter 7's last level: the kraken
-        expert: "boss-storm-v2",  // the Expert Waters bonus chapter
+        kraken: "boss-storm-v2",  // chapter 7's last level: the kraken (Eye of the Storm II)
+        expert: "boss-kraken",    // the Expert Waters bonus chapter (Kraken Rising)
         milestone: "milestone",   // a big milestone (not used by any page yet)
     };
     // Other names pages may use: older ones, and "boss", which now means the finale.
