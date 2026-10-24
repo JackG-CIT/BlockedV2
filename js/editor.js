@@ -31,10 +31,12 @@ function startEditor(cfg) {
         { id: "link", label: "Link", key: "8", sprite: "gate", drag: false },
         { id: "kraken", label: "Kraken", key: "9", sprite: "kraken-eye", drag: true },
         { id: "hull", label: "Enemy hull", key: "-", sprite: "hull", drag: true },
+        { id: "water", label: "Water", key: "=", sprite: "water", drag: true },
         { id: "erase", label: "Erase", key: "0", sprite: null, drag: true },
     ];
     const NAMES = { player: "Pirate start", wall: "Wall", box: "Crate", pressureplate: "Pressure plate",
-                    cannon: "Cannon", fuse: "Fuse", exit: "Treasure (exit)", kraken: "Kraken", hull: "Enemy hull" };
+                    cannon: "Cannon", fuse: "Fuse", exit: "Treasure (exit)", kraken: "Kraken", hull: "Enemy hull",
+                    water: "Water (blocks you and crates; shots fly over it)" };
     // The kraken and an enemy hull block like walls; each crate shot into one costs it a
     // health, and with none left all its squares vanish. Every square of one kind shares
     // its health (stored in aX on each square). Click one again to change it.

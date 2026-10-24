@@ -18,7 +18,8 @@ const token = (m, k) => -(1 + m * 1000 + k);
 function prepare(level) {
     const W = level.width, H = level.height;
     const L = { W, H, cannons: new Map(), exits: new Set(), plates: [], fuses: [], plateCells: new Set(),
-                monsterCells: MONSTERS.map(() => []), monsterAt: new Map(), health: MONSTERS.map(() => 0) };
+                monsterCells: MONSTERS.map(() => []), monsterAt: new Map(), health: MONSTERS.map(() => 0),
+                water: new Set() };   // water blocks like a wall, but shots fly over it
     const tiles = level.tiles.slice().sort((a, b) => a.y - b.y || a.x - b.x);
     for (const t of tiles) {
         const i = t.y * W + t.x;
@@ -29,6 +30,7 @@ function prepare(level) {
         else if (type === "exit") L.exits.add(i);
         else if (type === "pressureplate") { L.plates.push([i, target]); L.plateCells.add(i); }
         else if (type === "fuse") L.fuses.push([i, target]);
+        else if (type === "water") L.water.add(i);
         else if (MONSTERS.includes(type)) {
             const m = MONSTERS.indexOf(type);
             L.monsterCells[m].push(i);
@@ -133,7 +135,7 @@ function settle(L, p, boxes, walls) {
             const nx = x + dx, ny = y + dy;
             const n = inside(L, nx, ny) ? ny * L.W + nx : -1;
             if (n === p) return null; // a cannonball crate flattens the pirate
-            if (n < 0 || boxes.has(n) || walls.has(n)) {
+            if (n < 0 || boxes.has(n) || (walls.has(n) && !L.water.has(n))) {
                 if (n >= 0 && walls.has(n) && L.monsterAt.has(n)) hitMonster(L, L.monsterAt.get(n), walls);
                 else if (n >= 0 && walls.has(n) && !L.gates.has(n)) walls.delete(n); // gates eat the crate
                 boxes.delete(y * L.W + x);
@@ -275,6 +277,7 @@ function routeFrom(L, level, current, route) {
         else if (type === "box") s.boxes.add(i);
         else if (type === "wall") s.walls.add(i);
     }
+    L.water.forEach(c => s.walls.add(c));
     addMonsters(L, s.walls);
     if (s.p < 0 || !settle(L, s.p, s.boxes, s.walls)) return null;
     const want = key(current);

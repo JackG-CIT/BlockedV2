@@ -439,6 +439,8 @@ textarea { min-height: 80px; resize: vertical; }
 .sp.kraken { background-image: url("../img/kraken.svg"); animation: sway 1.6s steps(2) infinite; }
 .sp.kraken-eye { background-image: url("../img/kraken-eye.svg"); animation: blink 4s steps(1) infinite; }
 .sp.hull { background-image: url("../img/hull.svg"); }
+.sp.water { background-image: url("../img/water.svg"); animation: swell 2.4s steps(2) infinite; }
+@keyframes swell { 50% { filter: brightness(1.12); } }
 @keyframes sway { 50% { transform: translateX(6%); } }
 @keyframes blink { 96% { transform: scaleY(0.15); } }
 
@@ -449,7 +451,7 @@ textarea { min-height: 80px; resize: vertical; }
 .health-bar b { margin-right: 5px; font-weight: normal; letter-spacing: 0.5px; }
 .health-bar .pip { width: 10px; height: 12px; background: #d33b36; box-shadow: inset 0 -3px 0 #962127; }
 .health-bar.kraken .pip { background: #c87ee0; box-shadow: inset 0 -3px 0 #5a2275; }
-.health-bar .pip.lost { background: #383a42; box-shadow: none; }
+.health-bar .pip.spent { background: #383a42; box-shadow: none; }
 .health-bar.beaten { opacity: 0.55; text-decoration: line-through; }
 
 @keyframes idle { 50% { translate: 0 -6%; } }
@@ -544,7 +546,9 @@ main:has(.play-layout) { max-width: 1600px; padding-top: 18px; }
 /* A compact header on level pages leaves more height for the board. */
 main:has(.play-layout) .play-head h1 { font-size: clamp(1.7rem, 2.6vw, 2.5rem); }
 main:has(.play-layout) .difficulty { margin-top: 2px; }
-main:has(.play-layout) .msgbar { height: 38px; }
+main:has(.play-layout) .msgbar { height: 30px; }
+main:has(.play-layout) .board-area { gap: 6px; }
+main:has(.play-layout) .play-notes { margin-bottom: 2px; }
 .play-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
 .play-head h1 { margin: 0; text-shadow: 4px 4px 0 var(--ink); }
 .play-head .place { color: var(--gold); font-weight: 700; text-shadow: 2px 2px 0 var(--ink); }

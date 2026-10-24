@@ -5,7 +5,8 @@
 //
 // A level looks like:
 //   { width, height, tiles: [{ type, x, y, direction, aX, aY }, ...] }
-// type is one of: player, wall, box, pressureplate, cannon, fuse, exit, kraken, hull.
+// type is one of: player, wall, box, pressureplate, cannon, fuse, exit, kraken, hull, water.
+// Water blocks the pirate and crates like a wall, but a shot crate flies over it.
 // Plates and fuses point at the tile they control with aX/aY. A kraken or hull
 // tile keeps its health in aX: all of one kind share one health pool.
 (function (global) {
@@ -45,6 +46,7 @@
                         td.dataset.targetY = t.aY;
                     }
                     if (type === "cannon") td.dataset.direction = t.direction || "up";
+                    if (type === "water") td.classList.add("wall");
                     if (MONSTERS[type]) {
                         td.classList.add("wall");    // blocks like a wall while it lives
                         health[type] = Math.max(health[type] || 0, t.aX || 3);
@@ -94,7 +96,7 @@
             const first = table.querySelector("td." + kind);
             if (!first) return "";
             const max = parseInt(first.dataset.maxHp), hp = monsterHealth(table, kind);
-            const pips = Array.from({ length: max }, (_, k) => `<i class="pip${k < hp ? "" : " lost"}"></i>`).join("");
+            const pips = Array.from({ length: max }, (_, k) => `<i class="pip${k < hp ? "" : " spent"}"></i>`).join("");
             return `<span class="health-bar ${kind}${hp ? "" : " beaten"}"><b>${MONSTERS[kind]}</b>${pips}</span>`;
         }).join("");
         if (!bars) { if (strip) strip.remove(); return; }
@@ -140,6 +142,7 @@
         if (c.contains("pressureplate")) base = weighed ? "plate pressed" : "plate";
         else if (c.contains("fuse")) base = weighed ? "fuse lit" : "fuse";
         else if (c.contains("exit")) base = exitSprite(cell);
+        else if (c.contains("water")) base = "water";
         else if (cell.dataset.door) base = "gate-open";
 
         let obj = "";
@@ -147,7 +150,7 @@
         else if (c.contains("box")) obj = c.contains("pressureplate") ? "crate weighing" : "crate";
         else if (c.contains("kraken") && c.contains("wall")) obj = cell.dataset.eye ? "kraken-eye" : "kraken";
         else if (c.contains("hull") && c.contains("wall")) obj = "hull";
-        else if (c.contains("wall") || c.contains("nopass")) obj = cell.dataset.door ? "gate" : "wall";
+        else if ((c.contains("wall") && !c.contains("water")) || c.contains("nopass")) obj = cell.dataset.door ? "gate" : "wall";
         else if (c.contains("cannon")) obj = "cannon " + (cell.dataset.direction || "up");
 
         cell.innerHTML = (base ? `<i class="sp ${base}"></i>` : "") + (obj ? `<i class="sp ${obj}"></i>` : "");
@@ -279,7 +282,8 @@
             if (emit) emit("crash");
             return "hit";
         }
-        if (!next || next.classList.contains("box") || next.classList.contains("nopass") || next.classList.contains("wall")) {
+        const blocked = c => c.classList.contains("box") || c.classList.contains("nopass") || (c.classList.contains("wall") && !c.classList.contains("water"));
+        if (!next || blocked(next)) {
             // Cannon fire smashes walls, but a shut gate just eats the crate.
             // A monster loses a health instead.
             const monster = next && next.classList.contains("wall") && Object.keys(MONSTERS).find(k => next.classList.contains(k));
@@ -670,30 +674,77 @@
     // tiles instead, inside a window (.board-wrap.camera) that follows the pirate.
     // maxW/maxH are the space the page has for the board.
     const CAMERA_MIN = 26, CAMERA_TILE = 30;
+
+    // ========== Wide levels built as a row of rooms: one room at a time ==========
+    // A level at least ROOMS_MIN_WIDTH wide whose rooms are split by solid wall columns
+    // (a doorway or gate allowed) is shown a room at a time, zoomed in. Walking through a
+    // door slides the view to the next room; walking back slides it back.
+    const ROOMS_MIN_WIDTH = 24, ROOM_MIN = 5;
+    function roomsOf(table) {
+        const rows = table.rows.length, cols = rows ? table.rows[0].cells.length : 0;
+        if (cols < ROOMS_MIN_WIDTH) return null;
+        const solid = c => c.classList.contains("wall") || c.classList.contains("nopass") || c.classList.contains("cannon");
+        const dividers = [0];
+        for (let x = 1; x < cols - 1; x++) {
+            let open = 0;
+            for (let y = 0; y < rows; y++) if (!solid(table.rows[y].cells[x])) open++;
+            if (open <= 1) dividers.push(x);   // a wall with at most one doorway
+        }
+        dividers.push(cols - 1);
+        const rooms = [];
+        for (let i = 0; i + 1 < dividers.length; i++) {
+            const from = dividers[i], to = dividers[i + 1];
+            const last = rooms[rooms.length - 1];
+            if (to - from < 2) { if (last) last.to = to; continue; }   // two walls side by side
+            if (last && to - from + 1 < ROOM_MIN) { last.to = to; continue; }   // too narrow to be a room: join the one before
+            rooms.push({ from, to });
+        }
+        return rooms.length >= 2 ? rooms : null;
+    }
+
     function fitBoard(table, width, height, maxW, maxH, min = 14, max = 72) {
         const wrap = table.closest(".board-wrap");
         const strip = table.closest(".board-frame") && table.closest(".board-frame").querySelector(":scope > .health");
         const capH = strip ? strip.offsetHeight + 6 : 0;
         let size = fitTile(width, height, maxW, maxH - capH, 1, max);
-        const camera = !!wrap && size < CAMERA_MIN;
-        size = camera ? CAMERA_TILE : Math.max(min, size);
+        // A row of rooms: show the widest room whole, if that makes the tiles a good deal bigger.
+        const rooms = wrap && roomsOf(table);
+        const roomW = rooms ? Math.max(...rooms.map(r => r.to - r.from + 1)) : 0;
+        const roomSize = rooms ? fitTile(roomW, height, maxW, maxH - capH, 1, max) : 0;
+        const byRoom = !!rooms && roomSize >= size * 1.25;
+        table._rooms = byRoom ? rooms : null;
+        table._room = null;
+        const camera = !!wrap && (byRoom || size < CAMERA_MIN);
+        size = byRoom ? roomSize : camera ? CAMERA_TILE : Math.max(min, size);
         table.style.setProperty("--tile", size + "px");
         if (wrap) {
             wrap.classList.toggle("camera", camera);
-            wrap.style.width = camera ? Math.min(maxW, width * size) + "px" : "";
+            wrap.classList.toggle("rooms", byRoom);
+            wrap.style.width = camera ? Math.min(maxW, (byRoom ? roomW : width) * size) + "px" : "";
             wrap.style.height = camera ? Math.min(maxH - capH, height * size) + "px" : "";
         }
         follow(table, true);
         return size;
     }
 
-    // Keeps the pirate in the middle of the camera's window (if the board has one).
+    // Keeps the pirate in view: in the middle of the camera's window, or (a row of
+    // rooms) the room the pirate is in. In a doorway the view stays where it was.
     function follow(table, instant = false) {
         const wrap = table.closest(".board-wrap.camera");
         const p = wrap && table.querySelector("td.player");
         if (!p) return;
-        const x = table.offsetLeft + p.offsetLeft + p.offsetWidth / 2;
         const y = table.offsetTop + p.offsetTop + p.offsetHeight / 2;
+        let x = table.offsetLeft + p.offsetLeft + p.offsetWidth / 2;
+        const rooms = table._rooms;
+        if (rooms) {
+            const px = parseInt(p.dataset.x);
+            const inside = r => px > r.from && px < r.to;
+            let room = rooms.find(inside) || table._room || rooms.find(r => px >= r.from && px <= r.to);
+            if (table._room && !inside(table._room) && !rooms.some(inside)) room = table._room;
+            table._room = room;
+            const first = table.rows[0].cells[room.from], last = table.rows[0].cells[room.to];
+            x = table.offsetLeft + (first.offsetLeft + last.offsetLeft + last.offsetWidth) / 2;
+        }
         wrap.scrollTo({ left: x - wrap.clientWidth / 2, top: y - wrap.clientHeight / 2, behavior: instant ? "auto" : "smooth" });
     }
 
