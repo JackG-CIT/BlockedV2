@@ -71,6 +71,16 @@
             const target = targetOf(table, pp);
             if (target && !target.classList.contains("cannon")) target.dataset.door = "1";
         });
+        // Colour tags: each gate (and each cannon) gets a colour, shown as a gem on it and on
+        // every plate (or fuse) that works it, so you can see at a glance what opens what.
+        const tags = new Map();
+        table.querySelectorAll(".pressureplate, .fuse").forEach(src => {
+            const target = targetOf(table, src);
+            const works = src.classList.contains("fuse") ? target && target.classList.contains("cannon") : target && target.dataset.door;
+            if (!works) return;   // a plate pointing at a cannon does nothing, so it gets no colour
+            if (!tags.has(target)) tags.set(target, tags.size % TAG_COLORS);
+            src.dataset.tag = target.dataset.tag = tags.get(target);
+        });
         table.querySelectorAll("td").forEach(renderCell);
     }
 
@@ -121,6 +131,8 @@
         return hp;
     }
 
+    const TAG_COLORS = 10;   // .sp.tag.t0 ... t9 in style.css
+
     // Mid-chapter rooms end at a door (an exit in the outer wall) or a trapdoor
     // (an exit inside the room); the treasure chest is for a chapter's last room.
     // The page says which by setting data-exit-style="door" on the board table.
@@ -153,7 +165,11 @@
         else if ((c.contains("wall") && !c.contains("water")) || c.contains("nopass")) obj = cell.dataset.door ? "gate" : "wall";
         else if (c.contains("cannon")) obj = "cannon " + (cell.dataset.direction || "up");
 
-        cell.innerHTML = (base ? `<i class="sp ${base}"></i>` : "") + (obj ? `<i class="sp ${obj}"></i>` : "");
+        // The colour tag sits on the plate, fuse or open gate (under a crate or the pirate),
+        // and on top of a shut gate or a cannon.
+        const tag = cell.dataset.tag != null ? `<i class="sp tag t${cell.dataset.tag}${c.contains("cannon") ? " corner" : ""}"></i>` : "";
+        const tagOnTop = obj === "gate" || c.contains("cannon");
+        cell.innerHTML = (base ? `<i class="sp ${base}"></i>` : "") + (tagOnTop ? "" : tag) + (obj ? `<i class="sp ${obj}"></i>` : "") + (tagOnTop ? tag : "");
     }
 
     // ========== Rules ==========

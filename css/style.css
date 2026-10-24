@@ -439,6 +439,14 @@ textarea { min-height: 80px; resize: vertical; }
 .sp.kraken { background-image: url("../img/kraken.svg"); animation: sway 1.6s steps(2) infinite; }
 .sp.kraken-eye { background-image: url("../img/kraken-eye.svg"); animation: blink 4s steps(1) infinite; }
 .sp.hull { background-image: url("../img/hull.svg"); }
+/* Colour tags (engine.js): a gem on each plate or fuse and on the gate or cannon it works */
+.board .sp.tag { inset: 34%; border: max(1px, calc(var(--tile) / 24)) solid #1d1a1f; box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3), inset 2px 2px 0 rgba(255, 255, 255, 0.35); }
+.board .sp.tag.corner { inset: 4% 62% 62% 4%; }
+.board.mini .sp.tag { border-width: 1px; box-shadow: none; }
+.sp.tag.t0 { background: #e8413b; } .sp.tag.t1 { background: #3b8cf0; } .sp.tag.t2 { background: #4fcf52; }
+.sp.tag.t3 { background: #b366e8; } .sp.tag.t4 { background: #ff9a1f; } .sp.tag.t5 { background: #2fd6d0; }
+.sp.tag.t6 { background: #ff7fc8; } .sp.tag.t7 { background: #f5efe0; } .sp.tag.t8 { background: #8a5a2b; }
+.sp.tag.t9 { background: #2a2f8f; }
 .sp.water { background-image: url("../img/water.svg"); animation: swell 2.4s steps(2) infinite; }
 @keyframes swell { 50% { filter: brightness(1.12); } }
 @keyframes sway { 50% { transform: translateX(6%); } }
