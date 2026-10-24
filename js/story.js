@@ -183,6 +183,19 @@
         ctx.fillText(text, Math.round(x), Math.round(y));
     }
 
+    // No speech bubbles, sound words or titles in any scene (the user's call): the
+    // pictures tell it. Set to false to draw story.py's lines again.
+    const WORDLESS = true;
+
+    // Fire on a ship's hull: a few flickering flames.
+    function flames(ctx, x, y, t) {
+        for (let i = 0; i < 3; i++) {
+            const h = 3 + Math.round((Math.sin(t * 13 + i * 2.1) + 1) * 2);
+            rect(ctx, x + i * 5, y - h, 3, h, i % 2 ? COL.lamp : "#ff8a1e");
+            rect(ctx, x + i * 5 + 1, y - h - 1, 1, 1, "#ffd84a");
+        }
+    }
+
     // ---------- the intro ----------
     // Each shot gets its lines from story.py: say(key) is that shot's line for key.
     const INTRO = [
@@ -215,41 +228,57 @@
                 disc(ctx, cx + 78 + s, cy + 34 - s / 2, 3 + Math.min(4, s / 3), "rgba(200, 200, 210, 0.45)");
             }
             if (between(t, 5.6, 6.8)) shout(ctx, say("boom"), cx + 66, cy + 22, COL.lamp);
-            if (between(t, 5.9, 7.1)) {   // the shot lands just short of the White Knight
-                const h = Math.round(Math.sin((t - 5.9) / 1.2 * Math.PI) * 18);
-                rect(ctx, 184, WATER - h, 4, h, COL.foam);
-                rect(ctx, 181, WATER - 2, 10, 2, COL.foam);
+            if (between(t, 5.9, 6.3)) {   // the shot strikes the White Knight
+                disc(ctx, 214, wy + 40, 7, COL.lamp);
+                disc(ctx, 214, wy + 40, 3, "#ffffff");
             }
+            if (t > 6.2) flames(ctx, 208, wy + 44, t);
         } },
-        { dur: 9, draw(ctx, t, say) {   // the crew dragged across, the White Knight towed away
+        { dur: 10, draw(ctx, t, say) {   // the crew dragged across, Pawn smuggled over in a crate, the White Knight sunk
             nightSky(ctx, t);
             sea(ctx, t);
-            const drift = t > 6.4 ? (t - 6.4) * 24 : 0;
-            const wx = 34 - drift, rx = 140 - drift;
+            const cut = 6.4;                                  // the grappling lines are cut
+            const away = t > cut ? (t - cut) * 26 : 0;        // the Castle sails off
+            const sink = t > cut ? (t - cut) * 8 : 0;         // and the White Knight goes down by the stern
+            const wx = 34, rx = 140 + away;
+            ctx.save();
+            ctx.beginPath(); ctx.rect(-OX, 0, VW, WATER + 1); ctx.clip();   // nothing shows below the waterline
+            ctx.translate(wx + 70, WATER);
+            ctx.rotate(-Math.min(0.3, sink / 70));
+            ctx.translate(-(wx + 70), -WATER + sink);
             const wy = ship(ctx, wx, t, 0);
+            if (sink < 30) flames(ctx, wx + 18, wy + 44, t);
+            ctx.restore();
             const ry = ship(ctx, rx, t, 1.3, true);
             const deck = wy + 26;
-            ctx.strokeStyle = COL.woodDeep;   // grappling lines, then the tow rope
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            if (t < 6.4) { ctx.moveTo(wx + 66, deck); ctx.lineTo(rx + 8, ry + 26); }
-            else { ctx.moveTo(wx + 74, wy + 22); ctx.lineTo(rx + 4, ry + 30); }
-            ctx.stroke();
-            const crew = [];
-            for (let i = 0; i < 6; i++) {   // the crew, one by one, Knight last
-                const start = i * 0.8, x = wx + 40 + Math.min((t - start) * 18, 78);
-                if (t < start || x > rx + 26) { crew.push(null); continue; }
+            if (t < cut) {   // the grappling line
+                ctx.strokeStyle = COL.woodDeep;
+                ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(wx + 66, deck); ctx.lineTo(rx + 8, ry + 26); ctx.stroke();
+            }
+            for (let i = 0; i < 6 && t < cut; i++) {   // the crew, one by one, Knight last
+                const start = 2.2 + i * 0.6, x = wx + 40 + Math.min((t - start) * 20, 78);
+                if (t < start || x > rx + 26) continue;
                 sailor(ctx, x, deck - 7, i === 5 ? COL.gold : COL.cream, t);
-                crew.push(x);
+            }
+            // Pawn (red bandana) hops into a crate of plunder, which Rook's crew haul across.
+            const k = Math.max(0, Math.min(1, (t - 2.2) / 3.4));
+            const cx = wx + 58 + (rx + 14 - (wx + 58)) * k, cy = deck - 7 + (ry + 20 - (deck - 7)) * k - Math.sin(k * Math.PI) * 6;
+            if (t < 1.6) sailor(ctx, wx + 48 + t * 5, deck - 7, COL.red, t);
+            else if (t < 2.0) sailor(ctx, wx + 56, deck - 9 - Math.sin((t - 1.6) / 0.4 * Math.PI) * 5, COL.red, t);
+            if (k < 1) {
+                rect(ctx, cx, cy, 8, 7, COL.wood);
+                rect(ctx, cx, cy, 8, 1, COL.woodDeep);
+                rect(ctx, cx + 3, cy + 1, 1, 6, COL.woodDeep);
+                if (t > 2.0 && Math.floor(t * 2) % 3 === 0) rect(ctx, cx + 2, cy - 2, 4, 2, COL.red);   // a peek
             }
             rook(ctx, rx + 30, ry + 16, t);
+            if (t > cut) {   // bubbles where she went down
+                const r = seeded(Math.floor(t * 6));
+                for (let i = 0; i < 4; i++) disc(ctx, wx + 20 + r() * 50, WATER + 1 - r() * 3, 1, COL.foam);
+            }
             // Things are going badly: a red alarm glow pulses over the scene.
-            if (t < 6.4) full(ctx, 0, H, `rgba(211, 59, 54, ${0.06 + Math.max(0, Math.sin(t * 5)) * 0.06})`);
-            if (between(t, 0.6, 2.2) && crew[0] != null) bubble(ctx, say("crew"), crew[0] + 2, deck - 8);
-            if (between(t, 2.4, 3.9) && crew[2] != null) bubble(ctx, say("crew2"), crew[2] + 2, deck - 8);
-            if (between(t, 4.4, 6) && crew[5] != null) bubble(ctx, say("knight"), crew[5] + 2, deck - 8);
-            if (between(t, 6, 7.6)) bubble(ctx, say("rook"), rx + 33, ry + 14, true);
-            if (between(t, 7.6, 9)) bubble(ctx, say("rook2"), rx + 33, ry + 14, true);
+            if (t < cut) full(ctx, 0, H, `rgba(211, 59, 54, ${0.06 + Math.max(0, Math.sin(t * 5)) * 0.06})`);
             fog(ctx, t, Math.min(0.6, t / 10));
         } },
         { dur: 8.5, draw(ctx, t, say) {   // Pawn, asleep in a crate in the hold
@@ -698,7 +727,8 @@
                 if (t >= total) return finish();
                 let n = 0;
                 while (n < shots.length - 1 && t >= shots[n].dur) { t -= shots[n].dur; n++; }
-                const shot = shots[n], say = key => (lines[n] || {})[key] || "";
+                // The scenes are wordless: story.py's lines are kept, but never drawn.
+                const shot = shots[n], say = key => (WORDLESS ? "" : (lines[n] || {})[key] || "");
                 ctx.setTransform(RES, 0, 0, RES, OX * RES, 0);
                 try { shot.draw(ctx, t, say); } catch (err) { /* a drawing bug shouldn't trap the player */ }
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
