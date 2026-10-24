@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% from '_editor.html' import workspace %}
+
+{% block title %}{% if level %}Edit {{ level.name }}{% else %}Build a level{% endif %}{% endblock %}
+
+{% block content %}
+<div class="play-head">
+    <h1>{% if level %}Editing “{{ level.name }}”{% else %}Build a level{% endif %}</h1>
+    <div class="btn-row">
+        {% if level %}<a class="btn sea small" href="{{ url_for('play', level_id=level.id) }}">Play saved version</a>{% endif %}
+        <a class="btn sea small" href="{{ url_for('index') }}">All levels</a>
+    </div>
+</div>
+
+{{ workspace(payload.limits, admin=current_user.is_admin, level=level) }}
+
+<script type="application/json" id="editorData">{{ payload|tojson }}</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ asset('js/editor.js') }}"></script>
+{% endblock %}
