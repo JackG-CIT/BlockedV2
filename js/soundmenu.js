@@ -10,6 +10,10 @@
     // Story cutscenes on or off (story.js reads the same key). Kept in the browser.
     const scenes = document.getElementById("storyScenes");
     const SCENES_KEY = "blocked-scenes";
+    // Level skip keys (for testing): = and - on a level jump forwards and backwards (play.js, standalone.js).
+    const skipKeys = document.getElementById("skipKeys");
+    const SKIP_KEY = "blocked-skipkeys";
+    const skipOn = () => { try { return localStorage.getItem(SKIP_KEY) === "on"; } catch (e) { return false; } };
     const scenesOn = () => { try { return localStorage.getItem(SCENES_KEY) !== "off"; } catch (e) { return true; } };
     function sync() {
         const s = S.settings;
@@ -18,6 +22,7 @@
         mute.checked = s.muted;
         if (longMusic) longMusic.checked = s.longMusic !== false;
         if (scenes) scenes.checked = scenesOn();
+        if (skipKeys) skipKeys.checked = skipOn();
         toggle.classList.toggle("muted", s.muted);
     }
     sync();
@@ -35,6 +40,9 @@
     mute.addEventListener("change", () => { S.set("muted", mute.checked); sync(); });
     // Long, layered chapter tracks, or the short loops. Takes effect straight away.
     if (longMusic) longMusic.addEventListener("change", () => { S.set("longMusic", longMusic.checked); sync(); });
+    if (skipKeys) skipKeys.addEventListener("change", () => {
+        try { localStorage.setItem(SKIP_KEY, skipKeys.checked ? "on" : "off"); } catch (e) { /* storage blocked */ }
+    });
     if (scenes) scenes.addEventListener("change", () => {
         try { localStorage.setItem(SCENES_KEY, scenes.checked ? "on" : "off"); } catch (e) { /* storage blocked */ }
     });

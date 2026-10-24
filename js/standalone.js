@@ -260,8 +260,8 @@
         $("myStats").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
     }
 
-    function playVoyage(index, { flow = false, entering = false } = {}) {
-        if (!isUnlocked(index)) return;
+    function playVoyage(index, { flow = false, entering = false, skip = false } = {}) {
+        if (!isUnlocked(index) && !skip) return;
         startLevel({ lv: LEVELS[index], index, flow }, entering);
     }
 
@@ -509,6 +509,20 @@
             return;
         }
         if (screen !== "play" || !game) return;
+        // Level skip keys (a testing option in the speaker menu): = and - jump to the next or
+        // previous voyage level, locked or not, without clearing this one (nothing is recorded).
+        if ((e.key === "=" || e.key === "+" || e.key === "-" || e.key === "_") && current && current.index != null && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            let on = false;
+            try { on = localStorage.getItem("blocked-skipkeys") === "on"; } catch (err) { /* storage blocked */ }
+            if (!on) return;
+            const to = current.index + (e.key === "=" || e.key === "+" ? 1 : -1);
+            if (to < 0 || to >= LEVELS.length) return;
+            e.preventDefault();
+            $("winModal").classList.add("hidden");
+            $("tally").classList.add("hidden");
+            playVoyage(to, { skip: true });
+            return;
+        }
         const popup = !$("winModal").classList.contains("hidden");
         const tally = !$("tally").classList.contains("hidden");
         if (popup || tally) {
