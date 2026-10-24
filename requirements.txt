@@ -1,0 +1,8 @@
+Flask>=3.0
+Flask-Login>=0.6.3
+Flask-Bcrypt>=1.0.1
+python-dotenv>=1.0
+# Only needed when DATABASE_URL points at Postgres (e.g. Neon); harmless otherwise.
+psycopg2-binary>=2.9.10
+# Production web server for hosting on Render (doesn't run on Windows).
+gunicorn>=22.0; platform_system != "Windows"

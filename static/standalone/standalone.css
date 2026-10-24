@@ -1,0 +1,63 @@
+/* Extra styles for the standalone build (on top of the website's style.css). */
+
+/* The pixel font ships with the game: no font requests to anyone else. */
+@font-face {
+    font-family: "Jersey 10";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/jersey10-latin.woff2") format("woff2");
+}
+
+/* Screens switch in place (one page, so the music never stops). */
+.screen.hidden { display: none; }
+
+/* The top bar uses buttons rather than links. */
+.topbar button.brand, .topbar button.navlink {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+.topbar button.brand { background: none; border: 0; padding: 0; }
+.topbar button.navlink { background: transparent; }
+.level-card button.stretched { background: none; border: 0; padding: 0; cursor: pointer; }
+
+/* Title screen */
+.title-card { display: grid; justify-items: center; gap: 18px; text-align: center; padding: 24px 0; }
+.title-logo { width: min(520px, 90vw); height: auto; filter: drop-shadow(6px 6px 0 rgba(10, 20, 40, 0.45)); }
+.title-card .ship { width: min(360px, 70vw); animation: bob 3.5s ease-in-out infinite; }
+.tagline { font-size: 1.2rem; text-shadow: 2px 2px 0 var(--ink); margin: 0; }
+.title-card .btn-row { justify-content: center; }
+
+/* How to play, tutorials and mechanic popups */
+.help { max-width: 760px; margin: 0 auto; }
+.help ul, .info-list { padding-left: 1.2em; }
+.help li, .info-list li { margin: 8px 0; }
+#infoModal .panel { text-align: left; }
+#infoModal h2 { text-align: center; }
+#infoModal .btn-row { justify-content: center; }
+
+/* Import / export */
+#shareText {
+    width: 100%;
+    font: 0.85rem/1.4 ui-monospace, "Cascadia Mono", monospace;
+    padding: 8px;
+    border: var(--px) solid var(--ink);
+    resize: vertical;
+}
+
+/* Your levels */
+.level-card .card-actions { flex-wrap: wrap; }
+#workshopList > .btn-row { margin-bottom: 16px; }
+
+/* Small screens and Chromebooks */
+@media (max-width: 700px) {
+    .topbar nav { gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+    .topbar button.navlink { padding: 4px 8px; font-size: 0.95rem; }
+    .play-head h1 { font-size: 1.8rem; }
+    .controls-hint { display: none; }
+}
+@media (max-height: 720px) {
+    .play-notes { margin-bottom: 8px; }
+    .play-head h1 { font-size: 1.9rem; margin: 2px 0; }
+}

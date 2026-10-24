@@ -1,0 +1,2540 @@
+[
+ {
+  "rows": [
+   "######E#",
+   "#.....##",
+   "#F.B..##",
+   "#...####",
+   "##.B.B.#",
+   "##_.####",
+   "#.B#D_.#",
+   "#...D.^#",
+   "#..P####",
+   "########"
+  ],
+  "links": {
+   "1,2": "6,7",
+   "2,5": "4,7",
+   "5,6": "4,6"
+  },
+  "style": "crates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 273,
+  "pushes": 102,
+  "states": 300308,
+  "ruin": 0.361,
+  "score": 17.4,
+  "difficulty": 7,
+  "solution": "ULUUUULUURDDDDDLDRUUUUUURRDLULDDDDDLDDRUUDRLUURUULDDDLDDRUUDRRURDLLLUURUULDDDLDRUUUUUURRDLULDLRDDDDLDDRUUDRLUURUULDDDLDDRUUDRRURDLLLUUUULUURDDDDDLDDRUUDRRRURUULLRRDDLDLLLUURUULDDDLDRUUUUUURRDLULDDDDDLDDRUUDRLUURUULDDDLDDRUUDRRURDLLLUUUULURURDDLDRRRLLUURRRDDDUUULLLLLURRRRRU",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "###########",
+   "##.F#...v##",
+   "##B.#.....#",
+   "##...##.#.#",
+   "##B#_..DD.#",
+   "#......#..#",
+   "#...B_B.#.#",
+   "#.P#####.##",
+   "#########E#"
+  ],
+  "links": {
+   "3,1": "8,1",
+   "4,4": "7,4",
+   "5,6": "8,4"
+  },
+  "style": "crates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 284,
+  "pushes": 80,
+  "states": 201328,
+  "ruin": 0.302,
+  "score": 16.78,
+  "difficulty": 7,
+  "solution": "UURRUULLDDLDDRULURRRRDLLULLDDRULURRDRUDRRULURDLLLLUURRDULUULDDDDLDRRRURURRUDRRUULLULLDRRDDLDDLLLULLDDRULURRRRDRULURDLLLLUURRDULUUDDLDDDRRURURRURULULLDRRDDLDLLLLUURRDDLDRUUULUUDDRDDRRDLLLULLDDRULURRDRURURRURRDDDLLLLLLULLDDRULURRRRDRULURDLLLLUURRDDLDRURRDRRUUUDDDLLUULLULUUDDRDDDRRRRDDR",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "####E#####",
+   "#....#FP.#",
+   "#.####B..#",
+   "####D<D#.#",
+   "#__....#.#",
+   "#.##...B.#",
+   "#.B.#B.###",
+   "#......###",
+   "##########"
+  ],
+  "links": {
+   "6,1": "5,3",
+   "1,4": "4,3",
+   "2,4": "6,3"
+  },
+  "style": "mixed",
+  "squeeze": true,
+  "problems": [],
+  "moves": 242,
+  "pushes": 44,
+  "states": 202384,
+  "ruin": 0.538,
+  "score": 16.25,
+  "difficulty": 7,
+  "solution": "DRDDDLLULLDRURDULLLLLDDDRRRRUURULLLRDRDDRUUUDDDLLLLLUUURRRDRRULLLRDRRRRUUUULLDDDUUURRDDDDLLDLURRRUUULULDDDLRUURRDDDLLDDLLLLLUUURLDDDRRULDLUUDDRRRRUULUDRRRRUUUULLDRRDDDLLULDLUDRRRRUUUULLDRRDDDLLULLULLDRRDRRULDLUDRRRRUUUULLDRRDDDLLULLULLLUURRRU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "###.#>.<#####",
+   "E#FB.#...P..#",
+   "#..##.F###..#",
+   "#....B......#",
+   "#.B#.##B##..#",
+   "##......#####",
+   "#############"
+  ],
+  "links": {
+   "2,2": "7,1",
+   "6,3": "5,1"
+  },
+  "style": "crates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 247,
+  "pushes": 67,
+  "states": 308327,
+  "ruin": 0.401,
+  "score": 16.16,
+  "difficulty": 7,
+  "solution": "LLLDDLLDDLLULUURDRRRRRRRLLLUURRRRDRDDLUURULLLLRRRDDLLLLLLDDRRRUDLLLUURRRRRLLLUURRRRDRDDLUURULLLLRRRDDLLLDDLLLLLULURUUDDRRRRRRRLLLUURRRRDRDDLUURULLLLRRRDDLLLLLLLLUUURRDLULDDLDRRRRRRRRLLLUURRRRDRDDLUURULLLLRRRDDLLLLLLLLUUDDRRRURURRRRDDLLLLLLLLUUULLD",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "####E######",
+   "###.D#._#.#",
+   "#...#..._.#",
+   "#.#.#..#..#",
+   "#.B.#..##.#",
+   "#.#.##.#..#",
+   "#.#.....B.#",
+   "#PBD...#^F#",
+   "###########"
+  ],
+  "links": {
+   "7,1": "4,1",
+   "8,2": "3,7",
+   "9,7": "8,7"
+  },
+  "style": "mixed",
+  "squeeze": true,
+  "problems": [],
+  "moves": 296,
+  "pushes": 47,
+  "states": 189962,
+  "ruin": 0.347,
+  "score": 16.05,
+  "difficulty": 7,
+  "solution": "UUUUURRDDDDRRRUUUURRDRDDDLLLDLLURDRUUUULURRLDDDDLLLUUUULLDDRLUURRDDDDRRRRRURUUULDRDDDLLLUUUURLDDDDDLLLURDRRURRURUUULLULDLDDRDDDLLURRRLUULUURRRDRDDDDULLLUUULURRLDDDDLLLUULLDDDRRURRDLURRRRUUURULDDDDLLUUUURLDDDDDLLLURDRRURRUUURULLULDLDDRDDDLLURRRLUULUURRRDDDRDDULLLUUULURRURRDDLURULDDDDDLLLLLUUUUURU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "#..#F.#>.##.##",
+   "#.B#..##.B.#.#",
+   "#.B....#.###.E",
+   "#...#..#.#####",
+   "#P#.##.#.....#",
+   "##...........#",
+   "##.....####..#",
+   "##############"
+  ],
+  "links": {
+   "4,1": "7,1"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 260,
+  "pushes": 74,
+  "states": 108097,
+  "ruin": 0.347,
+  "score": 16.03,
+  "difficulty": 7,
+  "solution": "UURLUURDDRRLDDDRRRUULULLLLDRURDDUURRDRDDDLLLLURUUURUURDLDLDDDRRRRRRRURRDDLURULLLDLUUUUDDDDLLUUULLUUDDLDLLUURDLDRURDDUURRDRDDDLLLLURRRRRRRRURRDDLURULLLDLUUUUDDDDLLUUULUULDDRDRDDRRUUUUURRDLULDDDDRDLLLDLLURRRRRRURRDDLURULLLDLUUUUDDDDLLUUULUULDDRDRDDRRUUUUURRRRDDR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "########E##",
+   "#..#...#.D#",
+   "#..B...##.#",
+   "#DB#.####.#",
+   "##..BP#._.#",
+   "#.._###...#",
+   "#._.....D.#",
+   "###########"
+  ],
+  "links": {
+   "8,4": "9,1",
+   "3,5": "8,6",
+   "2,6": "1,3"
+  },
+  "style": "crates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 229,
+  "pushes": 62,
+  "states": 89405,
+  "ruin": 0.493,
+  "score": 15.96,
+  "difficulty": 7,
+  "solution": "LUULLDDUURRDDLDDLLURURRUULLDDDUUUULDRDDDLDRRRRRRURRDLLLLLLULUULURRRDDLDLLDRRUURUULLDDRDDLLURDRRRRRLLLLULUUURRDDLRUULLDDUURRURRDLLLRDDLLDUULUURDRRDDLDLLDRRUURUULLDDRDDLLURDRRRRRLLLLULUUURRDDLRUULLDDRDDLLURDRRRRRUURRDULLDDRURUUUULU",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "##########",
+   "#D.......#",
+   "E.###B_..#",
+   "#.##.B...#",
+   "##D._##B##",
+   "#..####..#",
+   "#........#",
+   "#..D..####",
+   "#P###_####",
+   "##########"
+  ],
+  "links": {
+   "6,2": "2,4",
+   "4,4": "3,7",
+   "5,8": "1,1"
+  },
+  "style": "crates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 241,
+  "pushes": 52,
+  "states": 121551,
+  "ruin": 0.527,
+  "score": 15.89,
+  "difficulty": 7,
+  "solution": "UURRRRRRUUURULDDDDLLLLLUURRURRLLDLLDDRRRRRUUURUULDDDDRDLLLLLRRRRUUULLLDLLDLDDRUUDRRRRRUUUUULLDRURRDLDDDDLLLLLUURRURRLUURRDDDDRDLLLLLRRRRUUULLLDLLDLDDRUUDRRRRRUUULLURURRDLDDDDLLLLLUURLDDRRRRRUUULLURURDDDDRDLLLLLDLLUURDLDRRRURDURRUUUUULLLLLLDL",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "###########",
+   "#._.#.P.###",
+   "#FB.B.#..##",
+   "#..#B##.B##",
+   "#...D.B..##",
+   "#.>.D..#_##",
+   "#....####.#",
+   "#########E#"
+  ],
+  "links": {
+   "2,1": "4,5",
+   "1,2": "2,5",
+   "8,5": "4,4"
+  },
+  "style": "crates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 179,
+  "pushes": 43,
+  "states": 313268,
+  "ruin": 0.491,
+  "score": 15.74,
+  "difficulty": 7,
+  "solution": "RDRDDLLLLLDDLLUUUUURDLDDDDRRUURRRRUUULLDLLULLDDDRRRRRLLLLLUUURRDRDULULLDRDLDDDRRUURUULULDLDDRRLUURRDDRDLUUULLLDDRRDRRRRULLDLULLUURRDDRDLUUULLLRRRRURRDDDRDLLLLDLLLUUUUDDRRDRRRRRRDD",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "############",
+   "##.D.######E",
+   "#PB.B.>.####",
+   "#........###",
+   "#.B.###.BB.#",
+   "##..F##.._.#",
+   "############"
+  ],
+  "links": {
+   "4,5": "6,2",
+   "9,5": "3,1"
+  },
+  "style": "crates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 159,
+  "pushes": 48,
+  "states": 622007,
+  "ruin": 0.425,
+  "score": 15.7,
+  "difficulty": 7,
+  "solution": "DRRRRRRDDRUDRRULLDLUULLLLDDRLUURRRRURDLDDRRULDLUULLLLDDRLLULURRRRRRURDDLDRUULLLULULDULDDRRRRRURDLDDRRULDLUULLLLDDRLLULURRRRRRURDLDDRRULDLUULLLLDDRLUURRRRURRRRU",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "#############",
+   "#...##_.#####",
+   "#....._.P####",
+   "##..##.B#...#",
+   "##.####D.D#.#",
+   "#.....B.B.#D#",
+   "#._......#..#",
+   "##########E##"
+  ],
+  "links": {
+   "6,1": "11,5",
+   "6,2": "9,4",
+   "2,6": "7,4"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 243,
+  "pushes": 68,
+  "states": 147915,
+  "ruin": 0.273,
+  "score": 15.64,
+  "difficulty": 6,
+  "solution": "LLLLLDLDDDRRRRRULLLLDLUUURUULDDDDUUURRRRRDDUULLLLDLDDLDRRURRDRRRULLLLLDLUUURUULLDRRRRLLDLDDRRRDLLURRRRRRULDLLLLLLUUURRRRDRDRDLLLLRRRUULUURDDDUULLLLDLDDLDRRRULDLUUURUULLDRRRRLLDLDDRRRRDLLLRRRRRULUULUDRDDLLLLDLUUURUULLDRRRRLLDLDDRRRRRRURURRDDDLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "##.F.###v##",
+   "##.#.#..B##",
+   "#.B..#B.###",
+   "#..#_..DD##",
+   "#..#...#.##",
+   "##B.._#####",
+   "##P#.....##",
+   "#########E#"
+  ],
+  "links": {
+   "3,1": "8,1",
+   "4,4": "7,4",
+   "5,6": "8,4"
+  },
+  "style": "mixed",
+  "squeeze": true,
+  "problems": [],
+  "moves": 200,
+  "pushes": 48,
+  "states": 138808,
+  "ruin": 0.343,
+  "score": 15.47,
+  "difficulty": 6,
+  "solution": "UULUURRLUURRDDDDUULLLDDRULURRLUURRDDDRDDLURURRUULDRDLDLLUULLUURRDDDRDDLURURDLLUULLUURRDDLLDDDRRURURRRUDLLDLLUULLUURLDDDDDRRDRUULUULLUURRDDDRDDLURURDLDLLLUUURRDDUULLDDDRRDRRRRUUUULLDLLUUULRDDDDDDRRRRDR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "##...D.##..#DE",
+   "#.B#.........#",
+   "#_.#._.##...##",
+   "#..B.#..##..##",
+   "#.#BB.D###.P_#",
+   "#....#########",
+   "##############"
+  ],
+  "links": {
+   "1,3": "6,5",
+   "5,3": "12,1",
+   "12,5": "5,1"
+  },
+  "style": "crates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 204,
+  "pushes": 60,
+  "states": 255616,
+  "ruin": 0.32,
+  "score": 15.43,
+  "difficulty": 6,
+  "solution": "UUULLLLLLLULLDLDDDDRRRUULLRRDDLLLUUDDRRURRRUUULLDDLDRRLUUUULLDLDDRRDDLLUURRDRRRUULLDLDRRLUUUULLDDULDDRRDDLLUURRDRRRUULURRRRURDLDRULLLLDLLDLDRRLULLUULDDRRDDLLUURRDRRRUULURRRRURDRDDLUDDRUUULLLLLULDRRRRRRRUR",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "#########",
+   "#####.D.#",
+   "#####B.D#",
+   "###._.BB#",
+   "#...B_..#",
+   "#.>..####",
+   "#.#.###.#",
+   "#FP.#...#",
+   "#####E###"
+  ],
+  "links": {
+   "4,3": "7,2",
+   "5,4": "6,1",
+   "1,7": "2,5"
+  },
+  "style": "crates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 188,
+  "pushes": 45,
+  "states": 29543,
+  "ruin": 0.405,
+  "score": 15.16,
+  "difficulty": 6,
+  "solution": "RUUUURRDRULLLDRURRUDDLULLDRURRUULDRDLRDRUDLLLLURDRRULDLDLDDLLUUURRRRURRDLULUURDRDDLLUURDLDLLURDDLDDLLUUURLDDDRRUURUULDDURRURRDLUUULDRDDLLULDLLDDDUUURRURRURDRDLLLULDLLDDDRRUDLLRRUURRRRDDLLD",
+  "src": "refined"
+ },
+ {
+  "rows": [
+   "#############",
+   "###.#>.<#####",
+   "E#F###B.#####",
+   "##....F.....#",
+   "##...#.##...#",
+   "###.B.B#.B###",
+   "#####P....###",
+   "#############"
+  ],
+  "links": {
+   "2,2": "7,1",
+   "6,3": "5,1"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 179,
+  "pushes": 44,
+  "states": 145005,
+  "ruin": 0.439,
+  "score": 14.97,
+  "difficulty": 6,
+  "solution": "RRRRUURULLLLLLDLLURRRRRRRDDDLLLUUDDRRURUULLLLLDLDRRDRRRURURRULLLLLURDRRDDDLLLULLULLUUDDRDRRRUUURDRRDDDLLLULLULLUUDDRRURLDDRRUUURDRRDDDLLLULLULLUUDRRRLDDRRUUURDRRDDDLLLULLUULLUULLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########",
+   "#P.#...##",
+   "##.#.#B.#",
+   "#D...#.=#",
+   "#_#.##..#",
+   "###.#...#",
+   "ED#..BB.#",
+   "#......##",
+   "#########"
+  ],
+  "links": {
+   "7,3": "1,3",
+   "1,4": "1,6"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 174,
+  "pushes": 40,
+  "states": 260313,
+  "ruin": 0.427,
+  "score": 14.85,
+  "difficulty": 6,
+  "solution": "RDDRDDDDRRRULDLLUUUURUURRDRDDLDLDLDLUUUDDRRURURUULULLDDLDDDDRRRURUULDRDLLDLLUUUULRRUURRDDURDLDDLDLDLUUUDDRRURRULUUULLDDLLRDDDRRURRDLLLDLUUUDDRRURUUUULLDDLRUURRDRDDDLDDLLLLLUL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "##...#..P#",
+   "E#.B....##",
+   "###B#.#.<#",
+   "#...B.##F#",
+   "###.#BB..#",
+   "###.....##",
+   "##########"
+  ],
+  "links": {
+   "8,4": "8,3"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 153,
+  "pushes": 39,
+  "states": 315794,
+  "ruin": 0.426,
+  "score": 14.67,
+  "difficulty": 6,
+  "solution": "LDLLLULLDRRRRURDLLDDLLDDRRRRURUDLDLLUUURULLULLDRRRRURDLDLDDDRRURUDLLDLUULLURRRLDDRRRUDLLLUUULULDLDRRRRLDDRRRUDLLLUULLLLDRRRLDDRRUULURRLDDRRRUDLLLUULLLLLU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "#_.#P#..###",
+   "##D.._..###",
+   "###...#B..#",
+   "####.#.B..#",
+   "##...B...D#",
+   "##...####.#",
+   "#########E#"
+  ],
+  "links": {
+   "1,1": "9,5",
+   "5,2": "2,2"
+  },
+  "style": "mixed",
+  "squeeze": true,
+  "problems": [],
+  "moves": 151,
+  "pushes": 47,
+  "states": 71446,
+  "ruin": 0.408,
+  "score": 14.62,
+  "difficulty": 6,
+  "solution": "DDDDRRURURRDLDLLURDLLLDLLURDRUUURURURDDDURRDLDLLLLUULURRDLDDDLLURDRUUURULDDDRRRRUULULRDDRDLLLLUUULRRDLDDDLLURDRUUURULDDDRRURUULRDDDLLLUUULRRDLDDRRRRRDD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "######E#####",
+   "##.....#..##",
+   "########.B.#",
+   "###.###.BB.#",
+   "###.###....#",
+   "#F..PB...#.#",
+   "##^####....#",
+   "############"
+  ],
+  "links": {
+   "1,5": "2,6"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 135,
+  "pushes": 43,
+  "states": 294917,
+  "ruin": 0.408,
+  "score": 14.6,
+  "difficulty": 6,
+  "solution": "RRRURRRUULDRDDDLLULUURDLDDRRRUULLULDRRRDDLLULLLLLLRRRRRDRRRUULLULDRDLLLLLRRRRURRRUULDRDLLULDURRUULDDRDLDLLLLLRRRRRUULDRDLLLLLUULUURRRRU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "######..#####",
+   "###.##B....<#",
+   "#.###..#..#.E",
+   "#.#F....B.#.#",
+   "#..#..BB.##.#",
+   "##..##P.##..#",
+   "###...##...##",
+   "#####....####",
+   "#############"
+  ],
+  "links": {
+   "3,4": "11,2"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 159,
+  "pushes": 43,
+  "states": 201620,
+  "ruin": 0.349,
+  "score": 14.56,
+  "difficulty": 6,
+  "solution": "RURULLRDDLULUDRRULRRRUULLULDDDRRUDLLUURRRDDLDLDLUUDLLULRRDRRURUULLLDDRULURRRRDDLLDLULLLRDRURULURRRRDDLDLDLUULLLRRRULURRRRDDLLLLLLRRUULLLLDDDRDRDRRDRRRURRURUUUR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "#_#.#...DE",
+   "##D...._##",
+   "##..#...##",
+   "###BP#B=##",
+   "###..B.D.#",
+   "######...#",
+   "##########"
+  ],
+  "links": {
+   "1,1": "8,1",
+   "7,2": "7,5",
+   "7,4": "2,2"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 126,
+  "pushes": 45,
+  "states": 84654,
+  "ruin": 0.475,
+  "score": 14.54,
+  "difficulty": 6,
+  "solution": "DLUULURRRRLLLDDDRRRDRRULLUURDLDDRRULUULLUURRDLLDRDRUDDDLUUULUURRDDLLURLLLDDDRRRDRRULDLUUURDULLUURRDDULLLLDDDRRRUULURDRDULUURRR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########E##",
+   "###.D##..#DD#",
+   "###.B.....#.#",
+   "#P#_#.##..#.#",
+   "#.#._B#...#.#",
+   "#...B.#..##.#",
+   "#._..##.....#",
+   "#############"
+  ],
+  "links": {
+   "3,3": "10,1",
+   "4,4": "11,1",
+   "2,6": "4,1"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 144,
+  "pushes": 39,
+  "states": 151561,
+  "ruin": 0.446,
+  "score": 14.5,
+  "difficulty": 6,
+  "solution": "DDRRUUURRRRURDDDUULLLLLDDDDRURUUDDLLUUURRDDLRUULLDDDRDLUUUURRRRURDRDDLURULLLLLULDDDUURRRRRDDLDDRUUURULLLLLULDRRDDDLDLLURDRURUUURRRDDDDRRRUUUUULU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "############",
+   "####..##..##",
+   "#####...B.##",
+   "####.#BB..##",
+   "##..._B...##",
+   "##.^.#..####",
+   "E.DPF#..####",
+   "############"
+  ],
+  "links": {
+   "5,4": "2,6",
+   "4,6": "3,5"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 103,
+  "pushes": 34,
+  "states": 93645,
+  "ruin": 0.529,
+  "score": 14.48,
+  "difficulty": 6,
+  "solution": "RUURRURDRRULRUULDDRDLLLLLDDUURRURURDRDLLLDDRULULLDDUURRURRDLLLLDDUUULUURRDRRDRRUULDDRDLLLUULULLDDDLDDLL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#####_D.....#",
+   "#...._.####.#",
+   "#........##D#",
+   "##.###....#.E",
+   "#.....#..B.##",
+   "#....P##.B..#",
+   "###..####...#",
+   "#############"
+  ],
+  "links": {
+   "5,1": "11,3",
+   "5,2": "6,1"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 139,
+  "pushes": 50,
+  "states": 42050,
+  "ruin": 0.381,
+  "score": 14.43,
+  "difficulty": 6,
+  "solution": "ULLLUURRRRDRDRDRDRRULULRDDLULUDRRULULRDDLULUDRRULULLLLLULDDDLDRRDRURULLDLUUULURRRDRUDRRRDDLURULLLLLULDDDLDRRDRURULLDLUUULURRRDRRUURRRRRDDDR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "##..#.D###...#",
+   "##..B_..##.#.#",
+   "##..#......#.#",
+   "###.#####....#",
+   "E.#.B...#.##P#",
+   "#.#..#B..._###",
+   "#.D..#....####",
+   "##############"
+  ],
+  "links": {
+   "5,2": "6,1",
+   "10,6": "2,7"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 174,
+  "pushes": 43,
+  "states": 67470,
+  "ruin": 0.303,
+  "score": 14.33,
+  "difficulty": 6,
+  "solution": "ULLLDDLLULLLDLUUULUURDRRRLLLDDDRDDLUUUULURRRDRRRRDDDDLLLURULLLDLUUULURRLDDDRRRDRRRUUULLLUDRRRDDDLLULLLLUUURRURDLDRRRRDRRRUUULLDDUURRDDDLLULDDUULLLULLLDDDRRRDRRRLLULLLDDLLLUUL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########E##",
+   "#_.D.####P#D.#",
+   "#B.......B.#.#",
+   "#_.###.=B..#.#",
+   "#.####..#.D..#",
+   "##############"
+  ],
+  "links": {
+   "1,1": "11,1",
+   "1,3": "10,4",
+   "7,3": "3,1"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 109,
+  "pushes": 41,
+  "states": 58651,
+  "ruin": 0.535,
+  "score": 14.29,
+  "difficulty": 6,
+  "solution": "DLLLLLULLLDRRRRRRRRRDDLURULLLLLLLRRRDDRURURRDLLULLLLULLLDDRULURDRRRRRRDRRULLLLLLLLULDRRRULLDRRRRDRRRDRRRUUULU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "############",
+   "#########..#",
+   "#_#####...P#",
+   "#....##B#_.#",
+   "#..B....B.##",
+   "###...##._##",
+   "###.######DE",
+   "###.D...D..#",
+   "############"
+  ],
+  "links": {
+   "1,2": "8,7",
+   "9,3": "4,7",
+   "9,5": "10,6"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 129,
+  "pushes": 36,
+  "states": 30991,
+  "ruin": 0.55,
+  "score": 14.22,
+  "difficulty": 6,
+  "solution": "DLDLLLLDLLUDRRULULLDLURRRDLRRRRRRUULLDURRDDLLLLDLLURRRRRDRUURULDDLLLLLULLLDRRRRRRRDRUURUULDDDLLUURLDDRRURUULDLLDDLLDLLDDRRRRRRRUR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##E##########",
+   "#D.#___.....#",
+   "#.#...###.B.#",
+   "#D#...BPB.###",
+   "#..D.###..###",
+   "#############"
+  ],
+  "links": {
+   "4,1": "1,3",
+   "5,1": "3,4",
+   "6,1": "1,1"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 138,
+  "pushes": 46,
+  "states": 24751,
+  "ruin": 0.357,
+  "score": 14.1,
+  "difficulty": 6,
+  "solution": "LLLUURRRRRDDLLLLUURRRRRRDLULLLLLDDRRRRURULLLLRRRDDLLLLULLDRRULURRRRRDRRULLLLLLDDRRRDRUURULLLLRRRDDLLLLULLDRRRRRDRUURULLLRRDDLLLLLDLLLUUURU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "##############",
+   "#_...#########",
+   "##..D....#####",
+   "###...##.....#",
+   "####_.#..BB..#",
+   "###..#....##.#",
+   "##.......#D..#",
+   "##...####..#P#",
+   "#########E####"
+  ],
+  "links": {
+   "1,2": "10,7",
+   "4,5": "4,3"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 160,
+  "pushes": 41,
+  "states": 31021,
+  "ruin": 0.336,
+  "score": 14.09,
+  "difficulty": 6,
+  "solution": "UUUULLLLDDRURULDDLDLLLLUUURURRRDDURRRRDLLLDLULDRDLLLLDLLURDRUUURUURRRDDRDLULDRDLLLLDLLURDRUUDRRURURUULLLLLDRDRUDLDLDDRUUDRRURURUULLLLDLURULLDRRRRRRDDRRRRDDLLDLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "ED.#.._..F#",
+   "##.....>.##",
+   "##.####..##",
+   "#..B_...BP#",
+   "####.B.D.##",
+   "###########"
+  ],
+  "links": {
+   "6,1": "1,1",
+   "9,1": "7,2",
+   "4,4": "7,5"
+  },
+  "style": "mixed",
+  "squeeze": true,
+  "problems": [],
+  "moves": 154,
+  "pushes": 25,
+  "states": 9162,
+  "ruin": 0.532,
+  "score": 14.06,
+  "difficulty": 6,
+  "solution": "LUUULLDLLLLDDRLUURRURRRRDDLDURUULLDLLLLDDRRDRLULLUURRURRRRDDLDLLDRURURUULLDLLLLDDRRDRRULDRRRUUDDLLURDRULLLLLLUURRURRRRRLLLDLLLLDDRRRRRRUURULLLDLLURDLLLULL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "###..#...#",
+   "###._.B..#",
+   "#....#.B.#",
+   "#..D..#.##",
+   "#..##..__#",
+   "#.#P######",
+   "#......DD#",
+   "########E#"
+  ],
+  "links": {
+   "4,2": "3,4",
+   "7,5": "8,7",
+   "8,5": "7,7"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 155,
+  "pushes": 37,
+  "states": 12303,
+  "ruin": 0.456,
+  "score": 14.05,
+  "difficulty": 6,
+  "solution": "DLLUUUURRURRRURRDLLLLULDRDDRDRRUURULLLRDRDDLLULLLURURDURRURRDLLLRDRDDLLULLUURRRURDDDUULLLDDRDRRLLULULLLDDRULURRURRRDRDDLLULULURRRURDDDUULLLDLLDDLDDRRRRRRRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##E#########",
+   "#..#..###F##",
+   "#.#..B....##",
+   "###B.#.B..<#",
+   "###...#.B.##",
+   "#>..P.#.#F##",
+   "############"
+  ],
+  "links": {
+   "9,1": "1,5",
+   "9,5": "10,3"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 117,
+  "pushes": 38,
+  "states": 132399,
+  "ruin": 0.385,
+  "score": 13.97,
+  "difficulty": 6,
+  "solution": "UUULDDRDLUUURRRRDRRUUDLLLLULDDLDRDRRRUURRDLULLULLDDDRRRURUULLDRRDRDUUULLLLULDLDRRRRRDRDULLDLLULURRRRDRDUULLLLLLLLUURU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########",
+   "#..D_####",
+   "#__.#####",
+   "#PB...D##",
+   "##.##..##",
+   "##.B....#",
+   "##.##.B.#",
+   "#.D###..#",
+   "#E#######"
+  ],
+  "links": {
+   "4,1": "2,7",
+   "1,2": "6,3",
+   "2,2": "3,1"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 127,
+  "pushes": 33,
+  "states": 31153,
+  "ruin": 0.515,
+  "score": 13.95,
+  "difficulty": 6,
+  "solution": "URRDRRDDRRDDLUULUULLULLDRDDRRRUULLRRDDDRRULDLULLLUURULDRRRRDDLURULLLRRDDLLLUUDDRRRRRDDLURULDLUURULLLUULLDRDRRRDDLLLUURULDDDDDLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "##P##...###",
+   "#...#.#B.##",
+   "#...B....F#",
+   "E###B.#...#",
+   "###....<###",
+   "###########"
+  ],
+  "links": {
+   "9,3": "7,5"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 131,
+  "pushes": 40,
+  "states": 40725,
+  "ruin": 0.363,
+  "score": 13.91,
+  "difficulty": 6,
+  "solution": "DDRRRRRDRRULLLLUURRDULLDDRRLLLLULLDRRRRDDLURUUURRDDLRUULLDDDLDRUURRDRRULLLRUULLDDDULLULLDRRRDDRUURRRRLULULLDDDLDRUURRRRLLLLDDLLLLLU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "#....#...#",
+   "#.B..#.#.#",
+   "#.#....#.#",
+   "#.BB#.__.#",
+   "###....D##",
+   "#####P#.D#",
+   "########E#"
+  ],
+  "links": {
+   "6,4": "7,5",
+   "7,4": "8,6"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 144,
+  "pushes": 33,
+  "states": 87581,
+  "ruin": 0.36,
+  "score": 13.85,
+  "difficulty": 6,
+  "solution": "UUULUULLLDRRURDLDRRDRRRUUULLDDLDDLLUURUULLDLDDRLUURRURDLDRRDDRRULDLLLUURRDRDLURRRUUULLDDDULLUULLDRURDLDRRDRRRUUULLDDLDDRLURRDLLUULLDDRRRLURDRDRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#..P##..###.#",
+   "#_#B##...#._#",
+   "#...##...BB.#",
+   "#......###..#",
+   "##..#D.....DE",
+   "#############"
+  ],
+  "links": {
+   "1,2": "11,5",
+   "11,2": "5,5"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 131,
+  "pushes": 40,
+  "states": 23924,
+  "ruin": 0.365,
+  "score": 13.81,
+  "difficulty": 6,
+  "solution": "DDLDDRURRRDRRRRURUULDLLULLDRRRRLLLLDDRRRRURULLLLULDDLLLULLUURRDDLDRRRDRUURUULDDRRRRDDLLLLRRRRUURUDDLDLLLLULLLDLURULDLUDRRRRRDRRRRRR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########E##",
+   "########.D_#",
+   "#...###....#",
+   "#......B...#",
+   "#...####.###",
+   "#.B###....##",
+   "#...#.....##",
+   "#.#..D..#.P#",
+   "#._..#######",
+   "############"
+  ],
+  "links": {
+   "10,1": "5,7",
+   "2,8": "9,1"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 114,
+  "pushes": 42,
+  "states": 38340,
+  "ruin": 0.362,
+  "score": 13.79,
+  "difficulty": 6,
+  "solution": "LUULUULLLLLULLDRRRRRRURDDDRDLULLDDRULURDRUUULLLLLDLLDDRUULURRRRRRURRDRULLDDDRDLLULDRDLLLDLLLUURRDRDLURRURURRUUUURU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "##....##.D.##",
+   "##.PBB##.#..#",
+   "##...B.#.##.#",
+   "##_###...##.#",
+   "#....._####.#",
+   "#D#....###..#",
+   "#...##_#..D##",
+   "########E####"
+  ],
+  "links": {
+   "2,4": "1,6",
+   "6,5": "10,7",
+   "6,7": "9,1"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 153,
+  "pushes": 33,
+  "states": 32544,
+  "ruin": 0.336,
+  "score": 13.67,
+  "difficulty": 6,
+  "solution": "DLDDRRRRUULLLRRRDDLLLLUURUURRDLDLLDDRRRRUULUULLLDDDUUURRDLULDDURRRDRDDDLLLDLLUURRRRLLLUURUULDDDUURRRDLLULDRRRRDDDLLLDLLUURRRRLLLUURRRRDRRUUURRDRDDDDLDLLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "##>B...#..####",
+   "##.B.####B_..#",
+   "##.#..B.F..#.#",
+   "##.##.##...#.#",
+   "##.....P###D.#",
+   "###########E##"
+  ],
+  "links": {
+   "10,2": "11,5",
+   "8,3": "2,1"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 127,
+  "pushes": 25,
+  "states": 26866,
+  "ruin": 0.408,
+  "score": 13.63,
+  "difficulty": 6,
+  "solution": "LLUURRRRLLLLDDLLLUUURURRRRRRDULLLLLLDLDDDRRRUULUDRRRRDRRULLRUULLLLLRRRRRDDLRUURDULLLLLLDDRRRRDRUURULLLLLLDDRRRRDRRULUURRDRDDDLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "ED#._...F####",
+   "#.#.B.B..####",
+   "##..B###.####",
+   "##.D.###..#P#",
+   "##^_.####...#",
+   "#############"
+  ],
+  "links": {
+   "4,1": "3,4",
+   "8,1": "2,5",
+   "3,5": "1,1"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 110,
+  "pushes": 30,
+  "states": 17636,
+  "ruin": 0.394,
+  "score": 13.62,
+  "difficulty": 6,
+  "solution": "DLLULUUULLLDRULLLDRDUURRDLULLDDRUDLDDRUULUURDRRURRDLLLLULDRRRULDLLDDRULUURRDLULDRRRRULLDLLDRDLUUURRRRDLLLLLLUL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "########",
+   "#.....##",
+   "E.######",
+   "##....##",
+   "##B.#.##",
+   "##.B...#",
+   "#.B.B.^#",
+   "#...#P##",
+   "#..##F##",
+   "########"
+  ],
+  "links": {
+   "5,8": "6,6"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 106,
+  "pushes": 30,
+  "states": 237731,
+  "ruin": 0.404,
+  "score": 13.61,
+  "difficulty": 6,
+  "solution": "UUUULLDDLDLDDRURUUDDLLURDRULURRRDDDUULULLDDRULURRRDDDUUUUULLDULDDRRRDDDUULLDLLURDRULURRRDDDUUUUURUULLLLLDL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#####E#######",
+   "#...#.......#",
+   "#..B.######.#",
+   "#.F#.B.####.#",
+   "#....B.###..#",
+   "#..##..###.##",
+   "###>B#P###.##",
+   "#############"
+  ],
+  "links": {
+   "2,3": "3,6"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 135,
+  "pushes": 32,
+  "states": 58402,
+  "ruin": 0.34,
+  "score": 13.58,
+  "difficulty": 6,
+  "solution": "UULLLRUULULLDDDDRURRRRULDLLLLUUURRDRDULULLDRLDDRUDRRURDDRDLUULLLULUURDDLDRRRURDDRDLUUULULULDDLDRRRURDDRDLUULLLUDRRRDDRRRRRUURUUULLLLLLU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "##_##..#....D#",
+   "##.##....B##DE",
+   "##..#.#.#.BP##",
+   "#....._.#...##",
+   "#..##......###",
+   "#..####..#####",
+   "##############"
+  ],
+  "links": {
+   "2,1": "12,2",
+   "6,4": "12,1"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 141,
+  "pushes": 41,
+  "states": 21624,
+  "ruin": 0.222,
+  "score": 13.5,
+  "difficulty": 6,
+  "solution": "DLDLLLUUURURDDDRDLLDLUUUDDRRUUULLLULDDURRRRDDRRULDDLLLUUURRDDRDLLDLUUUDLLLLULDLDDRUUUUDDRRRDRRRRUUULLLULDDURRDDLLLLULDLDDRULURRRRUURRRURRRRDR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "#..#.......P_#",
+   "#FB.B.#.#.##DE",
+   "#..###D...#..#",
+   "#........_..##",
+   "#####..##^####",
+   "##############"
+  ],
+  "links": {
+   "12,1": "12,2",
+   "1,2": "9,5",
+   "9,4": "6,3"
+  },
+  "style": "mixed",
+  "squeeze": true,
+  "problems": [],
+  "moves": 131,
+  "pushes": 26,
+  "states": 8537,
+  "ruin": 0.396,
+  "score": 13.48,
+  "difficulty": 6,
+  "solution": "LLDDDLLLLLLLULUURDDLDRRRRRRUUULLDLLRURRRDDDLLLLLULUURDLDDRRRRRRRULUULLDLLLDLDRRRRDRULLLLUULDDRRRRRRUUDDLLLLLUURRURRRRRRRLLDDDRRURUR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "#######....#.E",
+   "#####._..D.#.#",
+   "##....###..#.#",
+   "#.B.#.....##D#",
+   "#.#.#B#.._.#.#",
+   "#.......#..#.#",
+   "#...P##.#....#",
+   "##..###....###",
+   "##############"
+  ],
+  "links": {
+   "6,2": "12,4",
+   "9,5": "9,2"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 135,
+  "pushes": 35,
+  "states": 63512,
+  "ruin": 0.217,
+  "score": 13.38,
+  "difficulty": 6,
+  "solution": "ULLLUURURRRDDUULLDDDRRRLUURRDRRDDDLLUUUDLLLDLDLULURRRRRLUURRRLLLUURRURRRDDLDDRDDDLLLUUUDLLUURRRDRRDDLURULULLDRURURULLLRRDDDDDRRRUUUUUUR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#####..#...##",
+   "##.##B.BB#B<#",
+   "#.##P.......#",
+   "#.##...####.#",
+   "#...######F.#",
+   "###E#########"
+  ],
+  "links": {
+   "10,5": "11,2"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 114,
+  "pushes": 28,
+  "states": 43467,
+  "ruin": 0.44,
+  "score": 13.37,
+  "difficulty": 6,
+  "solution": "RRUULDRDRRRRRDDLRUULUULLDLDLDLLURURRRRDRRDDLRUULULLLDLDLULURRRRRDRRDDLRUULLLLLDLULURRRRRDRRDDLRUULULLLLLLLLLDDDRRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########E##",
+   "#...#...#..#",
+   "#.BB#...F#.#",
+   "#.B.P..###.#",
+   "#...>..##.##",
+   "############"
+  ],
+  "links": {
+   "8,2": "4,4"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 110,
+  "pushes": 28,
+  "states": 37630,
+  "ruin": 0.458,
+  "score": 13.35,
+  "difficulty": 6,
+  "solution": "LDLLURRRRDRULUURRDLULDDURRRLLDLLLLLUURDLDRRRRDRULUURRDLULDDURRRLLDLLLLUURDLDRRRDRULUURRDLULDDURRRLLDDRRRRUUULU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#....########",
+   "#.B...###._P#",
+   "#.#....B._..#",
+   "#D####B#_..##",
+   "#DD###...####",
+   "##E##########"
+  ],
+  "links": {
+   "10,2": "1,5",
+   "9,3": "1,4",
+   "8,4": "2,5"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 89,
+  "pushes": 28,
+  "states": 57708,
+  "ruin": 0.508,
+  "score": 13.3,
+  "difficulty": 6,
+  "solution": "DLLLLLLULLDRRRRRDDLLUDRRURRUULDRDLULLLLULULLLDRRDRRRRRRDRULLLLLLLUURDLDRRRRRLLLULLLLDDDRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########E##",
+   "#._......D##",
+   "#P#.#.#..#_#",
+   "###.#....#.#",
+   "###....#...#",
+   "###.B..BBD.#",
+   "######...###",
+   "############"
+  ],
+  "links": {
+   "2,1": "9,5",
+   "10,2": "9,1"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 114,
+  "pushes": 36,
+  "states": 78548,
+  "ruin": 0.236,
+  "score": 13.29,
+  "difficulty": 6,
+  "solution": "URRDDDDRURRDDRRULDLUUDRRUULLDLUUDRRUULLLLRRRRRDDDRDLLDLUULLDRRRRUULLDLUUDDLLUUULRRRDDRRUULLLLDDDDRRRRRRRUUDLLUUURU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#####E#######",
+   "##....#..D._#",
+   "##D###..P..##",
+   "##..##_..####",
+   "#.B.B.#.#####",
+   "#.........###",
+   "#######...###",
+   "#############"
+  ],
+  "links": {
+   "11,1": "2,2",
+   "6,3": "9,1"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 111,
+  "pushes": 33,
+  "states": 10593,
+  "ruin": 0.393,
+  "score": 13.19,
+  "difficulty": 5,
+  "solution": "DLDDLLLLUULDLDRRRRRRDRRULDLUUULURRDLDDLLULLULDLDRRRRRRDRRULDLUUURUULDRDLUURRRDLULLDDRULURRRDLLDLDDLLULLULUURRRU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "#.._.#..DE",
+   "#...P#D###",
+   "##.B..B_.#",
+   "##.#.##B.#",
+   "##._.#...#",
+   "###.D...##",
+   "##########"
+  ],
+  "links": {
+   "3,1": "4,6",
+   "7,3": "8,1",
+   "3,5": "6,2"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 112,
+  "pushes": 29,
+  "states": 29039,
+  "ruin": 0.393,
+  "score": 13.19,
+  "difficulty": 5,
+  "solution": "DLRDDLLUUULURDDDDRDRRRURRUULLLLULLDRURDRRRRDDLURULLLLDDLLUURURDDUUULDLLURDDRRRRRDDDLLLUUDDRRURUULLLULLDRRRRUURRR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########",
+   "##.._.###",
+   "##DP#B###",
+   "##.#...##",
+   "#..#...##",
+   "#....B#DE",
+   "#..##.#.#",
+   "#..._...#",
+   "#########"
+  ],
+  "links": {
+   "4,1": "7,5",
+   "4,7": "2,2"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 126,
+  "pushes": 28,
+  "states": 7296,
+  "ruin": 0.438,
+  "score": 13.15,
+  "difficulty": 5,
+  "solution": "URRDDRDLDLLLDDRRRUUUULDRDLLRRDDLLLULUURDDLDRRLUUUUUURRRDDRDLULDRDLLRUURUULLDLDDLDDRUUUDDRRRDDLRUULLLDDRLUUUUUURDLDDDRRRDDRRUUR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "########E##",
+   "#F#.<..##P#",
+   "#.B.#B.##F#",
+   "#.B.....B.#",
+   "###..##^###",
+   "###########"
+  ],
+  "links": {
+   "1,1": "7,4",
+   "9,2": "4,1"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 92,
+  "pushes": 31,
+  "states": 14479,
+  "ruin": 0.473,
+  "score": 13.14,
+  "difficulty": 5,
+  "solution": "DDLLLLLDLUUDRRRRRRUDLLLLLLUULLDDRRRRRUULDRDLLLUULLDDRRRRRLLLUULDULDDRRRRRLLLUULLDDRRRRUURRUR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##E##########",
+   "##D..##..####",
+   "#PB.B.......#",
+   "#.#.###..##.#",
+   "#....._D.._.#",
+   "#############"
+  ],
+  "links": {
+   "6,4": "7,4",
+   "10,4": "2,1"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 119,
+  "pushes": 40,
+  "states": 7449,
+  "ruin": 0.252,
+  "score": 13.12,
+  "difficulty": 5,
+  "solution": "DDRRUURRRRDRDRRRUULLLULDLLLLDDLLUURRRRRRRDDRRRUULLLLLLLULDDULLDDRRRRLLUURRRRRDDLURULLLLLDDLLUURRRRRRURDDLDRRLUULLLLULLU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#..##...#####",
+   "#..##.#B#####",
+   "#D_.....#####",
+   "E.##.#.DB...#",
+   "#.#..P_.B...#",
+   "#############"
+  ],
+  "links": {
+   "2,3": "1,3",
+   "6,5": "7,4"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 90,
+  "pushes": 39,
+  "states": 48921,
+  "ruin": 0.248,
+  "score": 13.06,
+  "difficulty": 5,
+  "solution": "RRRRURRDLLLLRRULLULLLDDRRUDRRURRDLLLUULLLLLUDRRRUURRDDLDRDRRULLDLUDLLUURUURRDDLLLLLUULDDDL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###E#########",
+   "###D#_D...###",
+   "#...#....D###",
+   "#.####_#...##",
+   "#.###..B.#.##",
+   "#.###..=##.P#",
+   "#.###...#####",
+   "#......######",
+   "#############"
+  ],
+  "links": {
+   "5,1": "3,1",
+   "6,3": "6,1",
+   "7,5": "9,2"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 121,
+  "pushes": 26,
+  "states": 10790,
+  "ruin": 0.439,
+  "score": 13.05,
+  "difficulty": 5,
+  "solution": "LUULLDLRUULLDDLDDRRUDLLUURDUUURRDDLDLUUDDLDDRUUURRUUULLLDRRLDDLDRURRUURULDDDLLDDRULUUURRDDLDLURRUUULLDDDDDLDLLLLUUUUURRUU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "######E###",
+   "######D###",
+   "#._.....##",
+   "##.._#.B##",
+   "##B.##.B.#",
+   "##..#..#P#",
+   "##.D...#.#",
+   "#####....#",
+   "#####..###",
+   "##########"
+  ],
+  "links": {
+   "2,2": "3,6",
+   "4,3": "6,1"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 129,
+  "pushes": 23,
+  "states": 17717,
+  "ruin": 0.42,
+  "score": 12.97,
+  "difficulty": 5,
+  "solution": "DDLLUUUUULLDLDDLUUDDDRRRDRRRUUULRDDDLLULLLUUUURRRDDDDUURRDDDLLDLURULLRURUUULLLLRRRRRDLDDDDRRUUULRDDDLLUUUURULLLLDDLDDRUULURURRRUU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "#.BD_.D..#",
+   "#.#.._##.#",
+   "#.##..=..E",
+   "#.##.DB###",
+   "#..##....#",
+   "##.#.PB..#",
+   "##...##..#",
+   "##########"
+  ],
+  "links": {
+   "4,1": "5,4",
+   "5,2": "6,1",
+   "6,3": "3,1"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 85,
+  "pushes": 23,
+  "states": 54841,
+  "ruin": 0.525,
+  "score": 12.96,
+  "difficulty": 5,
+  "solution": "LDLLUULUUUURRDRDDRDDRURRDDLURULLDLUULUURDRDDLURULDDDRURRDDLURULDLUULLURUULLDRURRRRDDR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "#.B...D_.#",
+   "#..#_...##",
+   "#B.##.#P.#",
+   "#D.#..##.#",
+   "#.B...##.#",
+   "#._...#D.#",
+   "#######E##"
+  ],
+  "links": {
+   "7,1": "1,4",
+   "4,2": "7,6",
+   "2,6": "6,1"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 140,
+  "pushes": 28,
+  "states": 7720,
+  "ruin": 0.315,
+  "score": 12.93,
+  "difficulty": 5,
+  "solution": "ULLDDDDLLLLURRDRRUULDRDLLULUUULURRRRRLLLLDLDUURRRRRRDLLDDDLLLLDRRULUULUURDDDUUURRDRDDDLLDLLURRLUUUURRDRDDDDLLURDRUUUDDLLLUUUURRRRDLRRDRDDDLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##E##########",
+   "#..##...#####",
+   "#.#P._..#####",
+   "#.##.#.#B####",
+   "#D##_..D#####",
+   "#.##.=.B.####",
+   "#.#####.B####",
+   "#...#.....###",
+   "###...#D..###",
+   "#############"
+  ],
+  "links": {
+   "5,2": "7,8",
+   "4,4": "1,4",
+   "5,5": "7,4"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 127,
+  "pushes": 23,
+  "states": 8170,
+  "ruin": 0.462,
+  "score": 12.92,
+  "difficulty": 5,
+  "solution": "RDDRRRDRDDLUULLURUDLLUURURRDLDDDRDDRRDLUUULLULLUURURRDLDDDRDDDRRULDLURUULLULLUURURDDULLDDRDRRRDDLURULLRULLRDRDDLLDLLULLUUUUUURU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "######E#####",
+   "##.._#D..###",
+   "##BBP###..##",
+   "##.D#####.##",
+   "##.##.....##",
+   "#..#.BD..._#",
+   "#_........##",
+   "############"
+  ],
+  "links": {
+   "4,1": "6,1",
+   "10,5": "3,3",
+   "1,6": "6,5"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 72,
+  "pushes": 24,
+  "states": 6677,
+  "ruin": 0.682,
+  "score": 12.88,
+  "difficulty": 5,
+  "solution": "ULLDDDDLDRRRRRRURRDLLLLLLLRRURRRRRDLLLLLLLUUURULURDDLDDDRRURURRRRUULULLU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#####E##",
+   "#D..#.D#",
+   "#.B_.#.#",
+   "##.#...#",
+   "#...#__#",
+   "#......#",
+   "#P.##..#",
+   "##DB.#.#",
+   "###....#",
+   "########"
+  ],
+  "links": {
+   "3,2": "6,1",
+   "5,4": "2,7",
+   "6,4": "1,1"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 122,
+  "pushes": 25,
+  "states": 11631,
+  "ruin": 0.393,
+  "score": 12.87,
+  "difficulty": 5,
+  "solution": "URRRRUULULULDDDLDRRRLULUURRDRDRDDLUDRDDLLULDRRRUUUUULDRDDLUDRDDLLULLUUUUDDRRRRUULDRDLLLULLDRRRRDRULUULULULLDRDDDRRRUURUULU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########",
+   "##_##..D#",
+   "#_..#.#DE",
+   "##....P##",
+   "##..B####",
+   "###...B.#",
+   "###.###.#",
+   "#....#..#",
+   "#.......#",
+   "#########"
+  ],
+  "links": {
+   "2,1": "7,2",
+   "1,2": "7,1"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 131,
+  "pushes": 25,
+  "states": 12756,
+  "ruin": 0.343,
+  "score": 12.83,
+  "difficulty": 5,
+  "solution": "LLLDDDDDRRRURUULLLRRRDDDLLLULUUULUURDDDDURRRRDDDLLLULUUUURDLDDDDLLURDRUUUURULDDDDDRRRURUULLLRRRDDDLLLULUUULUUDDRRULDLURULDRRRUURRDR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "############",
+   "#####.D_####",
+   "##..#B._.###",
+   "#...B..#..P#",
+   "#..B_#..####",
+   "###.##..####",
+   "###......DD#",
+   "##########E#"
+  ],
+  "links": {
+   "7,1": "10,6",
+   "7,2": "9,6",
+   "4,4": "6,1"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 88,
+  "pushes": 32,
+  "states": 18975,
+  "ruin": 0.344,
+  "score": 12.8,
+  "difficulty": 5,
+  "solution": "LLULLDLLLDUULDLDRRURRRUULDRDLLLDLLURRRRURDDRDDLUUUDDDLLLUULURRRURDDRDDLUUUULURDDDDDRRRRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "#>..PB.##.#",
+   "##.###...#E",
+   "##.##.B..##",
+   "##.B..F.###",
+   "#####..####",
+   "###########"
+  ],
+  "links": {
+   "6,4": "1,1"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 85,
+  "pushes": 30,
+  "states": 12414,
+  "ruin": 0.409,
+  "score": 12.76,
+  "difficulty": 5,
+  "solution": "LLDDDRRRURURRDLDLLURUULLLRRRDDDUUULLLLDDDRRRDRUUURULLLLRRRDDDRUURULLLLLRRRDDDUUURRRRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "#_.......##",
+   "#.##.###..#",
+   "#.##....#.#",
+   "#....#..B.#",
+   "##B#D_.####",
+   "##.....P###",
+   "E.D.#..####",
+   "###########"
+  ],
+  "links": {
+   "1,1": "4,5",
+   "5,5": "2,7"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 148,
+  "pushes": 23,
+  "states": 5381,
+  "ruin": 0.367,
+  "score": 12.76,
+  "difficulty": 5,
+  "solution": "LUUULLUURRRRDRDDLLULDDLDDRUUURULLRDRRRUULULLLLLLLDDDRRRUUDDLLLUUURRRDDRRDDDLLLLUDRRRURUULLUULLLDDDRRLDDRRRURURRRUULULLLLLLRRDDDDULLDDRRURRDDLULLDLLL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "###..#########",
+   "###._.....####",
+   "###D..#.#....#",
+   "##...##....#.#",
+   "##..###..B.B.#",
+   "##P_#####..#D#",
+   "###########..#",
+   "###########E##"
+  ],
+  "links": {
+   "4,2": "3,3",
+   "3,6": "12,6"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 105,
+  "pushes": 30,
+  "states": 13524,
+  "ruin": 0.312,
+  "score": 12.76,
+  "difficulty": 5,
+  "solution": "UURRUURRRDDRRRDDLURULLDLUUDRRUULLLLDLLUURDRRRRRDRRRDDLLDLURULLDLUUDRRUULLLLDLRULULDDDDUUURRRRDDDRRRRRDDLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "###..##.....#",
+   "#P#...B.###.#",
+   "#.B.###_.D#DE",
+   "#..........##",
+   "#.#.####_..##",
+   "#...##....###",
+   "######...####",
+   "#############"
+  ],
+  "links": {
+   "7,3": "11,3",
+   "8,5": "9,3"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 102,
+  "pushes": 28,
+  "states": 19487,
+  "ruin": 0.335,
+  "score": 12.75,
+  "difficulty": 5,
+  "solution": "DDRRRRRRUULLLULDDDLLDDRRUDLLUUURDRRRRRURDULULLLLDLDRRRRRRDRRULDDLUUDDDLLURDRURUUULDLLLLLUURRRRURRRRDDR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "############",
+   "#...#.....##",
+   "#D#P..###..#",
+   "ED###.B.B..#",
+   "##_####....#",
+   "#_..##...###",
+   "#........###",
+   "#..#########",
+   "############"
+  ],
+  "links": {
+   "2,4": "1,2",
+   "1,5": "1,3"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 110,
+  "pushes": 28,
+  "states": 16001,
+  "ruin": 0.296,
+  "score": 12.7,
+  "difficulty": 5,
+  "solution": "RRURRRRDDDLLURDRRUULDRDLLURUULLLLDDRRDDRDLLLLLULLDDRUUDRRRRURUURDRRUULDRDLLULDDRDLLLLLLDLURRRRRURUULLULLULLDDL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "#####..#..#",
+   "##P##B....#",
+   "#.._...#..#",
+   "#...##....#",
+   "###.B.###D#",
+   "###...###.#",
+   "E.#.#####.#",
+   "#D..#####_#",
+   "###########"
+  ],
+  "links": {
+   "3,3": "9,5",
+   "9,8": "1,8"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 105,
+  "pushes": 30,
+  "states": 11035,
+  "ruin": 0.301,
+  "score": 12.69,
+  "difficulty": 5,
+  "solution": "DRRRRUULDRDLLLDLLURRRRURRRDDLLULLLDDDRRULDLUULURRRURRRDDLLUDRRUULLULDRDLLRURRRURDDDDDDUUULLLULLLDDDDDLLUL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "##########",
+   "#####...##",
+   "#####.B.##",
+   "#####...##",
+   "##PF##vB.#",
+   "#........#",
+   "#...######",
+   "####..####",
+   "####E#####"
+  ],
+  "links": {
+   "3,5": "6,5"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 78,
+  "pushes": 29,
+  "states": 4321,
+  "ruin": 0.503,
+  "score": 12.67,
+  "difficulty": 5,
+  "solution": "DRRRRRUULLUURRDDDRDLLLLLDLLURRRRLLUDRRRRUULLURURDDDRDLLLLLDLLURRRRLLUDRRRDDLLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "###.D.._._.P##",
+   "#.B.#..#.#####",
+   "#.#......D.#.E",
+   "#..B..##.#..D#",
+   "#..B._...#####",
+   "##############"
+  ],
+  "links": {
+   "7,1": "9,3",
+   "9,1": "12,4",
+   "5,5": "4,1"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 110,
+  "pushes": 25,
+  "states": 109956,
+  "ruin": 0.22,
+  "score": 12.65,
+  "difficulty": 5,
+  "solution": "LLLDDDDLLLLLULLDRRRUURUULLDDRDDLLULUURLDDRRDRURUUULLDDRDDLLURDRURUUDDLLUUURRRRRLLLLLDDRDRUUDLLUURRRDDRRRRDRRUR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "###...._._.#.E",
+   "####.B###..#D#",
+   "#####.##PD##.#",
+   "#.B....B...#.#",
+   "#...._####..D#",
+   "####..########",
+   "####..########",
+   "##############"
+  ],
+  "links": {
+   "7,1": "12,2",
+   "9,1": "9,3",
+   "5,5": "12,5"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 89,
+  "pushes": 28,
+  "states": 24122,
+  "ruin": 0.342,
+  "score": 12.63,
+  "difficulty": 5,
+  "solution": "DLLLUULURRRRLLLDDDDLLURDRURRRURURULLLLLLDRDDDLLLLURRRDRUUULURRLDDDDLDDRULUURRRRRRDRRUUUUR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "##.....#..E",
+   "##_B.#.DD##",
+   "#.B.##.####",
+   "#..###...##",
+   "#_..####.##",
+   "###.#....##",
+   "#PB_..D.###",
+   "###########"
+  ],
+  "links": {
+   "2,2": "6,7",
+   "1,5": "8,2",
+   "3,7": "7,2"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 113,
+  "pushes": 15,
+  "states": 20953,
+  "ruin": 0.581,
+  "score": 12.61,
+  "difficulty": 5,
+  "solution": "RRUULUUDDRDDRRURRDLURRUULLUUULLLLDDUURRDLDLLDDRRDDRRLLUULLUURDURUURRRDDDRRDDLLLDLLUULRDDRRURRDLLLRURRRUULLUURRURR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########",
+   "#..__#D.E",
+   "#..#..D##",
+   "#...#.B.#",
+   "#....B..#",
+   "##.##.###",
+   "##....P##",
+   "#########"
+  ],
+  "links": {
+   "3,1": "6,2",
+   "4,1": "6,1"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 113,
+  "pushes": 27,
+  "states": 7368,
+  "ruin": 0.314,
+  "score": 12.57,
+  "difficulty": 5,
+  "solution": "LUULLULUURRDRDDRRULDLLLULUURRDRDRDLLLULLDRDDRRRUULLRRDDLLLUUULUURRRDRDRDLLLULULURRLDDDRRRDDLLLUUUULURDDDRRRUURURR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "########E###",
+   "#..###..D###",
+   "#.......B..#",
+   "#_.BD#.....#",
+   "###.P_###..#",
+   "############"
+  ],
+  "links": {
+   "1,3": "4,3",
+   "5,4": "8,1"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 78,
+  "pushes": 31,
+  "states": 7111,
+  "ruin": 0.395,
+  "score": 12.56,
+  "difficulty": 5,
+  "solution": "LULURRRRURDRDRRULLLLLLLDLLUURDLDRURRRRDRRURRDDLURULLLLLLLLULDRDRURDLDRUURRURRU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########",
+   "###>.#.##",
+   "#P...###E",
+   "###..####",
+   "#.....###",
+   "#.#..B###",
+   "#.FB....#",
+   "####.#B.#",
+   "####...##",
+   "#########"
+  ],
+  "links": {
+   "2,6": "3,1"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 95,
+  "pushes": 26,
+  "states": 58954,
+  "ruin": 0.266,
+  "score": 12.54,
+  "difficulty": 5,
+  "solution": "RRDDDRDDDRRURULLRDDLLUUUUUUDDRDLDDDRRUULRDDLLUULRUUUUDDLLLDDRRURDRRDDLLUUUUUUDDDDLLRUUUURURRRRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#...#..._####",
+   "#.#..B.#.####",
+   "#.#.B.#.....#",
+   "#..#......D.#",
+   "#.PD#...#.._#",
+   "###E#########"
+  ],
+  "links": {
+   "8,1": "10,4",
+   "11,5": "3,5"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 102,
+  "pushes": 25,
+  "states": 9202,
+  "ruin": 0.37,
+  "score": 12.52,
+  "difficulty": 5,
+  "solution": "ULUUURRDDRDRRRURUULLDLDLLURDDRRRRUUULLLDDLDRRRURRRRDDLLUDRRUULLDLUUDDLDLLURRRRRURDLLLLLLUULLULLDDDDRRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "##..###..D#",
+   "##......#.#",
+   "##..#####DE",
+   "###.####_##",
+   "##..B.#P_##",
+   "##D..._B.##",
+   "###...#..##",
+   "###########"
+  ],
+  "links": {
+   "8,4": "9,3",
+   "8,5": "9,1",
+   "6,6": "2,6"
+  },
+  "style": "plates",
+  "squeeze": false,
+  "problems": [],
+  "moves": 73,
+  "pushes": 23,
+  "states": 7648,
+  "ruin": 0.573,
+  "score": 12.52,
+  "difficulty": 5,
+  "solution": "RDLLLDLLURRULDLUUULUURDDDDLDRURRDRRDRUUDLLLULLDRRRRDRULLLULLUUURRRRURRDDR",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "###..########",
+   "##_.B#._....#",
+   "###....###..#",
+   "ED#.#.......#",
+   "#.#.D.B.##..#",
+   "#.######.P#.#",
+   "#.######.#..#",
+   "#...........#",
+   "#############"
+  ],
+  "links": {
+   "2,2": "1,4",
+   "7,2": "4,5"
+  },
+  "style": "mixed",
+  "squeeze": true,
+  "problems": [],
+  "moves": 147,
+  "pushes": 23,
+  "states": 6395,
+  "ruin": 0.272,
+  "score": 12.5,
+  "difficulty": 5,
+  "solution": "LDDRRURUUULLLLLULLLUURDLDRRDRRRRRUULLLLDLDRRRRLLLUURRRRDRDDLUURULLLRRDDLLLDLLUURURLDDDLURRRRRUULLRRDDLLLLULLRDDLLUURULDRRDRRRRRDRDDDLLLLLLLLLLUUUUL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#E#######",
+   "#.#..D..#",
+   "#D..#.#.#",
+   "####DB..#",
+   "#####_#.#",
+   "#P.##B#.#",
+   "#....._.#",
+   "#.....#_#",
+   "#########"
+  ],
+  "links": {
+   "5,4": "4,3",
+   "6,6": "5,1",
+   "7,7": "1,2"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 111,
+  "pushes": 24,
+  "states": 6052,
+  "ruin": 0.316,
+  "score": 12.32,
+  "difficulty": 5,
+  "solution": "DRRRRUDRRUUULLDDUURRDDDLLDLLURRUUURRUULLDDRRDDDLLLLRRRRUUULLDDUURRDDDLLDLLURRRLUUURRDDDLLDLLLLURRRRUUUUULLDLLUU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##########",
+   "##########",
+   "###P#F####",
+   "#..B#.####",
+   "#.#.#.####",
+   "#.#...B..#",
+   "#..B.....#",
+   "###..#.<##",
+   "#E########"
+  ],
+  "links": {
+   "5,2": "7,7"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 90,
+  "pushes": 24,
+  "states": 43850,
+  "ruin": 0.275,
+  "score": 12.31,
+  "difficulty": 5,
+  "solution": "DLLDDDRRRRURDLLLLLUUURRDDUULLDDDRRRRUUUUDDDRDRRULLLUUUDDDLDLLLUUURRDDDLDRRRUUUUUDDDDDLLLLD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#########E###",
+   "#_D..####.D.#",
+   "#.#....B.##.#",
+   "#..B........#",
+   "###P##....._#",
+   "#############"
+  ],
+  "links": {
+   "1,1": "10,1",
+   "11,4": "2,1"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 88,
+  "pushes": 28,
+  "states": 3256,
+  "ruin": 0.367,
+  "score": 12.3,
+  "difficulty": 5,
+  "solution": "URUULDRDRRRRULLLDLLUURDLDRRRURDLDRRRRULLULLLLULLLDDRRRRRDRURULLLLDLURULLRDDRRRRRRRRUULLU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###E#####",
+   "#PDD###_#",
+   "#.##..#.#",
+   "#.=....D#",
+   "#.B#.B..#",
+   "##._..###",
+   "#########"
+  ],
+  "links": {
+   "7,1": "2,1",
+   "2,3": "3,1",
+   "3,5": "7,3"
+  },
+  "style": "plates",
+  "squeeze": true,
+  "problems": [],
+  "moves": 87,
+  "pushes": 23,
+  "states": 6530,
+  "ruin": 0.433,
+  "score": 12.3,
+  "difficulty": 5,
+  "solution": "DDRRRRLDDLLULURRLDDRRURUULDDRDLUURRLLLLDDRLUURRDRDLUURRRUDDLLULLLDDRRURULLRDDLLULUUURRU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "####....._####",
+   "##....###.####",
+   "#._#......####",
+   "#..#..##.#####",
+   "#..##..#.#####",
+   "#P..B....#####",
+   "#.B.####.#####",
+   "ED#...D..#####",
+   "##############"
+  ],
+  "links": {
+   "9,1": "1,8",
+   "2,3": "6,8"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 123,
+  "pushes": 24,
+  "states": 27207,
+  "ruin": 0.15,
+  "score": 12.25,
+  "difficulty": 5,
+  "solution": "UUURURRDDRDDLLRRUUUULLLDDDLDDRUUUDDRRRRRRDDLLLLLULURRRRRLLLLDDRRRRRUUUUDDLLULUUUURRRRDDLLLRRDDDLLULUUULURRRRLLLDDDDDLLDLLDL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###E######",
+   "###DD..###",
+   "#..###.###",
+   "#.B.##.###",
+   "#.B..#...#",
+   "#..._..#.#",
+   "###P#....#",
+   "#####..#_#",
+   "##########"
+  ],
+  "links": {
+   "4,5": "4,1",
+   "8,7": "3,1"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 84,
+  "pushes": 21,
+  "states": 9363,
+  "ruin": 0.451,
+  "score": 12.22,
+  "difficulty": 5,
+  "solution": "ULLURLUURDDLDRRRRDRRRUULLDLDRRLUURRDDLLULLULULDLDRRRRDRRRUULLDURRDDLLDLURULRUUUULLLU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#######E##",
+   "#.....PD_#",
+   "#.######.#",
+   "#.#..#...#",
+   "#.B...DB.#",
+   "##.B.#####",
+   "##_..#####",
+   "##.#######",
+   "##########"
+  ],
+  "links": {
+   "8,1": "7,1",
+   "2,6": "6,4"
+  },
+  "style": "squeeze",
+  "squeeze": true,
+  "problems": [],
+  "moves": 84,
+  "pushes": 18,
+  "states": 5088,
+  "ruin": 0.571,
+  "score": 12.21,
+  "difficulty": 5,
+  "solution": "LLLLLDDDRDDRRULRUULDDULDURRRRURRDLLLLDLLURRRLDLLDURRDLUURRRURDRUUDDLLLLLLLUUURRRRRRU",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#v#......####",
+   "#D....B._#F.#",
+   "#.B._#B...#.#",
+   "E#.#.P..#..D#",
+   "#############"
+  ],
+  "links": {
+   "8,2": "11,4",
+   "10,2": "1,1",
+   "4,3": "1,2"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 81,
+  "pushes": 15,
+  "states": 66975,
+  "ruin": 0.35,
+  "score": 12.21,
+  "difficulty": 5,
+  "solution": "RRUULLULDLLLDRURRRRRDDLLLUDRRURUULLLLDLDRUURRDLLLRRRRRDRRDRRUULRDDLLULULLLLDLLDLL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#...###..F.##",
+   "#.#####..B.##",
+   "#.#..##...###",
+   "#.##.##.#.###",
+   "E.#...#..B###",
+   "###^......###",
+   "####.P#######",
+   "#############",
+   "#############"
+  ],
+  "links": {
+   "9,1": "3,6"
+  },
+  "style": "cannons",
+  "squeeze": false,
+  "problems": [],
+  "moves": 99,
+  "pushes": 27,
+  "states": 8107,
+  "ruin": 0.24,
+  "score": 12.19,
+  "difficulty": 5,
+  "solution": "URRUUUUURRRDLLULDDDDRDLLLDLURULDRRRRRUUULUURRDLLULDDDDRDLLLDLURULDRRRUUUUURRDDDDDLLLLULUULUULLDDDDL",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "###########",
+   "#_..#.P####",
+   "#...#.B.###",
+   "#.#DB.B..##",
+   "#.##..._.##",
+   "#..D^F#####",
+   "###E#######"
+  ],
+  "links": {
+   "1,1": "3,5",
+   "7,4": "3,3",
+   "5,5": "4,5"
+  },
+  "style": "mixed",
+  "squeeze": true,
+  "problems": [],
+  "moves": 62,
+  "pushes": 22,
+  "states": 12001,
+  "ruin": 0.35,
+  "score": 12.16,
+  "difficulty": 5,
+  "solution": "LDDRLUURDRDLULDLRRDLDUURRRDLLLUULLULLDRRRDRDDUUURULLLLDLDDDRRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "##############",
+   "######.._..###",
+   "###..#...#.###",
+   "##...._..#.B.#",
+   "##..##..B..#.#",
+   "#...##..#....#",
+   "#.###..##..###",
+   "#.DD#P########",
+   "###E##########"
+  ],
+  "links": {
+   "8,1": "2,7",
+   "6,3": "3,7"
+  },
+  "style": "squeeze",
+  "squeeze": false,
+  "problems": [],
+  "moves": 97,
+  "pushes": 22,
+  "states": 26270,
+  "ruin": 0.242,
+  "score": 12.06,
+  "difficulty": 5,
+  "solution": "URUUUUURRRRDDDDRRUULRDDLLULLULLDDRUUURURRDDDURRDDLLDLURULLLDLURUULURDDLLLULDLDDRULURRRLLDDLLDDRRD",
+  "src": "evolved"
+ },
+ {
+  "rows": [
+   "#############",
+   "#...#########",
+   "#...........#",
+   "##..#..#BB..#",
+   "##D..#...####",
+   "#_..._D#P####",
+   "######E######"
+  ],
+  "links": {
+   "1,5": "2,4",
+   "5,5": "6,5"
+  },
+  "style": "mixed",
+  "squeeze": false,
+  "problems": [],
+  "moves": 75,
+  "pushes": 29,
+  "states": 9301,
+  "ruin": 0.234,
+  "score": 11.96,
+  "difficulty": 5,
+  "solution": "UURURRDLLULLLLLLULLDRURDDDRDLLUUURRRDRDRRURULLLLLLULLDRURDDDLDRRULUURRDRDDD",
+  "src": "evolved"
+ }
+]

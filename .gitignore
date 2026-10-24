@@ -1,0 +1,17 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+blocked.db
+art/preview*.png
+dist/
+blocked.backup-*.db
+tools/jsolve/*.class
+tools/jsolve/*.txt
+tools/__pycache__/
+blocked.drafts.db
+tools/evo_*/
+tools/refine_seeds*.txt
+tools/tests/enginetest/*cases.json
+tools/jsolve/refine/
