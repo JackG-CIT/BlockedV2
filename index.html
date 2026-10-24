@@ -1,8 +1,5 @@
-{#- The standalone build's single page (written by `flask --app app export-standalone`).
-    Every screen lives on this one page and switches in place, so the music never stops.
-    Paths are relative: the folder works from any static host or a portal's iframe. -#}
-{% from '_sound_menu.html' import sound_menu %}
-{% from '_editor.html' import workspace %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +19,22 @@
             <button class="navlink" type="button" data-go="chapters">Levels</button>
             <button class="navlink" type="button" data-go="workshop">Build</button>
             <button class="navlink" type="button" data-go="help">How to play</button>
-            {{ sound_menu() }}
+            
+<div class="sound-menu">
+    <button class="navlink sound-toggle" id="soundToggle" type="button" aria-expanded="false" aria-controls="soundPanel" title="Sound (M to mute)">
+        <span class="speaker" aria-hidden="true"></span><span class="sr-only">Sound settings</span>
+    </button>
+    <div class="sound-panel panel hidden" id="soundPanel">
+        <label for="musicVol">Music</label>
+        <input type="range" id="musicVol" min="0" max="1" step="0.05">
+        <label for="sfxVol">Effects</label>
+        <input type="range" id="sfxVol" min="0" max="1" step="0.05">
+        <label class="check"><input type="checkbox" id="muteAll"> Mute everything <kbd>M</kbd></label>
+        <label class="check" title="Off: the shorter chapter loops instead of the long tracks that build up room by room"><input type="checkbox" id="longMusic"> Long chapter music</label>
+        
+    </div>
+</div>
+
         </nav>
     </header>
 
@@ -152,7 +164,93 @@
         </section>
     </main>
 
-    <template id="editorTemplate">{{ workspace(limits, standalone=True) }}</template>
+    <template id="editorTemplate">
+<div class="editor">
+    <!-- LEFT SIDE: tiles -->
+    <div class="panel">
+        <h3>Tiles</h3>
+        <div class="tools" id="tools"></div>
+        <p class="tools-help">Click or drag to paint. Right-click erases. Click a cannon again to turn it. After placing a plate or fuse, click what it controls.</p>
+    </div>
+
+    <!-- MIDDLE: the grid -->
+    <div class="editor-board">
+        <div class="board-frame">
+            <div class="board-wrap" id="editWrap">
+                <table id="editTable" class="board"></table>
+                <svg class="links-layer" id="links"></svg>
+            </div>
+        </div>
+        <div class="statusbar" id="status">Pick a tile on the left and click the grid.</div>
+        <div class="btn-row">
+            <button class="btn small wood" id="borderBtn" type="button">Wall the edges</button>
+            <button class="btn small wood" id="clearBtn" type="button">Clear everything</button>
+            <label class="check" style="margin: 0"><input type="checkbox" id="showLinks" checked> Show links</label>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE: settings -->
+    <div class="panel settings">
+        <h3>Level settings</h3>
+        <div class="field">
+            <label for="levelName">Name</label>
+            <input type="text" id="levelName" maxlength="80" placeholder="The Kraken's Cellar">
+        </div>
+        <div class="field">
+            <label for="levelNote">Notes</label>
+            <textarea id="levelNote" maxlength="500" placeholder="A hint or a bit of story, shown above the board."></textarea>
+        </div>
+        <div class="size-row">
+            <div class="field">
+                <label for="levelWidth">Width</label>
+                <input type="number" id="levelWidth" min="3" max="30">
+            </div>
+            <div class="field">
+                <label for="levelHeight">Height</label>
+                <input type="number" id="levelHeight" min="3" max="30">
+            </div>
+        </div>
+        
+            <input type="checkbox" id="published" checked hidden>
+        
+        
+
+        <div class="btn-row">
+            <button class="btn" id="saveBtn" type="button">Save</button>
+            <button class="btn red" id="testBtn" type="button">Playtest</button>
+        </div>
+        <div class="save-state" id="saveState"></div>
+
+        <div class="divider"></div>
+        <h3>Checks</h3>
+        <ul class="checks" id="checks"></ul>
+
+        
+            <div class="divider"></div>
+            <div class="btn-row">
+                <button class="btn small wood" id="copyBtn" type="button">Save a copy</button>
+                <button class="btn small sea" id="exportBtn" type="button">Export</button>
+            </div>
+        
+    </div>
+</div>
+
+<div class="modal hidden" id="testModal" role="dialog" aria-modal="true" aria-labelledby="testTitle">
+    <div class="panel wide">
+        <h2 id="testTitle">Playtest</h2>
+        <p id="testMsg">Arrow keys or WASD to move, Z to undo, R to restart, Esc to go back to editing.</p>
+        <div class="playtest-hud">
+            <div class="stat"><b id="testMoves">0</b><span>moves</span></div>
+            <div class="stat"><b id="testTime">0.0s</b><span>time</span></div>
+        </div>
+        <div class="board-frame"><div class="board-wrap"><table id="testTable" class="board"></table></div></div>
+        <div class="btn-row" style="margin-top: 16px">
+            <button class="btn red" id="testReset" type="button">Restart (R)</button>
+            <button class="btn wood" id="testClose" type="button">Back to editing (Esc)</button>
+        </div>
+    </div>
+</div>
+</template>
 
     <!-- Win popup (boss rooms, the last room, single replays) -->
     <div class="modal hidden" id="winModal" role="dialog" aria-modal="true" aria-labelledby="winTitle">
