@@ -445,7 +445,7 @@
     function theEnd() {
         leaving = true;
         $("winModal").classList.add("hidden");
-        BlockedStory.play("ending").then(() => portal.breakTime(() => show("chapters")));
+        BlockedStory.auto("ending").then(() => portal.breakTime(() => show("chapters")));
     }
 
     function backFromLevel() {

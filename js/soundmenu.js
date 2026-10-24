@@ -7,12 +7,17 @@
     if (!S || !panel || !toggle) return;
     const music = document.getElementById("musicVol"), sfx = document.getElementById("sfxVol"), mute = document.getElementById("muteAll");
     const longMusic = document.getElementById("longMusic");
+    // Story cutscenes on or off (story.js reads the same key). Kept in the browser.
+    const scenes = document.getElementById("storyScenes");
+    const SCENES_KEY = "blocked-scenes";
+    const scenesOn = () => { try { return localStorage.getItem(SCENES_KEY) !== "off"; } catch (e) { return true; } };
     function sync() {
         const s = S.settings;
         music.value = s.music;
         sfx.value = s.sfx;
         mute.checked = s.muted;
         if (longMusic) longMusic.checked = s.longMusic !== false;
+        if (scenes) scenes.checked = scenesOn();
         toggle.classList.toggle("muted", s.muted);
     }
     sync();
@@ -30,6 +35,9 @@
     mute.addEventListener("change", () => { S.set("muted", mute.checked); sync(); });
     // Long, layered chapter tracks, or the short loops. Takes effect straight away.
     if (longMusic) longMusic.addEventListener("change", () => { S.set("longMusic", longMusic.checked); sync(); });
+    if (scenes) scenes.addEventListener("change", () => {
+        try { localStorage.setItem(SCENES_KEY, scenes.checked ? "on" : "off"); } catch (e) { /* storage blocked */ }
+    });
     document.addEventListener("keydown", e => {
         const t = e.target;
         if (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable) return;

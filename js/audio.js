@@ -1967,12 +1967,13 @@
                 ],
             },
         },
-        // Chapter 1 boss level: "Sea Legs" sped up (72 -> 86 bpm) with the full band, horns on the tune, driving taiko and rushing strings.
-        // One loop is 22 s; every third time round a second fiddle joins in.
+        // Chapter 1 boss level: "Sea Legs" a little faster (72 -> 76 bpm) and more intense: the full band, horns on the tune,
+        // driving taiko with a crash every four bars, rushing strings and a low choir.
+        // One loop is 25 s; every third time round a second fiddle joins in.
         "sea-legs-boss": {
             title: "Sea Legs (boss)", group: "chapter-boss", volume: 0.75,
-            mood: "Faster, grander Sea Legs for the chapter's hardest level",
-            bpm: 86, stepsPerBeat: 6, barSteps: 12,
+            mood: "A more intense Sea Legs for the chapter's hardest level",
+            bpm: 76, stepsPerBeat: 6, barSteps: 12,
             loop: "sea-legs-short",
             cycle: ["boss", "boss", "boss2"],
             variations: {
@@ -2001,11 +2002,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2017,6 +2018,12 @@
                             "D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D4:1 D3:1 A3:1", "A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A4:1 A3:1 E4:1",
                             "C4:1 C4:1 G4:1 C4:1 C4:1 G4:1 C4:1 C4:1 G4:1 C5:1 C4:1 G4:1", "D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D4:1 D3:1 A3:1",
                             "E3:1 E3:1 B3:1 E3:1 E3:1 B3:1 E3:1 E3:1 B3:1 E4:1 E3:1 B3:1", "E3:1 E3:1 B3:1 E3:1 E3:1 B3:1 E3:1 E3:1 B3:1 E4:1 E3:1 B3:1",
+                        ],
+                        choir: [
+                            "C4+E4+A4:12", "D4+F#4+A4:12", "C4+E4+A4:12", "D4+F#4+A4:12",
+                            "C4+E4+G4:12", "B3+D4+G4:12", "B3+E4+G#4:12", "B3+E4+G#4:12",
+                            "C4+E4+A4:12", "B3+D4+G4:12", "D4+F#4+A4:12", "C4+E4+A4:12",
+                            "C4+E4+G4:12", "D4+F#4+A4:12", "B3+E4+G#4:12", "B3+E4+G#4:12",
                         ],
                         sub: [
                             "A2:12", "D2:12", "A2:12", "D2:12",
@@ -2051,11 +2058,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2067,6 +2074,12 @@
                             "D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D4:1 D3:1 A3:1", "A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A4:1 A3:1 E4:1",
                             "C4:1 C4:1 G4:1 C4:1 C4:1 G4:1 C4:1 C4:1 G4:1 C5:1 C4:1 G4:1", "D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D4:1 D3:1 A3:1",
                             "E3:1 E3:1 B3:1 E3:1 E3:1 B3:1 E3:1 E3:1 B3:1 E4:1 E3:1 B3:1", "E3:1 E3:1 B3:1 E3:1 E3:1 B3:1 E3:1 E3:1 B3:1 E4:1 E3:1 B3:1",
+                        ],
+                        choir: [
+                            "C4+E4+A4:12", "D4+F#4+A4:12", "C4+E4+A4:12", "D4+F#4+A4:12",
+                            "C4+E4+G4:12", "B3+D4+G4:12", "B3+E4+G#4:12", "B3+E4+G#4:12",
+                            "C4+E4+A4:12", "B3+D4+G4:12", "D4+F#4+A4:12", "C4+E4+A4:12",
+                            "C4+E4+G4:12", "D4+F#4+A4:12", "B3+E4+G#4:12", "B3+E4+G#4:12",
                         ],
                         sub: [
                             "A2:12", "D2:12", "A2:12", "D2:12",
@@ -2088,12 +2101,13 @@
                 },
             },
         },
-        // Chapter 2 boss level: "Pressure" sped up (124 -> 138 bpm) with the full band, horns on the tune, driving taiko and rushing strings.
-        // One loop is 27 s; every third time round a second fiddle joins in.
+        // Chapter 2 boss level: "Pressure" a little faster (124 -> 130 bpm) and more intense: the full band, horns on the tune,
+        // driving taiko with a crash every four bars, rushing strings and a low choir.
+        // One loop is 29 s; every third time round a second fiddle joins in.
         "pressure-boss": {
             title: "Pressure (boss)", group: "chapter-boss", volume: 0.78,
-            mood: "Faster, grander Pressure for the chapter's hardest level",
-            bpm: 138, stepsPerBeat: 4, barSteps: 16,
+            mood: "A more intense Pressure for the chapter's hardest level",
+            bpm: 130, stepsPerBeat: 4, barSteps: 16,
             loop: "pressure-short",
             cycle: ["boss", "boss", "boss2"],
             variations: {
@@ -2122,11 +2136,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2146,6 +2160,12 @@
                             "D3:1 D3:1 A3:1 D3:1 D3:1 D3:1 A3:1 D3:1 D3:1 D3:1 A3:1 D3:1 D4:1 D3:1 A3:1 D3:1",
                             "B3:1 B3:1 F#4:1 B3:1 B3:1 B3:1 F#4:1 B3:1 B3:1 B3:1 F#4:1 B3:1 B4:1 B3:1 F#4:1 B3:1",
                             "B3:1 B3:1 F#4:1 B3:1 B3:1 B3:1 F#4:1 B3:1 B3:1 B3:1 F#4:1 B3:1 B4:1 B3:1 F#4:1 B3:1",
+                        ],
+                        choir: [
+                            "B3+E4+G4:16", "B3+E4+G4:16", "C4+E4+G4:16", "B3+D#4+F#4:16",
+                            "B3+E4+G4:16", "B3+E4+G4:16", "C4+E4+A4:16", "B3+D#4+F#4:16",
+                            "C4+E4+G4:16", "D4+F#4+A4:16", "B3+E4+G4:16", "B3+E4+G4:16",
+                            "C4+E4+G4:16", "D4+F#4+A4:16", "B3+D#4+F#4:16", "B3+D#4+F#4:16",
                         ],
                         sub: [
                             "E2:16", "E2:16", "C3:16", "B2:16",
@@ -2180,11 +2200,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2204,6 +2224,12 @@
                             "D3:1 D3:1 A3:1 D3:1 D3:1 D3:1 A3:1 D3:1 D3:1 D3:1 A3:1 D3:1 D4:1 D3:1 A3:1 D3:1",
                             "B3:1 B3:1 F#4:1 B3:1 B3:1 B3:1 F#4:1 B3:1 B3:1 B3:1 F#4:1 B3:1 B4:1 B3:1 F#4:1 B3:1",
                             "B3:1 B3:1 F#4:1 B3:1 B3:1 B3:1 F#4:1 B3:1 B3:1 B3:1 F#4:1 B3:1 B4:1 B3:1 F#4:1 B3:1",
+                        ],
+                        choir: [
+                            "B3+E4+G4:16", "B3+E4+G4:16", "C4+E4+G4:16", "B3+D#4+F#4:16",
+                            "B3+E4+G4:16", "B3+E4+G4:16", "C4+E4+A4:16", "B3+D#4+F#4:16",
+                            "C4+E4+G4:16", "D4+F#4+A4:16", "B3+E4+G4:16", "B3+E4+G4:16",
+                            "C4+E4+G4:16", "D4+F#4+A4:16", "B3+D#4+F#4:16", "B3+D#4+F#4:16",
                         ],
                         sub: [
                             "E2:16", "E2:16", "C3:16", "B2:16",
@@ -2225,12 +2251,13 @@
                 },
             },
         },
-        // Chapter 3 boss level: "Locks and Keys" sped up (80 -> 92 bpm) with the full band, horns on the tune, driving taiko and rushing strings.
-        // One loop is 20 s; every third time round a second fiddle joins in.
+        // Chapter 3 boss level: "Locks and Keys" a little faster (80 -> 84 bpm) and more intense: the full band, horns on the tune,
+        // driving taiko with a crash every four bars, rushing strings and a low choir.
+        // One loop is 22 s; every third time round a second fiddle joins in.
         "locks-keys-boss": {
             title: "Locks and Keys (boss)", group: "chapter-boss", volume: 0.62,
-            mood: "Faster, grander Locks and Keys for the chapter's hardest level",
-            bpm: 92, stepsPerBeat: 6, barSteps: 12,
+            mood: "A more intense Locks and Keys for the chapter's hardest level",
+            bpm: 84, stepsPerBeat: 6, barSteps: 12,
             loop: "locks-keys-short",
             cycle: ["boss", "boss", "boss2"],
             variations: {
@@ -2259,11 +2286,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2275,6 +2302,12 @@
                             "Bb3:1 Bb3:1 F4:1 Bb3:1 Bb3:1 F4:1 Bb3:1 Bb3:1 F4:1 Bb4:1 Bb3:1 F4:1", "F3:1 F3:1 C4:1 F3:1 F3:1 C4:1 F3:1 F3:1 C4:1 F4:1 F3:1 C4:1",
                             "G3:1 G3:1 D4:1 G3:1 G3:1 D4:1 G3:1 G3:1 D4:1 G4:1 G3:1 D4:1", "Bb3:1 Bb3:1 F4:1 Bb3:1 Bb3:1 F4:1 Bb3:1 Bb3:1 F4:1 Bb4:1 Bb3:1 F4:1",
                             "A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A4:1 A3:1 E4:1", "A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A4:1 A3:1 E4:1",
+                        ],
+                        choir: [
+                            "D4+F4+A4:12", "Bb3+D4+F4:12", "D4+F4+A4:12", "Bb3+D4+F4:12",
+                            "Bb3+D4+G4:12", "D4+F4+A4:12", "Bb3+D4+G4:12", "C#4+E4+A4:12",
+                            "C4+F4+A4:12", "C4+E4+G4:12", "Bb3+D4+F4:12", "C4+F4+A4:12",
+                            "Bb3+D4+G4:12", "Bb3+D4+F4:12", "C#4+E4+A4:12", "C#4+E4+A4:12",
                         ],
                         sub: [
                             "D2:12", "Bb2:12", "D2:12", "Bb2:12",
@@ -2309,11 +2342,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2325,6 +2358,12 @@
                             "Bb3:1 Bb3:1 F4:1 Bb3:1 Bb3:1 F4:1 Bb3:1 Bb3:1 F4:1 Bb4:1 Bb3:1 F4:1", "F3:1 F3:1 C4:1 F3:1 F3:1 C4:1 F3:1 F3:1 C4:1 F4:1 F3:1 C4:1",
                             "G3:1 G3:1 D4:1 G3:1 G3:1 D4:1 G3:1 G3:1 D4:1 G4:1 G3:1 D4:1", "Bb3:1 Bb3:1 F4:1 Bb3:1 Bb3:1 F4:1 Bb3:1 Bb3:1 F4:1 Bb4:1 Bb3:1 F4:1",
                             "A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A4:1 A3:1 E4:1", "A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A3:1 A3:1 E4:1 A4:1 A3:1 E4:1",
+                        ],
+                        choir: [
+                            "D4+F4+A4:12", "Bb3+D4+F4:12", "D4+F4+A4:12", "Bb3+D4+F4:12",
+                            "Bb3+D4+G4:12", "D4+F4+A4:12", "Bb3+D4+G4:12", "C#4+E4+A4:12",
+                            "C4+F4+A4:12", "C4+E4+G4:12", "Bb3+D4+F4:12", "C4+F4+A4:12",
+                            "Bb3+D4+G4:12", "Bb3+D4+F4:12", "C#4+E4+A4:12", "C#4+E4+A4:12",
                         ],
                         sub: [
                             "D2:12", "Bb2:12", "D2:12", "Bb2:12",
@@ -2346,12 +2385,13 @@
                 },
             },
         },
-        // Chapter 4 boss level: "Gunpowder" sped up (112 -> 128 bpm) with the full band, horns on the tune, driving taiko and rushing strings.
-        // One loop is 30 s; every third time round a second fiddle joins in.
+        // Chapter 4 boss level: "Gunpowder" a little faster (112 -> 118 bpm) and more intense: the full band, horns on the tune,
+        // driving taiko with a crash every four bars, rushing strings and a low choir.
+        // One loop is 32 s; every third time round a second fiddle joins in.
         "gunpowder-boss": {
             title: "Gunpowder (boss)", group: "chapter-boss", volume: 0.66,
-            mood: "Faster, grander Gunpowder for the chapter's hardest level",
-            bpm: 128, stepsPerBeat: 4, barSteps: 16,
+            mood: "A more intense Gunpowder for the chapter's hardest level",
+            bpm: 118, stepsPerBeat: 4, barSteps: 16,
             loop: "gunpowder-short",
             cycle: ["boss", "boss", "boss2"],
             variations: {
@@ -2380,11 +2420,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2404,6 +2444,12 @@
                             "A3:1 A3:1 E4:1 A3:1 A3:1 A3:1 E4:1 A3:1 A3:1 A3:1 E4:1 A3:1 A4:1 A3:1 E4:1 A3:1",
                             "E3:1 E3:1 B3:1 E3:1 E3:1 E3:1 B3:1 E3:1 E3:1 E3:1 B3:1 E3:1 E4:1 E3:1 B3:1 E3:1",
                             "E3:1 E3:1 B3:1 E3:1 E3:1 E3:1 B3:1 E3:1 E3:1 E3:1 B3:1 E3:1 E4:1 E3:1 B3:1 E3:1",
+                        ],
+                        choir: [
+                            "C4+E4+A4:16", "C4+E4+A4:16", "C4+F4+A4:16", "B3+D4+G4:16",
+                            "C4+E4+A4:16", "C4+E4+A4:16", "C4+F4+A4:16", "B3+E4+G#4:16",
+                            "D4+F4+A4:16", "C4+E4+A4:16", "C4+F4+A4:16", "B3+D4+G4:16",
+                            "D4+F4+A4:16", "C4+E4+A4:16", "B3+E4+G#4:16", "B3+E4+G#4:16",
                         ],
                         sub: [
                             "A2:16", "A2:16", "F2:16", "G2:16",
@@ -2438,11 +2484,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2462,6 +2508,12 @@
                             "A3:1 A3:1 E4:1 A3:1 A3:1 A3:1 E4:1 A3:1 A3:1 A3:1 E4:1 A3:1 A4:1 A3:1 E4:1 A3:1",
                             "E3:1 E3:1 B3:1 E3:1 E3:1 E3:1 B3:1 E3:1 E3:1 E3:1 B3:1 E3:1 E4:1 E3:1 B3:1 E3:1",
                             "E3:1 E3:1 B3:1 E3:1 E3:1 E3:1 B3:1 E3:1 E3:1 E3:1 B3:1 E3:1 E4:1 E3:1 B3:1 E3:1",
+                        ],
+                        choir: [
+                            "C4+E4+A4:16", "C4+E4+A4:16", "C4+F4+A4:16", "B3+D4+G4:16",
+                            "C4+E4+A4:16", "C4+E4+A4:16", "C4+F4+A4:16", "B3+E4+G#4:16",
+                            "D4+F4+A4:16", "C4+E4+A4:16", "C4+F4+A4:16", "B3+D4+G4:16",
+                            "D4+F4+A4:16", "C4+E4+A4:16", "B3+E4+G#4:16", "B3+E4+G#4:16",
                         ],
                         sub: [
                             "A2:16", "A2:16", "F2:16", "G2:16",
@@ -2483,12 +2535,13 @@
                 },
             },
         },
-        // Chapter 5 boss level: "Crossfire" sped up (76 -> 88 bpm) with the full band, horns on the tune, driving taiko and rushing strings.
-        // One loop is 21 s; every third time round a second fiddle joins in.
+        // Chapter 5 boss level: "Crossfire" a little faster (76 -> 80 bpm) and more intense: the full band, horns on the tune,
+        // driving taiko with a crash every four bars, rushing strings and a low choir.
+        // One loop is 24 s; every third time round a second fiddle joins in.
         "crossfire-boss": {
             title: "Crossfire (boss)", group: "chapter-boss", volume: 0.63,
-            mood: "Faster, grander Crossfire for the chapter's hardest level",
-            bpm: 88, stepsPerBeat: 6, barSteps: 12,
+            mood: "A more intense Crossfire for the chapter's hardest level",
+            bpm: 80, stepsPerBeat: 6, barSteps: 12,
             loop: "crossfire-short",
             cycle: ["boss", "boss", "boss2"],
             variations: {
@@ -2517,11 +2570,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2541,6 +2594,12 @@
                             "F3:1 F3:1 C4:1 F3:1 F3:1 C4:1 F3:1 F3:1 C4:1 F4:1 F3:1 C4:1",
                             "D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D4:1 D3:1 A3:1",
                             "D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D4:1 D3:1 A3:1",
+                        ],
+                        choir: [
+                            "Bb3+D4+G4:12", "C4+F4+A4:12", "Bb3+Eb4+G4:12", "D4+F#4+A4:12",
+                            "Bb3+D4+G4:12", "C4+F4+A4:12", "Bb3+Eb4+G4:12", "D4+F#4+A4:12",
+                            "C4+Eb4+G4:12", "Bb3+D4+G4:12", "C4+Eb4+G4:12", "Bb3+D4+G4:12",
+                            "Bb3+Eb4+G4:12", "C4+F4+A4:12", "D4+F#4+A4:12", "D4+F#4+A4:12",
                         ],
                         sub: [
                             "G2:12", "F2:12", "Eb2:12", "D2:12",
@@ -2575,11 +2634,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
-                            "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
+                            "B+C:2 r:2 B:2 B:2 r:2 S:2", "B:2 r:2 B:2 B:2 r:2 S:2",
                             "B:2 r:2 B:2 B:2 r:2 S:2", "B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2599,6 +2658,12 @@
                             "F3:1 F3:1 C4:1 F3:1 F3:1 C4:1 F3:1 F3:1 C4:1 F4:1 F3:1 C4:1",
                             "D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D4:1 D3:1 A3:1",
                             "D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D3:1 D3:1 A3:1 D4:1 D3:1 A3:1",
+                        ],
+                        choir: [
+                            "Bb3+D4+G4:12", "C4+F4+A4:12", "Bb3+Eb4+G4:12", "D4+F#4+A4:12",
+                            "Bb3+D4+G4:12", "C4+F4+A4:12", "Bb3+Eb4+G4:12", "D4+F#4+A4:12",
+                            "C4+Eb4+G4:12", "Bb3+D4+G4:12", "C4+Eb4+G4:12", "Bb3+D4+G4:12",
+                            "Bb3+Eb4+G4:12", "C4+F4+A4:12", "D4+F#4+A4:12", "D4+F#4+A4:12",
                         ],
                         sub: [
                             "G2:12", "F2:12", "Eb2:12", "D2:12",
@@ -2620,12 +2685,13 @@
                 },
             },
         },
-        // Chapter 6 boss level: "Davy Jones" sped up (80 -> 96 bpm) with the full band, horns on the tune, driving taiko and rushing strings.
-        // One loop is 40 s; every third time round a second fiddle joins in.
+        // Chapter 6 boss level: "Davy Jones" a little faster (80 -> 84 bpm) and more intense: the full band, horns on the tune,
+        // driving taiko with a crash every four bars, rushing strings and a low choir.
+        // One loop is 45 s; every third time round a second fiddle joins in.
         "davy-jones-boss": {
             title: "Davy Jones (boss)", group: "chapter-boss", volume: 0.7,
-            mood: "Faster, grander Davy Jones for the chapter's hardest level",
-            bpm: 96, stepsPerBeat: 4, barSteps: 16,
+            mood: "A more intense Davy Jones for the chapter's hardest level",
+            bpm: 84, stepsPerBeat: 4, barSteps: 16,
             loop: "davy-jones-short",
             cycle: ["boss", "boss", "boss2"],
             variations: {
@@ -2646,11 +2712,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2670,6 +2736,12 @@
                             "Ab3:1 Ab3:1 Eb4:1 Ab3:1 Ab3:1 Ab3:1 Eb4:1 Ab3:1 Ab3:1 Ab3:1 Eb4:1 Ab3:1 Ab4:1 Ab3:1 Eb4:1 Ab3:1",
                             "G3:1 G3:1 D4:1 G3:1 G3:1 G3:1 D4:1 G3:1 G3:1 G3:1 D4:1 G3:1 G4:1 G3:1 D4:1 G3:1",
                             "G3:1 G3:1 D4:1 G3:1 G3:1 G3:1 D4:1 G3:1 G3:1 G3:1 D4:1 G3:1 G4:1 G3:1 D4:1 G3:1",
+                        ],
+                        choir: [
+                            "C4+Eb4+G4:16", "C4+Eb4+Ab4:16", "C4+Eb4+G4:16", "C4+Eb4+Ab4:16",
+                            "C4+F4+Ab4:16", "C4+Eb4+G4:16", "B3+D4+G4:16", "B3+D4+G4:16",
+                            "C4+Eb4+Ab4:16", "Bb3+Eb4+G4:16", "Bb3+D4+F4:16", "C4+Eb4+G4:16",
+                            "Db4+F4+Ab4:16", "C4+Eb4+Ab4:16", "B3+D4+G4:16", "B3+D4+G4:16",
                         ],
                     },
                 },
@@ -2690,11 +2762,11 @@
                         drums2: [
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                             "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
-                            "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
+                            "B+C:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2",
                             "B:2 r:2 B:2 r:2 B:2 B:2 S:2 r:2", "B:2 B:2 B:2 B:2 S:1 S:1 S:1 S:1 S:1 S:1 S:1 S:1",
                         ],
                         ostinato2: [
@@ -2714,6 +2786,12 @@
                             "Ab3:1 Ab3:1 Eb4:1 Ab3:1 Ab3:1 Ab3:1 Eb4:1 Ab3:1 Ab3:1 Ab3:1 Eb4:1 Ab3:1 Ab4:1 Ab3:1 Eb4:1 Ab3:1",
                             "G3:1 G3:1 D4:1 G3:1 G3:1 G3:1 D4:1 G3:1 G3:1 G3:1 D4:1 G3:1 G4:1 G3:1 D4:1 G3:1",
                             "G3:1 G3:1 D4:1 G3:1 G3:1 G3:1 D4:1 G3:1 G3:1 G3:1 D4:1 G3:1 G4:1 G3:1 D4:1 G3:1",
+                        ],
+                        choir: [
+                            "C4+Eb4+G4:16", "C4+Eb4+Ab4:16", "C4+Eb4+G4:16", "C4+Eb4+Ab4:16",
+                            "C4+F4+Ab4:16", "C4+Eb4+G4:16", "B3+D4+G4:16", "B3+D4+G4:16",
+                            "C4+Eb4+Ab4:16", "Bb3+Eb4+G4:16", "Bb3+D4+F4:16", "C4+Eb4+G4:16",
+                            "Db4+F4+Ab4:16", "C4+Eb4+Ab4:16", "B3+D4+G4:16", "B3+D4+G4:16",
                         ],
                         lead2: [
                             "C5:6 G4:2 C5:2 D5:2 Eb5:4", "Eb5:6 C5:2 Ab4:8", "G5:6 F5:2 Eb5:2 D5:2 C5:4", "Eb5:8 Ab5:8",

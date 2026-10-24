@@ -24,6 +24,11 @@
     function markSeen(id) {
         try { const s = seenAll(); s[id] = 1; localStorage.setItem(SEEN_KEY, JSON.stringify(s)); } catch (e) { /* storage blocked */ }
     }
+    // The player can switch story scenes off in the speaker menu (soundmenu.js): then no
+    // cutscene or chapter card plays by itself. "Watch again" buttons still play them.
+    function scenesOn() {
+        try { return localStorage.getItem("blocked-scenes") !== "off"; } catch (e) { return true; }
+    }
     function remember(key, value) {
         try { if (value === undefined) return localStorage.getItem(key); localStorage.setItem(key, value); } catch (e) { return null; }
         return value;
@@ -706,7 +711,9 @@
     }
 
     // Plays a cutscene once per player. Resolves straight away if it's been seen.
-    function playOnce(id) { return seen(id) ? Promise.resolve() : play(id); }
+    function playOnce(id) { return seen(id) || !scenesOn() ? Promise.resolve() : play(id); }
+    // A scene the game plays by itself (the ending): skipped if the player switched scenes off.
+    function auto(id) { return scenesOn() ? play(id) : Promise.resolve(); }
 
     // ---------- chapter title cards ----------
     // A full-screen card when a chapter starts: its number, title, place and intro.
@@ -761,6 +768,7 @@
         return null;
     }
     async function before({ afterLevel = null, afterChapter = null, chapter = null } = {}) {
+        if (!scenesOn()) return;
         for (const key of [afterLevel && "level:" + afterLevel, afterChapter && "chapter:" + afterChapter]) {
             const id = sceneAfter(key);
             if (id && !seen(id)) await play(id);
@@ -950,5 +958,5 @@
         return set;
     }
 
-    global.BlockedStory = { init, play, playOnce, before, titleCard, sceneButtons, seen, renderMap, viewSwitch };
+    global.BlockedStory = { init, play, playOnce, auto, scenesOn, before, titleCard, sceneButtons, seen, renderMap, viewSwitch };
 })(window);
