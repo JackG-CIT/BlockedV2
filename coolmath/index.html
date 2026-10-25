@@ -1,0 +1,388 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Blocked</title>
+    <link rel="icon" href="img/chest.svg">
+    <link rel="stylesheet" href="css/style.css?v=2a1a57323c">
+    <link rel="stylesheet" href="css/standalone.css?v=f097926446">
+    <script>window.BLOCKED_AUDIO = { files: {} };</script>
+    <script src="js/audio.js?v=658d4e57e6"></script>
+</head>
+<body class="standalone">
+    <header class="topbar">
+        <button class="brand" type="button" data-go="title" aria-label="Title screen"><img src="img/logo.svg" alt="Blocked"></button>
+        <nav>
+            <button class="navlink" type="button" data-go="chapters">Levels</button>
+            <button class="navlink" type="button" data-go="workshop">Build</button>
+            <button class="navlink" type="button" data-go="help">How to play</button>
+            
+<div class="sound-menu">
+    <button class="navlink sound-toggle" id="soundToggle" type="button" aria-expanded="false" aria-controls="soundPanel" title="Sound (M to mute)">
+        <span class="speaker" aria-hidden="true"></span><span class="sr-only">Sound settings</span>
+    </button>
+    <div class="sound-panel panel hidden" id="soundPanel">
+        <label for="musicVol">Music</label>
+        <input type="range" id="musicVol" min="0" max="1" step="0.05">
+        <label for="sfxVol">Effects</label>
+        <input type="range" id="sfxVol" min="0" max="1" step="0.05">
+        <label class="check"><input type="checkbox" id="muteAll"> Mute everything <kbd>M</kbd></label>
+        <label class="check" title="Off: the shorter chapter loops instead of the long tracks that build up room by room"><input type="checkbox" id="longMusic"> Long chapter music</label>
+        <label class="check" title="Off: no cutscenes or chapter title cards. You can still watch them again from the map."><input type="checkbox" id="storyScenes"> Story cutscenes</label>
+        
+        
+        <a href="#" data-go="sounds">Sound test</a>
+    </div>
+</div>
+
+        </nav>
+    </header>
+
+    <main>
+        <!-- Title -->
+        <section class="screen" id="screen-title">
+            <div class="title-card">
+                <img class="title-logo" src="img/logo.svg" alt="Blocked">
+                <img class="ship" src="img/ship.svg" alt="">
+                <p class="tagline">Push crates, trip plates, fire cannons, find the treasure.</p>
+                <div class="btn-row">
+                    <button class="btn big" type="button" id="continueBtn">Set sail</button>
+                    <button class="btn wood" type="button" data-go="chapters">Choose a level</button>
+                    <button class="btn sea" type="button" data-go="workshop">Build your own</button>
+                </div>
+                <button class="btn small sea" type="button" data-story-scene="intro">Watch the intro</button>
+                <p class="progress-label" id="titleProgress"></p>
+            </div>
+        </section>
+
+        <!-- Level select, by chapter -->
+        <section class="screen hidden" id="screen-chapters">
+            <div class="section-head">
+                <h2>The Voyage</h2>
+                <p>Clear each room to unlock the next.</p>
+                <div class="view-toggle" role="group" aria-label="Show the voyage as">
+                    <button type="button" data-view="map">Map</button>
+                    <button type="button" data-view="list">List</button>
+                </div>
+            </div>
+            <div id="voyageMap" class="hidden">
+                <div class="map-tools" id="sceneButtons"></div>
+                <div class="voyage-map" id="voyageMapBody"></div>
+            </div>
+            <div id="chapterList"></div>
+        </section>
+
+        <!-- Playing a level -->
+        <section class="screen hidden" id="screen-play">
+            <div class="play-head">
+                <div>
+                    <div class="place" id="pPlace"></div>
+                    <h1 id="pName"></h1>
+                    <div class="difficulty" id="pDifficulty"></div>
+                </div>
+                <div class="btn-row">
+                    <button class="btn sea small" type="button" id="pBack">All levels</button>
+                </div>
+            </div>
+            <p class="play-notes" id="pNotes"></p>
+            <div class="play-layout">
+                <div class="board-area">
+                    <div class="msgbar" aria-live="polite">
+                        <div class="stuck hidden" id="stuckBanner" role="status">
+                            <img src="img/lock.svg" alt="">
+                            <span><b>Stuck!</b> There's no way to the treasure from here. Undo (Z) or restart (R).</span>
+                        </div>
+                        <div class="stuck asking hidden" id="restartAsk" role="status">
+                            <span><b>Restart?</b> You'd lose <span id="restartAskMoves">0</span> moves. Press R or Restart again.</span>
+                        </div>
+                        <p class="hint-text" id="hintText"></p>
+                    </div>
+                    <div class="board-frame"><div class="board-wrap"><table id="gameBoard" class="board"></table></div></div>
+            
+                    <div class="dpad" aria-label="Move">
+                        <button class="btn up" type="button" data-move="0,-1" aria-label="Up">▲</button>
+                        <button class="btn left" type="button" data-move="-1,0" aria-label="Left">◀</button>
+                        <button class="btn down" type="button" data-move="0,1" aria-label="Down">▼</button>
+                        <button class="btn right" type="button" data-move="1,0" aria-label="Right">▶</button>
+                    </div>
+
+
+                </div>
+                <aside class="sidebar">
+                    <div class="panel dark">
+                        <h3>This run</h3>
+                        <div class="hud-run">
+                            <div class="stat"><b id="moveCount">0</b><span>moves</span></div>
+                            <div class="stat"><b id="timeElapsed">0.0s</b><span>time</span></div>
+                        </div>
+                    </div>
+            <div class="panel play-controls">
+                <h3>Controls</h3>
+                <div class="btn-row">
+                    <button class="btn wood" type="button" id="undoBtn" disabled>Undo</button>
+                    <button class="btn red" type="button" id="resetBtn">Restart</button>
+                    <button class="btn sea" type="button" id="hintBtn">Hint</button>
+                </div>
+                <label class="check play-option" id="autoAdvanceRow"><input type="checkbox" id="autoAdvance" checked> Walk straight on to the next room</label>
+                <div class="controls-hint">
+                    <span><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> or <kbd>WASD</kbd> move</span>
+                    <span><kbd>Z</kbd> undo</span>
+                    <span><kbd>R</kbd> restart</span>
+                    <span><kbd>M</kbd> mute</span>
+                    <span><kbd>H</kbd> hint</span>
+                    <span>Swipe the board on a touch screen</span>
+                </div>
+            </div>
+                    <div class="panel">
+                        <h3>Your record</h3>
+                        <dl class="stat-list" id="myStats"></dl>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Your own levels -->
+        <section class="screen hidden" id="screen-workshop">
+            <div id="workshopList">
+                <div class="section-head">
+                    <h2>Your levels</h2>
+                    <p>Saved in this browser only. Export one to share it or keep a copy.</p>
+                </div>
+                <div class="btn-row">
+                    <button class="btn" type="button" id="newLevelBtn">Build a new level</button>
+                    <button class="btn wood" type="button" id="importBtn">Import a level</button>
+                </div>
+                <div class="level-grid" id="myLevels"></div>
+            </div>
+            <div class="hidden" id="workshopEditor">
+                <div class="play-head">
+                    <h1 id="editorTitle">Build a level</h1>
+                    <div class="btn-row">
+                        <button class="btn sea small" type="button" id="editorPlayBtn">Play it</button>
+                        <button class="btn sea small" type="button" id="editorBackBtn">Your levels</button>
+                    </div>
+                </div>
+                <div id="editorHost"></div>
+            </div>
+        </section>
+
+        <!-- Sound test: every track and effect (shared with the website's /sounds page) -->
+        <section class="screen hidden" id="screen-sounds">
+            
+<style>
+    .track-group { margin: 14px 0 8px; color: var(--wood-deep); }
+    .track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 10px; }
+    .track { display: flex; gap: 10px; align-items: flex-start; padding: 8px; background: var(--parch-dark); border: 2px solid var(--ink); }
+    .track .muted { font-size: 0.85rem; margin: 2px 0 4px; }
+    .track code { display: block; font-size: 0.8rem; }
+    .passes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: center; }
+    .cycle { font-size: 0.8rem; margin-top: 6px; }
+    .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 10px; }
+    .slot-grid .field span { display: block; font-weight: 600; }
+    .slot-grid select { width: 100%; }
+</style>
+<div class="play-head">
+    <div>
+        <h1>Sound test</h1>
+        <p>Every sound in the game is made by <code>static/js/audio.js</code>. Click to listen, then change the numbers or notes there and refresh.</p>
+    </div>
+</div>
+
+<div class="panel" style="margin-bottom: 20px">
+    <h3>Music</h3>
+    <p>Click a track to listen. Switching tracks waits for the bar line and crossfades, the same as between pages in the game. The gold tags show which slot each track fills; change that in <code>PLAYLIST</code> near the top of the music section of <code>audio.js</code>.</p>
+    <p>The long chapter tracks play their short loop over and over, and every few times round they play a variation instead: a <strong>change-up</strong> (a second fiddle and drum fills), a <strong>grand</strong> pass (horns on the tune, big drums) or a <strong>breakdown</strong> (just fiddle, plucks and light drums). The cycle line shows the order. The variation buttons jump straight to that pass so you don't have to wait. Each chapter's boss track is a faster, grander version of its tune.</p>
+    <div class="btn-row" style="margin-bottom: 14px">
+        <button class="btn red small" type="button" id="stopMusic">Stop music</button>
+        <span id="nowPlaying" class="muted">Nothing playing</span>
+    </div>
+    <div id="tracks"></div>
+</div>
+
+<div class="panel" style="margin-bottom: 20px">
+    <h3>Try a track in a slot</h3>
+    <p>Hear a different track in the real game without editing code. This only changes <em>this browser</em>; when you've found the one you like, put its id in <code>PLAYLIST</code> to make it stick for everyone.</p>
+    <div class="slot-grid" id="slots"></div>
+    <div class="btn-row" style="margin-top: 12px">
+        <button class="btn small" type="button" id="resetSlots">Back to PLAYLIST</button>
+    </div>
+</div>
+
+<div class="panel">
+    <h3>Effects</h3>
+    <div class="sound-grid" id="effects"></div>
+</div>
+
+        </section>
+
+        <!-- How to play -->
+        <section class="screen hidden" id="screen-help">
+            <div class="panel help">
+                <h2>How to play</h2>
+                <ul id="helpList"></ul>
+                <div class="btn-row"><button class="btn" type="button" data-go="title">Back</button></div>
+            </div>
+        </section>
+    </main>
+
+    <template id="editorTemplate">
+<div class="editor">
+    <!-- LEFT SIDE: tiles -->
+    <div class="panel">
+        <h3>Tiles</h3>
+        <div class="tools" id="tools"></div>
+        <p class="tools-help">Click or drag to paint. Right-click erases. Click a cannon again to turn it. After placing a plate or fuse, click what it controls.</p>
+    </div>
+
+    <!-- MIDDLE: the grid -->
+    <div class="editor-board">
+        <div class="board-frame">
+            <div class="board-wrap" id="editWrap">
+                <table id="editTable" class="board"></table>
+                <svg class="links-layer" id="links"></svg>
+            </div>
+        </div>
+        <div class="statusbar" id="status">Pick a tile on the left and click the grid.</div>
+        <div class="btn-row">
+            <button class="btn small wood" id="borderBtn" type="button">Wall the edges</button>
+            <button class="btn small wood" id="clearBtn" type="button">Clear everything</button>
+            <label class="check" style="margin: 0"><input type="checkbox" id="showLinks" checked> Show links</label>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE: settings -->
+    <div class="panel settings">
+        <h3>Level settings</h3>
+        <div class="field">
+            <label for="levelName">Name</label>
+            <input type="text" id="levelName" maxlength="80" placeholder="The Kraken's Cellar">
+        </div>
+        <div class="field">
+            <label for="levelNote">Notes</label>
+            <textarea id="levelNote" maxlength="500" placeholder="A hint or a bit of story, shown above the board."></textarea>
+        </div>
+        <div class="size-row">
+            <div class="field">
+                <label for="levelWidth">Width</label>
+                <input type="number" id="levelWidth" min="3" max="48">
+            </div>
+            <div class="field">
+                <label for="levelHeight">Height</label>
+                <input type="number" id="levelHeight" min="3" max="48">
+            </div>
+        </div>
+        
+            <input type="checkbox" id="published" checked hidden>
+        
+        
+
+        <div class="btn-row">
+            <button class="btn" id="saveBtn" type="button">Save</button>
+            <button class="btn red" id="testBtn" type="button">Playtest</button>
+        </div>
+        <div class="save-state" id="saveState"></div>
+
+        <div class="divider"></div>
+        <h3>Checks</h3>
+        <ul class="checks" id="checks"></ul>
+
+        
+            <div class="divider"></div>
+            <div class="btn-row">
+                <button class="btn small wood" id="copyBtn" type="button">Save a copy</button>
+                <button class="btn small sea" id="exportBtn" type="button">Export</button>
+            </div>
+        
+    </div>
+</div>
+
+<div class="modal hidden" id="testModal" role="dialog" aria-modal="true" aria-labelledby="testTitle">
+    <div class="panel wide">
+        <h2 id="testTitle">Playtest</h2>
+        <p id="testMsg">Arrow keys or WASD to move, Z to undo, R to restart, Esc to go back to editing.</p>
+        <div class="playtest-hud">
+            <div class="stat"><b id="testMoves">0</b><span>moves</span></div>
+            <div class="stat"><b id="testTime">0.0s</b><span>time</span></div>
+        </div>
+        <div class="board-frame"><div class="board-wrap"><table id="testTable" class="board"></table></div></div>
+        <div class="btn-row" style="margin-top: 16px">
+            <button class="btn red" id="testReset" type="button">Restart (R)</button>
+            <button class="btn wood" id="testClose" type="button">Back to editing (Esc)</button>
+        </div>
+    </div>
+</div>
+</template>
+
+    <!-- Win popup (boss rooms, the last room, single replays) -->
+    <div class="modal hidden" id="winModal" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+        <div class="panel">
+            <img class="chest-big" src="img/chest.svg" alt="">
+            <h2 id="winTitle">Treasure found!</h2>
+            <div class="result">
+                <div class="stat"><b id="winMoves">0</b><span>moves</span></div>
+                <div class="stat"><b id="winTime">0.0s</b><span>time</span></div>
+            </div>
+            <p class="best" id="winBest"></p>
+            <p class="best hidden" id="winPar"></p>
+            <p class="chest-line hidden" id="winStory"></p>
+            <div class="btn-row">
+                <button class="btn big hidden" type="button" id="nextBtn">Next level ▶ <kbd>Space</kbd></button>
+                <button class="btn wood" type="button" id="replayBtn">Play again (R)</button>
+                <button class="btn sea" type="button" id="winBackBtn">Back to the chapter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room tally (mid-chapter rooms walk straight on) -->
+    <div class="tally hidden" id="tally" role="status" aria-live="polite">
+        <div class="panel">
+            <h2>Room cleared!</h2>
+            <div class="result">
+                <div class="stat"><b id="tallyMoves">0</b><span>moves</span></div>
+                <div class="stat"><b id="tallyTime">0.0s</b><span>time</span></div>
+            </div>
+            <p class="best" id="tallyNote"></p>
+            <p class="tally-line" id="tallyLine"></p>
+            <p class="tally-skip"><kbd>Space</kbd> to go on</p>
+        </div>
+    </div>
+    <div class="curtain" id="curtain" aria-hidden="true"></div>
+
+    <!-- First play, and the first time each mechanic shows up -->
+    <div class="modal hidden" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+        <div class="panel">
+            <h2 id="infoTitle"></h2>
+            <div id="infoBody"></div>
+            <div class="btn-row"><button class="btn big" type="button" id="infoOk">Aye! <kbd>Space</kbd></button></div>
+        </div>
+    </div>
+
+    <!-- Import / export a level as text -->
+    <div class="modal hidden" id="shareModal" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+        <div class="panel">
+            <h2 id="shareTitle"></h2>
+            <p id="shareHelp"></p>
+            <textarea id="shareText" rows="8" spellcheck="false"></textarea>
+            <p class="best" id="shareMsg"></p>
+            <div class="btn-row">
+                <button class="btn" type="button" id="shareOk"></button>
+                <button class="btn wood" type="button" id="shareClose">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/levels.js?v=3088f923a6"></script>
+    <script src="js/engine.js?v=5f6614258b"></script>
+    <script src="js/hints.js?v=9dabb56e9d"></script>
+    <script src="js/editor.js?v=f9d41dbb48"></script>
+    <script src="js/soundmenu.js?v=a50dc4fdfb"></script>
+    <script src="js/soundtest.js?v=7cfdd17508"></script>
+    <script src="js/story.js?v=0f0750d23b"></script>
+    <script src="js/portal.js?v=d90677d817"></script>
+    <script src="js/standalone.js?v=e844418d08"></script>
+</body>
+</html>

@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Blocked</title>
     <link rel="icon" href="img/chest.svg">
-    <link rel="stylesheet" href="css/style.css?v=44570eadb7">
-    <link rel="stylesheet" href="css/standalone.css?v=b02b03e61c">
+    <link rel="stylesheet" href="css/style.css?v=2a1a57323c">
+    <link rel="stylesheet" href="css/standalone.css?v=f097926446">
     <script>window.BLOCKED_AUDIO = { files: {} };</script>
     <script src="js/audio.js?v=658d4e57e6"></script>
 </head>
@@ -95,6 +95,9 @@
                         <div class="stuck hidden" id="stuckBanner" role="status">
                             <img src="img/lock.svg" alt="">
                             <span><b>Stuck!</b> There's no way to the treasure from here. Undo (Z) or restart (R).</span>
+                        </div>
+                        <div class="stuck asking hidden" id="restartAsk" role="status">
+                            <span><b>Restart?</b> You'd lose <span id="restartAskMoves">0</span> moves. Press R or Restart again.</span>
                         </div>
                         <p class="hint-text" id="hintText"></p>
                     </div>
@@ -373,13 +376,13 @@
     </div>
 
     <script src="js/levels.js?v=3088f923a6"></script>
-    <script src="js/engine.js?v=223181932e"></script>
+    <script src="js/engine.js?v=5f6614258b"></script>
     <script src="js/hints.js?v=9dabb56e9d"></script>
     <script src="js/editor.js?v=f9d41dbb48"></script>
     <script src="js/soundmenu.js?v=a50dc4fdfb"></script>
     <script src="js/soundtest.js?v=7cfdd17508"></script>
     <script src="js/story.js?v=0f0750d23b"></script>
-    <script src="js/portal.js?v=52387f6a55"></script>
-    <script src="js/standalone.js?v=74ce622711"></script>
+    <script src="js/portal.js?v=612f9991e3"></script>
+    <script src="js/standalone.js?v=e844418d08"></script>
 </body>
 </html>

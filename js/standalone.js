@@ -52,8 +52,9 @@
     }
     const ratingName = d => NAMES[Math.ceil(d / 2)];
 
+    let allUnlocked = false;   // unlockAll(): a portal's reviewers can open every level
     function isUnlocked(i) {
-        return i === 0 || !!progress[LEVELS[i].id] || !!progress[LEVELS[i - 1].id];
+        return allUnlocked || i === 0 || !!progress[LEVELS[i].id] || !!progress[LEVELS[i - 1].id];
     }
     function firstUncleared() {
         const i = LEVELS.findIndex(lv => !progress[lv.id]);
@@ -319,6 +320,8 @@
             onWin: won,
             onSettle: () => { if (hints) hints.settled(); $("undoBtn").disabled = !game || !game.canUndo; },
             onSound: name => S.play(name),
+            onRestartAsk: restartAsk,
+            onRestart: () => portal.levelRestart({ id: lv.id, number: cur.index != null ? cur.index + 1 : null }),
             onDeath: how => {
                 $("hintText").textContent = how === "shot"
                     ? "Blasted by your own cannon! Back to the start you go."
@@ -339,7 +342,8 @@
             buttonLabel: "Hint",
         });
         if (entering) stepIn(lv);
-        portal.levelStart({ id: lv.id, name: lv.name, chapter: lv.chapter, room: lv.room });
+        portal.levelStart({ id: lv.id, name: lv.name, chapter: lv.chapter, room: lv.room,
+                            number: cur.index != null ? cur.index + 1 : null });
     }
 
     // The story around voyage room i (story.js): what plays before it, the first time.
@@ -459,15 +463,22 @@
         });
     }
 
+    // A long attempt asks before restarting (engine.js): show the question and turn
+    // the button into "Sure?" until it's answered.
+    function restartAsk(moves) {
+        $("restartAsk").classList.toggle("hidden", !moves);
+        $("restartAskMoves").textContent = moves;
+        $("resetBtn").textContent = moves ? "Sure?" : "Restart";
+    }
+
     $("nextBtn").addEventListener("click", goNext);
     $("replayBtn").addEventListener("click", () => { $("winModal").classList.add("hidden"); if (game) game.reset(); });
     $("winBackBtn").addEventListener("click", backFromLevel);
     $("pBack").addEventListener("click", backFromLevel);
     $("resetBtn").addEventListener("click", () => {
         if (!game) return;
-        game.reset();
+        game.askReset();
         $("resetBtn").blur();
-        portal.levelRestart({ id: current.lv.id });
     });
     $("undoBtn").addEventListener("click", () => { if (game) game.undo(); $("undoBtn").blur(); });
     $("hintBtn").addEventListener("click", () => { if (hints) hints.show(); $("hintBtn").blur(); });
@@ -698,5 +709,10 @@
     show("title");
     portal.gameStart();
     BlockedStory.playOnce("intro");   // the first time the game opens
-    window.BlockedStandalone = { playVoyage, show, progress: () => ({ ...progress }) };   // handy for testing
+    function unlockAll() {
+        allUnlocked = true;
+        if (screen === "chapters") renderChapters();
+        if (screen === "title") renderTitle();
+    }
+    window.BlockedStandalone = { playVoyage, show, unlockAll, progress: () => ({ ...progress }) };   // handy for testing
 })();

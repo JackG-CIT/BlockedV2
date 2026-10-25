@@ -348,6 +348,11 @@
     // opts.onWin({ moves, ms }) is called once when the pirate reaches a chest.
     // opts.onSettle() is called whenever the board comes to rest (after a
     // move's cannon shots finish, an undo, or a reset).
+    // opts.onRestartAsk(moves) is called when R or askReset() wants a second press
+    // before throwing away a long attempt (moves = what would be lost), and with 0
+    // when that question goes away. Without it, restarts never ask.
+    // opts.onRestart() is called when the player restarts (R or askReset()), not on a death.
+    const CONFIRM_RESTART_AT = 10, CONFIRM_RESTART_MS = 3000;
     function startGame(table, level, opts = {}) {
         buildBoard(table, level);
         if (!table.querySelector(".player")) return null;
@@ -366,6 +371,7 @@
         let history = [];    // board snapshots for undo
         let shotTimer = null;    // ticks the flying crates along
         let pendingFuses = [];   // fuses still to check after the shot in the air lands
+        let restartAsked = null; // timer while a restart waits for its second press
 
         function findPlayer() {
             playerCell = table.querySelector(".player");
@@ -472,7 +478,29 @@
                 td.classList.remove("smash", "firing", "highlight", "hint"));
         }
 
+        function dropRestartAsk() {
+            if (!restartAsked) return;
+            clearTimeout(restartAsked);
+            restartAsked = null;
+            if (opts.onRestartAsk) opts.onRestartAsk(0);
+        }
+
+        // Restarts at once on a short or finished attempt; on a long one the first
+        // press only asks, and a second press within CONFIRM_RESTART_MS restarts.
+        function askReset() {
+            if (restartAsked || won || dead || moveCount < CONFIRM_RESTART_AT || !opts.onRestartAsk) {
+                sound("reset");
+                resetLevel();
+                if (opts.onRestart) opts.onRestart();
+                return true;
+            }
+            restartAsked = setTimeout(dropRestartAsk, CONFIRM_RESTART_MS);
+            opts.onRestartAsk(moveCount);
+            return false;
+        }
+
         function resetLevel() {
+            dropRestartAsk();
             generation++;
             stopFlights();
             pendingFuses = [];
@@ -497,6 +525,7 @@
         // Takes back one move (shots that were in the air then carry on). The timer keeps running.
         function undo() {
             if (won || dead || !history.length) return false;
+            dropRestartAsk();
             const snap = history.pop();
             generation++;
             stopFlights();
@@ -529,6 +558,7 @@
         // Moves are never held back: you can keep moving while a shot is in the air.
         function move(dx, dy) {
             if (won || dead) return;
+            dropRestartAsk();   // playing on answers "no"
             if (!tryMove(dx, dy)) sound("bump");
         }
 
@@ -614,8 +644,7 @@
                 event.preventDefault();
                 move(...KEYS[event.key]);
             } else if (event.key === "r" || event.key === "R") {
-                sound("reset");
-                resetLevel(); // RESET LEVEL
+                askReset(); // RESET LEVEL (asks first on a long attempt)
             } else if (event.key === "z" || event.key === "Z" || event.key === "Backspace") {
                 event.preventDefault();
                 undo();
@@ -658,11 +687,13 @@
             undo,
             getState,
             reset() { sound("reset"); resetLevel(); },
+            askReset,
             get won() { return won; },
             get busy() { return !!shotTimer || pendingFuses.length > 0; },   // a shot is in the air
             get canUndo() { return history.length > 0 && !won; },
             destroy() {
                 generation++;
+                dropRestartAsk();
                 stopFlights();
                 if (timerInterval) clearInterval(timerInterval);
                 document.removeEventListener("keydown", onKey);

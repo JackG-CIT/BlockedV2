@@ -504,6 +504,7 @@ textarea { min-height: 80px; resize: vertical; }
     font-size: 0.95rem;
 }
 .stuck img { width: 32px; height: 32px; }
+.stuck.asking { background: #fbe6a6; border-left-color: var(--gold); }
 /* One fixed-height slot above the board for hints and the stuck warning,
    so nothing on the page moves when they appear. */
 .msgbar { position: relative; display: grid; place-items: center; width: 100%; max-width: 680px; height: 56px; }

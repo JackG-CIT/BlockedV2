@@ -18,11 +18,12 @@
         // The game finished loading and the title screen is showing.
         gameStart() {},
         // The player started (or restarted from scratch) a level.
-        // level: { id, name, chapter, room } (room 5 = chapter boss; 0 = a player-made level)
+        // level: { id, name, chapter, room, number } (room 5 = chapter boss; 0 = a player-made level;
+        // number = the voyage position counting from 1, null for a player-made level)
         levelStart(level) {},
         // The player cleared a level. result: { moves, ms, par, firstClear }
         levelComplete(level, result) {},
-        // The player restarted the level they're on (R or the Restart button).
+        // The player restarted the level they're on (R or the Restart button). level: { id, number }
         levelRestart(level) {},
         // A natural break (between chapters, back to the level list): portals often show ads here.
         // Call done() when the game may carry on (immediately, unless the portal shows something).

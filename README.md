@@ -2,6 +2,9 @@
 
 **Play it here: https://jackg-cit.github.io/BlockedV2/**
 
+The Coolmath Games version (no testing options, Coolmath's hooks filled in) is
+at https://jackg-cit.github.io/BlockedV2/coolmath/.
+
 A pixel-art pirate puzzle game: push crates, trip plates, squeeze crates through
 slamming gates, fire cannons, and find the treasure. This repository only holds
 the built game that GitHub Pages serves. The source code (the Flask community
