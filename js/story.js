@@ -696,8 +696,9 @@
     const SCENES = { intro: INTRO, escape: ESCAPE, "ship-free": SHIP_FREE, "black-queen": BLACK_QUEEN, kraken: KRAKEN, ending: ENDING };
     const FADE = 0.6;   // seconds of fade to and from black between shots
 
-    // Plays a cutscene full screen. Resolves when it ends, or when a key press skips it
-    // (clicks and taps don't skip, so a stray click can't cut a scene short).
+    // Plays a cutscene full screen. Resolves when it ends, or when a key press or the
+    // Skip button skips it (other clicks and taps don't, so a stray one can't cut a
+    // scene short; phones have no keys, so the button is their way out).
     function play(id) {
         const lines = ((STORY.cutscenes[id] || {}).lines || []);
         const shots = SCENES[id] || PLAIN;
@@ -708,7 +709,8 @@
             box.setAttribute("role", "dialog");
             box.setAttribute("aria-modal", "true");
             box.setAttribute("aria-label", "Story scene. Press any key to skip.");
-            box.innerHTML = `<canvas height="${H}"></canvas><p class="cutscene-hint">Press any key to skip</p>`;
+            box.innerHTML = `<canvas height="${H}"></canvas><p class="cutscene-hint">Press any key to skip</p>` +
+                `<button class="btn small cutscene-skip" type="button">Skip &#9654;</button>`;
             document.body.appendChild(box);
             const canvas = box.querySelector("canvas"), ctx = canvas.getContext("2d");
             ["ship", "pirate", "crate", "logo", "chest", "wall", "cannon"].forEach(sprite);
@@ -746,6 +748,7 @@
             }
             document.addEventListener("keydown", onKey, true);
             box.addEventListener("pointerdown", e => e.preventDefault());   // clicks don't skip
+            box.querySelector(".cutscene-skip").addEventListener("click", finish);   // ...but the button does
 
             function frame(now) {
                 let t = (now - begun) / 1000;

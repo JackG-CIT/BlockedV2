@@ -639,8 +639,11 @@ kbd {
     place-items: center;
     padding: 16px;
     background: rgba(10, 20, 40, 0.65);
+    overflow-y: auto;   /* taller than the screen (a phone on its side): scroll to the buttons */
 }
 .modal .panel { width: min(460px, 100%); text-align: center; animation: pop 220ms steps(4); }
+.modal > .panel { margin: auto; }   /* centred, but starts at the top when it doesn't fit */
+@media (max-height: 500px) { .modal .chest-big { margin-top: 0; } }
 .modal .panel.wide { width: min(1100px, 100%); max-height: 100%; overflow: auto; }
 .modal .chest-big { width: 96px; height: 96px; margin: -60px auto 6px; background: var(--parch); border: var(--px) solid var(--ink); }
 .modal .result { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
@@ -800,6 +803,9 @@ kbd {
 }
 .cutscene.closing { opacity: 0; transition: opacity 0.4s; }
 .cutscene canvas { display: block; image-rendering: pixelated; }
+/* The Skip button: the way out on a phone (no keys), and a click target on a computer. */
+.cutscene-skip { position: absolute; top: max(14px, env(safe-area-inset-top)); right: max(14px, env(safe-area-inset-right)); opacity: 0.85; }
+@media (pointer: coarse) { .cutscene-hint { display: none; } }
 .cutscene-hint {
     position: absolute;
     left: 0;
@@ -829,6 +835,7 @@ kbd {
     background: linear-gradient(rgba(7, 13, 23, 0.78), rgba(7, 13, 23, 0.9)), var(--sea-deep) url("../img/sea.svg") 0 0 / 64px 64px;
     animation: fade-in 0.5s ease-out, tide 16s linear infinite;
     cursor: pointer;
+    overflow-y: auto;   /* a phone on its side: scroll to the button rather than lose it */
 }
 .chapter-card.closing { opacity: 0; transition: opacity 0.35s; }
 .chapter-card-inner { max-width: 640px; text-align: center; display: grid; justify-items: center; gap: 10px; }
@@ -841,6 +848,13 @@ kbd {
 .chapter-card h2 { margin: 0; font-size: clamp(2.6rem, 8vw, 4.4rem); color: var(--cream); text-shadow: 5px 5px 0 var(--ink); }
 .chapter-card-place { margin: 0; color: var(--parch-dark); font-size: 1.2rem; text-shadow: 2px 2px 0 var(--ink); }
 .chapter-card-intro { margin: 10px 0 14px; font-size: 1.25rem; line-height: 1.35; text-shadow: 2px 2px 0 var(--ink); }
+.chapter-card-inner { margin: auto; }   /* centred, but starts at the top when it's taller than the screen */
+@media (max-height: 500px) {
+    .chapter-card { padding: 10px 16px; }
+    .chapter-card-inner { gap: 4px; }
+    .chapter-card h2 { font-size: 2.2rem; }
+    .chapter-card-intro { margin: 4px 0 8px; font-size: 1rem; line-height: 1.25; }
+}
 @keyframes card-rise { from { opacity: 0; transform: translateY(10px); } }
 
 /* the story line on a chapter finale's "Treasure found!" popup */
